@@ -35,6 +35,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
+                                <li><a href="branch.php?page=list"><i class="fa fa-home"></i>Branch</a></li> 
                                 <li><a href="building.php?page=list"><i class="fa fa-home"></i>Room</a></li> 
                                 <li><a href="master_table.php?page=list"><i class="fa fa-cutlery"></i>Table</a></li>
                                 <li><a href="menu.php?page=list"><i class="fa fa-glass"></i>Menu</a></li>
@@ -60,10 +61,18 @@
                             
                   </li>
                   
-                   <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 8){ echo "class='active'"; } ?>>
+                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 8){ echo "class='active'"; } ?>>
                             <a href="transaction_new.php">
                                  <i class="fa fa-pencil-square-o"></i>
                                 <span>Transaksi Baru</span>
+                            </a>
+                            
+                  </li>
+
+                   <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 5){ echo "class='active'"; } ?>>
+                            <a href="reserved.php">
+                                 <i class="fa fa-list-alt"></i>
+                                <span>Reserved</span>
                             </a>
                             
                   </li>
