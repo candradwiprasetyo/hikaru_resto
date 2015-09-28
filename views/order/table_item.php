@@ -9,14 +9,22 @@ $q_c_t = mysql_query("select b.table_name
 						join tables b on b.table_id = a.table_id
 						where table_parent_id = '".$row['table_id']."'");
 						
-?>
-<div class="table_total_item" style="margin-bottom:10px; margin-top:10px; text-align:center;">
-<?php
+
+$i = 1;
+$merged = "";
 while($r_c_t = mysql_fetch_array($q_c_t)){
-	echo $r_c_t['table_name'];
+  if($i == 1){
+    if($r_c_t['table_name']){ echo " ("; }
+  }
+  $merged .= $r_c_t['table_name'].",";
+$i++;
 }
+
+echo substr($merged,0, -1);
+
+if($i > 1){ echo ")"; }
 ?>
-</div>
+
 </div>
 <span class="tooltip-text2 scrollpanel no4 content">
 <table width="100%" border="0" cellspacing="0" cellpadding="5" class="table_item" style="margin-right:10px;">
@@ -61,7 +69,7 @@ while($r_c_t = mysql_fetch_array($q_c_t)){
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="25%"><a href="transaction_new.php?page=list_edit&table_id=<?= $row['table_id']?>" style="text-decoration:none;"><div class="btn_edit_item">EDIT </div></a></td>
+    <td width="25%"><a href="transaction.php?page=list&table_id=<?= $row['table_id']?>" style="text-decoration:none;"><div class="btn_edit_item">EDIT </div></a></td>
     <td width="25%">
     <a href="payment.php?table_id=<?= $row['table_id']?>&building_id=<?= $building_id?>" style="text-decoration:none;"><div class="btn_payment">BAYAR</div></a>
       
@@ -80,3 +88,5 @@ while($r_c_t = mysql_fetch_array($q_c_t)){
   </tr>
 </table>
 </span>
+
+

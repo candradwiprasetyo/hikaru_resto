@@ -1,4 +1,4 @@
- <aside class="left-side sidebar-offcanvas">                
+ <aside class="left-side sidebar-offcanvas <?php if($_SESSION['menu_active'] == 3){ ?>collapse-left <?php } ?>">                
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
@@ -60,7 +60,7 @@
                             </a>
                             
                   </li>
-                  
+                  <!--
                   <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 8){ echo "class='active'"; } ?>>
                             <a href="transaction_new.php">
                                  <i class="fa fa-pencil-square-o"></i>
@@ -68,7 +68,7 @@
                             </a>
                             
                   </li>
-
+                  -->
                    <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 5){ echo "class='active'"; } ?>>
                             <a href="reserved.php">
                                  <i class="fa fa-list-alt"></i>

@@ -17,6 +17,12 @@ switch ($page) {
 
 		$action = "order.php?page=save_payment&table_id=".$table_id."&building_id=".$building_id;
 
+		if($table_id == 0 ){
+			$button_back = "";
+		}else{
+			$button_back = "order.php?building_id=$building_id";
+		}
+
 		include '../views/payment/list.php';
 		
 	break;

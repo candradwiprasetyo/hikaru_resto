@@ -2974,3 +2974,18 @@ Component: timeline
   margin-top:10px;
   margin-bottom:10px;
 }
+
+#searchContent{
+            border: 2px solid #CCCCCC;
+            border-radius: 0 0 0 0;
+            height: 500px;
+            margin: 0 auto;
+            overflow: auto;
+            padding: 5px;
+            width: 100%;
+        }
+
+.jcorgFilterTextChild{
+  color: #E9F0F5;
+  display: none;
+}

@@ -49,6 +49,7 @@ switch ($page) {
 		$i_date = format_back_date($i_date);
 		$i_jam = date("h:m:s");
 		$i_table_id = get_isset($i_table_id);
+		$i_tot_id = get_isset($i_tot_id);
 		$tanggal = $i_date." ".$i_jam;
 		
 		$i_total_harga = get_isset($i_total_harga);
@@ -61,10 +62,11 @@ switch ($page) {
 			if($check_table > 0){
 				$transaction_id = get_transaction_id_old($i_table_id);
 			}else{
-			$data = "'',
+				$data = "'',
 					'$i_table_id',
 					'0',
-					'$tanggal'
+					'$tanggal',
+					'$i_tot_id'
 						";
 			
 			create_config("transactions_tmp", $data);
@@ -113,10 +115,10 @@ switch ($page) {
 				
 				
 			}
-			if($i_table_id == 0){
-				header("Location: payment.php?table_id=0");
-			}else{
+			if($i_tot_id == 1){
 				header("Location: order.php");
+			}else{
+				header("Location: payment.php?table_id=0");
 			}
 			//header("Location: transaction.php?page=list&table_id=$i_table_id");
 		}else{

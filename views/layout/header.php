@@ -183,7 +183,7 @@ if(!$_SESSION['login']){
             ?>
 
             <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">                
+            <aside class="right-side <?php if($_SESSION['menu_active'] == 3){ ?>strech<?php } ?>">                
                 <!-- Content Header (Page header) -->
         
 				<script type="text/javascript">
