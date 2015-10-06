@@ -3,27 +3,28 @@
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
-                        <div class="image" style="text-align:center; margin-bottom:10px; margin-top:10px;">
-                        	<?php
+                        <div class="pull-left image">
+                            <?php
                              $user_data = get_user_data();
-							if($user_data[2]==""){
-								$img = "../img/user/default.jpg";
-							}else{
-								$img = "../img/user/".$user_data[2];
-							}
-							?>
+              if($user_data[2]==""){
+                $img = "../img/user/default.jpg";
+              }else{
+                $img = "../img/user/".$user_data[2];
+              }
+              ?>
                             <img src="<?= $img ?>" class="img-circle" alt="User Image" />
                         </div>
-                        <div class="info" style="text-align:center;">
-                            <p style="color:#fff; ">
-                                        <?php
+                        <div class="pull-left info">
+                            <p><?php
                                        
                                         echo "Welcome, ".$user_data[0];
-                                        ?>
-                                </p>
+                                        ?></p>
 
-                            <a style="color:#a0acbf;  "><?= $user_data[1]?></a>
+                            <a href="#"><?= $user_data[1]?></a>
                         </div>
+
+                       
+                       
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                    

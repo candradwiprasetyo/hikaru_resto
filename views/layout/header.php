@@ -1,5 +1,4 @@
 <?php
-
 if(!$_SESSION['login']){
     header("location: ../login.php");
 }
@@ -100,19 +99,15 @@ if(!$_SESSION['login']){
         <!-- header logo: style can be found in header.less -->
         <header class="header">
             <a href="../index.php" class="logo" >
-             <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-               
-                  <td width="86%" align="center"><span style="font-size:12px; font-weight:bold; color:#0FF">Resto</span><br><span style="font-weight:bold;">HIKARU</span></td>
-              </tr>
-              </tr>
-            </table>
-
+            
             	
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 
             </a>
+            
+
             <!-- Header Navbar: style can be found in header.less -->
+
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -121,7 +116,7 @@ if(!$_SESSION['login']){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-              	<div class="header_new"></div>
+
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
 
@@ -142,12 +137,12 @@ if(!$_SESSION['login']){
                                 <li class="user-header bg-new-red">
                                 <?php
                             
-							if($user_data[2]==""){
-								$img = "../img/user/default.jpg";
-							}else{
-								$img = "../img/user/".$user_data[2];
-							}
-							?>
+                            if($user_data[2]==""){
+                                $img = "../img/user/default.jpg";
+                            }else{
+                                $img = "../img/user/".$user_data[2];
+                            }
+                            ?>
                                     <img src="<?= $img ?>" class="img-circle" alt="User Image" />
                                     <p>
                                         <?php
@@ -174,6 +169,7 @@ if(!$_SESSION['login']){
                         </li>
                     </ul>
                 </div>
+               
             </nav>
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left">

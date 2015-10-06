@@ -124,16 +124,6 @@ function load_data_history(id)
 
 </script>
 
-<?php
-$string = '1,2,3';
-$result = '';
-foreach (explode(',',$string) as $data) 
-{
-$result .= $data.',';
-}
-echo substr($result ,0, -1);
-?>
-
 
 	
                 <?php
