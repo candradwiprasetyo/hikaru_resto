@@ -2931,7 +2931,7 @@ Component: timeline
 	height:50px;
 	color:#fff;
 	border:none !important;
-	background:#354052;
+	background:#d82827;
 }
 .title_menu{
 	
@@ -2956,6 +2956,7 @@ Component: timeline
 	 position:fixed;
 	 width:100%;
    padding-right: 250px;
+   border: 1px solid #d82827;
    
 }
 @media screen and (max-width: 992px) {
@@ -2969,8 +2970,8 @@ Component: timeline
 }
 .total_checkout[disabled], .total_checkout[readonly]{
 	font-weight:bold;  width:100%; height:60px;
-	background:#354052;
-	color:#fff;
+	background:#fee7e7;
+	color:#333;
 	font-size:3em;
 	text-align:right;
 }

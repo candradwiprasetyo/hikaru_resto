@@ -1,59 +1,6 @@
-﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-<script src="../js/search/jquery.textselect.min.js" type="text/javascript"></script>
-<script src="../js/search/jquery.scrollTo.min.js" type="text/javascript"></script>
-<script src="../js/search/jquery.search.min.js" type="text/javascript"></script>
-<script>
-        jQuery(document).ready(function($) {
+﻿<script type="text/javascript" src="../js/search2/jcfilter.min.js"></script>
 
-            //create searcher
-            var searcher = $("#searchContent").search({
-                searchType: "highlightSelected",
-                searchSelector : "p",
-                scrollTo : true
-            });
 
-            //make sure we find the same text, otherwise clear search postions
-            function find(up) {
-                var currentText = searcher.getText();
-
-                var text = $("#searchText").val();
-
-                if (text != currentText) {
-                    searcher.setText(text);
-                }
-
-                searcher.nextConcurrence(up);
-            }
-
-            //bind events
-            $("#prev").click(function(e) {
-                e.preventDefault();
-
-                find(true);
-            });
-
-            $("#next").click(function(e) {
-                e.preventDefault();
-
-                find(false);
-            });
-
-            $("#append").click(function(e) {
-                e.preventDefault();
-
-                var newNode = $("<p />",{
-                        text : $("#newText").val()
-                });
-
-                var $searchContent = $("#searchContent");
-
-                $searchContent
-                        .append(newNode)
-                        //autoscroll
-                        .scrollTo($searchContent.find("p:last"));
-            });
-        })
-    </script>
 
 <script type="text/javascript">
 
@@ -178,7 +125,6 @@ function load_data_history(id)
 </script>
 
 
-
 	
                 <?php
                 if(isset($_GET['did']) && $_GET['did'] == 1){
@@ -215,10 +161,16 @@ function load_data_history(id)
                 
  <form action="<?= $action ?>" method="post" enctype="multipart/form-data" role="form">
                 <!-- Main content -->
-                <section class="content">
+
+                <section class="content" style="padding-top: 0">
                   
-                  
-<div class="container">
+              <div class="row">
+              <div class="col-md-12">
+              <div class="box box-cokelat">
+              <div class="box-body">    
+              
+              <div class="container">
+        
 			<!-- Top Navigation -->
 		
 			
@@ -297,9 +249,10 @@ function load_data_history(id)
 			 ?>
 			</div>  
            
+      
             
                <div class="row">
-                <div id="searchContent">
+               
                
                <?php
                 while($row_cat = mysql_fetch_array($query_cat)){
@@ -327,8 +280,13 @@ function load_data_history(id)
                     while($row = mysql_fetch_array($query)){
                    ?>
                    
-                  <div class="box-showcase">
+                  <div class="box-showcase jcorgFilterTextParent">
+
                   	<a onClick="add_menu(<?= $row['menu_id']?>)">
+                        <div class="title_menu">
+                          <?= $row['menu_name'] ?>
+                        </div>
+                        <div class="box-showcaseInner_frame">
                         <div class="box-showcaseInner">
                         <?php
                         $gambar = ($row['menu_img']) ? $row['menu_img'] : "default.jpg";
@@ -336,9 +294,10 @@ function load_data_history(id)
                             <img src="../img/menu/<?= $gambar ?>" class="img_class" />
                            
                         </div>
+                      </div>
                         </a>
-                        <div class="box-showcaseDesc">
-                            <a onClick="add_menu(<?= $row['menu_id']?>)"> <div class="box-showcaseDesc_name"><p><?= $row['menu_name'] ?></p></div>
+                        <div class="box-showcaseDesc ">
+                            
                              <div class="box-showcaseDesc_price">Rp. <?= $row['menu_price'] ?></div>
                              </a>
                             <div class="box-showcaseDesc_by">
@@ -356,7 +315,9 @@ function load_data_history(id)
                             </div>
                             
                         </div>
-                     	
+                         <div class="jcorgFilterTextChild"><?= $row['menu_name'] ?></div>
+                       
+                     
                     </div>
                     
                     <?php
@@ -372,10 +333,13 @@ function load_data_history(id)
                 
                   <!-- batas kategori -->
                   <?php
-				}
+				  }
 				  ?>
-                </div>
-				 </div>
+          </div>
+          </div>
+          </div>
+          </div>    
+				  </div>
                 
 			</section>
 			
@@ -394,13 +358,13 @@ function load_data_history(id)
                  
                    <div class="col-md-6">
                    
-                 <div class="col-md-8">
+                 <div class="col-xs-8">
                    <div class="form-group">
                   <input required type="hidden" readonly="readonly" name="i_total_harga" id="i_total_harga" class="form-control total_checkout" value="0"/>
                    <input required type="text" readonly="readonly" name="i_total_harga_rupiah" id="i_total_harga_rupiah" class="form-control total_checkout" value="0"/>
                    </div>
                 </div>
-                 <div class="col-md-4">
+                 <div class="col-xs-4">
                    <div class="form-group">
                   <input class="btn btn-warning button_checkout" type="submit" value="SAVE"/>
                 </div>
@@ -409,19 +373,20 @@ function load_data_history(id)
                 
                  <div class="col-md-6">
                 
-                 <div class="col-xs-8">
+                 <div class="col-xs-12">
                
                  <div class="form-group">
-                   <input type="text" name="searchText" id="searchText" class="form-control cari_checkout" value="" placeholder="Cari menu..."/>
+                   <input type="text" name="searchText" id="filter" class="form-control cari_checkout" value="" placeholder="Cari menu..."/>
                  </div>
                  </div>
-                  <div class="col-xs-4">
+                  <!--<div class="col-xs-4">
                    <div class="form-group">
-                   <!--<a id="button_search_checkout" class="btn btn-primary button_checkout"><i class="fa  fa-search" style="font-size:1em; padding-top:10px;"></i></a>-->
+                   <a id="button_search_checkout" class="btn btn-primary button_checkout"><i class="fa  fa-search" style="font-size:1em; padding-top:10px;"></i></a>
                    <input type="button" id="next" value="Next">
                    </div>
                 </div>
-                
+                -->
+
                   </div>
                
                 </div>
@@ -433,4 +398,15 @@ function load_data_history(id)
               </form>
               
               
-            
+             <script type="text/javascript">
+       jQuery(document).ready(function(){
+          jQuery("#filter").jcOnPageFilter({animateHideNShow: true,
+                    focusOnLoad:true,
+                    highlightColor:'#E9F0F5',
+                    textColorForHighlights:'#E9F0F5',
+                    caseSensitive:false,
+                    hideNegatives:true,
+                    parentLookupClass:'jcorgFilterTextParent',
+                    childBlockClass:'jcorgFilterTextChild'});
+       });          
+       </script>

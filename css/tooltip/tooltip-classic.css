@@ -132,7 +132,7 @@ html, body{margin:0;  height:100%; }
 	position: absolute;
 	pointer-events: none;
 	border-color: transparent;
-	border-top-color: #2a3035;
+	border-top-color: #fff;
 	border-width: 10px;
 	margin-left: -10px;
 	z-index: 9999;

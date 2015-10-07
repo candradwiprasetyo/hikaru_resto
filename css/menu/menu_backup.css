@@ -1,40 +1,20 @@
 /* CSS Document */
 
 /* - ---------------------------- showcase new ------------------------------------ */
-  
-  
+	
+	
     .box-showcase {
        float: left;
        position: relative;
        width: 16.6%;
-       padding-bottom: 16.6%;
+       padding-bottom: 220px;
        margin-bottom: 90px;
        cursor: pointer;
-
-
-     
-        
+	   
+	      
     }
 
-    .box-showcase:hover .box-showcaseInner_frame {
-      background: #d82827;
-    }
-
-    .box-showcase:hover .title_menu{
-      background: #d82827;
-      color: #fff;
-    }
-
-    .box-showcase:hover .box-showcaseDesc{
-      background: #d82827;
-      color: #fff;
-    }
-      .box-showcase:hover .box-showcaseDesc_price{
-      background: #d82827;
-      color: #fff;
-    }
-
-     .box-showcaseInner_frame {
+    .box-showcaseInner_frame {
      
        position: absolute;
        left: 10px;
@@ -48,6 +28,7 @@
     }
    
     .box-showcaseInner {
+
        position: absolute;
        left: 20px;
        right: 20px;
@@ -55,102 +36,107 @@
        bottom: 0px;
        overflow: hidden;
        background: #fff;
-      
+	    
        border-radius: 50%;
     }
-  
-  
+	
+	
 
     .box-showcaseDesc {
-    
+		
        position: absolute;
        left: 10px;
        right: 10px;
        overflow: hidden;
        background: #fff;
-       top: 100%;
+       top: 220px;
        margin-top: -10px;
        height: 90px;
        
-     text-align:center;
-      border:1px solid #d82827;
-      border-top: none;
+	   text-align:center;
+	    border:1px solid #d82827;
+      border-top:none;
     }
 
     .box-showcaseDesc_name{
-    height:40px;
+		height:40px;
         color: #C63;
-    font-weight:bold;
-    padding:10px;
-    font-size:14px;
-    
+		font-weight:bold;
+		padding:10px;
+		font-size:14px;
+		
     }
-  
-  .box-showcaseDesc_price{
-    bottom: 50px;
-    width:100%;
-        font-size: 12px;
-    position:absolute;
-    background:#fff;
-    padding:10px;
-    color:#999;
-    font-weight:bold;
+	
+	.box-showcaseDesc_price{
+		bottom: 50px;
+		width:100%;
+        font-size: 14px;
+		position:absolute;
+		background:#fff;
+		padding:10px;
+		color:#d82827;
+		font-weight:bold;
+    font-family: 'calibri';
 
-  }
+	}
 
     .box-showcaseDesc_by{
        
         bottom: 0px;
-    width:100%;
+		width:100%;
         font-size: 11px;
         font-weight: bold;
         color: #000;
-    position:absolute;
-    
+		position:absolute;
+		
     }
-  
-   .box-showcaseDesc_date{
+	
+	 .box-showcaseDesc_date{
         height: 20px;
         bottom: 0px;
-    float:right;
+		float:right;
         font-size: 11px;
         font-weight: bold;
         color: #999;
-    position:absolute;
-    text-align:right;
-    right:10px;
+		position:absolute;
+		text-align:right;
+		right:10px;
     }
-    
-   .box-showcaseDesc_button{
+		
+	 .box-showcaseDesc_button{
         width:100%;
-    height:50px;
-    background:#E98A7E;
-    line-height:50px;
-    color:#fff;
+		height:50px;
+		background:#354052;
+		line-height:50px;
+		color:#fff;
     }
-  
+	
     .box-showcaseInner .img_class {
-    
+		
        width: 100%;
+
         opacity: 1;
-     transition: opacity .25s ease-in-out;
-     -moz-transition: opacity .25s ease-in-out;
-     -webkit-transition: opacity .25s ease-in-out;
+	   transition: opacity .25s ease-in-out;
+	   -moz-transition: opacity .25s ease-in-out;
+	   -webkit-transition: opacity .25s ease-in-out;
     }
-  
-   .box-showcaseInner .img_class2 {
-    
+	
+	 .box-showcaseInner .img_class2 {
+		
        height: 100%;
         opacity: 1;
-     transition: opacity .25s ease-in-out;
-     -moz-transition: opacity .25s ease-in-out;
-     -webkit-transition: opacity .25s ease-in-out;
+	   transition: opacity .25s ease-in-out;
+	   -moz-transition: opacity .25s ease-in-out;
+	   -webkit-transition: opacity .25s ease-in-out;
     }
-  
-  
+	
+	
 
-   
-  
+    .box-showcaseInner img:hover {
+    	opacity: 0.5;
+    }
+	
+	
 
     .box-showcaseInner .titlebox-showcase {
        position: absolute;
@@ -168,8 +154,8 @@
        -o-transition: all 0.3s ease-out;
        transition: all 0.3s ease-out;
     }
-
-     .title_menu{
+	
+    .title_menu{
         position: absolute;
        left: 10px;
        right: 10px;
@@ -187,43 +173,43 @@
       padding-bottom: 10px;
       height: 55px;
     }
-  
+
 
     /*.box-showcaseInner:hover .titlebox-showcase, .box-showcaseInner.touchFocus .titlebox-showcase {
        margin-bottom: 0;
     }*/
-  
+	
 
 
     @media only screen and (max-width : 480px) {
        /* Smartphone view: 1 tile */
        .box-showcase {
           width: 100%;
-          padding-bottom: 100%;
+          padding-bottom: 75%;
        }
-    
-     
+	  
+	   
     }
     @media only screen and (max-width : 800px) and (min-width : 481px) {
        /* Tablet view: 2 tiles */
        .box-showcase {
           width: 50%;
-          padding-bottom: 50%;
+          padding-bottom: 35%;
        }
-   
+	 
     }
     @media only screen and (max-width : 1050px) and (min-width : 801px) {
        /* Small desktop / ipad view: 3 tiles */
        .box-showcase {
           width: 33.3%;
-          padding-bottom: 33.3%;
+          padding-bottom: 25%;
        }
-    
+	  
     }
     @media only screen and (max-width : 1290px) and (min-width : 1051px) {
        /* Medium desktop: 4 tiles */
        .box-showcase {
           width: 25%;
-          padding-bottom: 25%;
+          padding-bottom: 18%;
        }
     }

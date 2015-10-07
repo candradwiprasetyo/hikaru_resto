@@ -161,10 +161,16 @@ function load_data_history(id)
                 
  <form action="<?= $action ?>" method="post" enctype="multipart/form-data" role="form">
                 <!-- Main content -->
-                <section class="content">
+
+                <section class="content" style="padding-top: 0">
                   
-                  
-<div class="container">
+              <div class="row">
+              <div class="col-md-12">
+              <div class="box box-cokelat">
+              <div class="box-body">    
+              
+              <div class="container">
+        
 			<!-- Top Navigation -->
 		
 			
@@ -243,6 +249,7 @@ function load_data_history(id)
 			 ?>
 			</div>  
            
+      
             
                <div class="row">
                
@@ -266,37 +273,42 @@ function load_data_history(id)
                  
                   <!-- start menu -->
                   
-                  
-                   <?php
+                  <?php
                     $no2 = 1;
-					$query = mysql_query("select * from menus where menu_type_id = '".$row_cat['menu_type_id']."' order by menu_id");
+          $query = mysql_query("select * from menus where menu_type_id = '".$row_cat['menu_type_id']."' order by menu_id");
                     while($row = mysql_fetch_array($query)){
                    ?>
                    
                   <div class="box-showcase jcorgFilterTextParent">
 
-                  	<a onClick="add_menu(<?= $row['menu_id']?>)">
+                    <a onClick="add_menu(<?= $row['menu_id']?>)">
+                      <div class="title_menu">
+                          <?= $row['menu_name'] ?>
+                        </div>
+                        <div class="box-showcaseInner_frame">
                         <div class="box-showcaseInner">
                         <?php
                         $gambar = ($row['menu_img']) ? $row['menu_img'] : "default.jpg";
-						?>
+            ?>
                             <img src="../img/menu/<?= $gambar ?>" class="img_class" />
                            
                         </div>
+                      </div>
                         </a>
                         <div class="box-showcaseDesc ">
-                            <a onClick="add_menu(<?= $row['menu_id']?>)"> <div class="box-showcaseDesc_name "><p><?= $row['menu_name'] ?></p></div>
+                            <a onClick="add_menu(<?= $row['menu_id']?>)"> 
+
                              <div class="box-showcaseDesc_price">Rp. <?= $row['menu_price'] ?></div>
                              </a>
                             <div class="box-showcaseDesc_by">
-                            	<div class="col-xs-8" style="padding:0px;">
-                                   	<input required type="text" name="i_jumlah_<?= $row['menu_id'] ?>" id="i_jumlah_<?= $row['menu_id'] ?>" class="form-control text_menu" value="0" onchange="edit_menu(<?= $row['menu_id'] ?>)"/>
-                           			<input type="hidden" name="i_harga_<?= $row['menu_id'] ?>" id="i_harga_<?= $row['menu_id'] ?>" class="form-control text_menu" value="<?= $row['menu_price'] ?>"/>
-                       			</div>
+                              <div class="col-xs-8" style="padding:0px;">
+                                    <input required type="text" name="i_jumlah_<?= $row['menu_id'] ?>" id="i_jumlah_<?= $row['menu_id'] ?>" class="form-control text_menu" value="0" onchange="edit_menu(<?= $row['menu_id'] ?>)"/>
+                                <input type="hidden" name="i_harga_<?= $row['menu_id'] ?>" id="i_harga_<?= $row['menu_id'] ?>" class="form-control text_menu" value="<?= $row['menu_price'] ?>"/>
+                            </div>
                                 <div class="col-xs-4" style="padding:0px;">
-                                	<a onClick="minus_menu(<?= $row['menu_id']?>)">
-                                	<div class="box-showcaseDesc_button">
-                                    	<i class="fa fa-minus"></i>
+                                  <a onClick="minus_menu(<?= $row['menu_id']?>)">
+                                  <div class="box-showcaseDesc_button">
+                                      <i class="fa fa-minus"></i>
                                     </div>
                                     </a>
                                 </div>
@@ -304,11 +316,11 @@ function load_data_history(id)
                             
                         </div>
                          <div class="jcorgFilterTextChild"><?= $row['menu_name'] ?></div>
-                     	
+                      
                     </div>
                     
                     <?php
-					$no2++;
+          $no2++;
                     }
                     ?>
                                 
@@ -320,10 +332,13 @@ function load_data_history(id)
                 
                   <!-- batas kategori -->
                   <?php
-				}
+				  }
 				  ?>
-                
-				 </div>
+          </div>
+          </div>
+          </div>
+          </div>    
+				  </div>
                 
 			</section>
 			
@@ -350,7 +365,7 @@ function load_data_history(id)
                 </div>
                  <div class="col-xs-4">
                    <div class="form-group">
-                  <input class="btn btn-warning button_checkout" type="submit" value="SAVE"/>
+                  <input class="btn btn-danger button_checkout" type="submit" value="SAVE"/>
                 </div>
             </div>
                 </div>
