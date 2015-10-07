@@ -89,13 +89,13 @@ if(!$_SESSION['login']){
 	}
 	?>
 	.meja1 {
-    background: url(../img/table7.png) no-repeat !important;
+    background: url(../img/table_hikaru.png) no-repeat !important;
     display: table;
     width: 100%;
 	}
 	
 	.meja2 {
-    background: url(../img/table_merger.png) no-repeat !important;
+    background: url(../img/table_hikaru2.png) no-repeat !important;
     display: table;
     width: 100%;
 	}
@@ -120,8 +120,10 @@ if(!$_SESSION['login']){
 						
 					</div><!-- morph-button -->
 
-					<div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-						<button class="red_color_button" type="button">LOGOUT</button>
+					<div class="logo_order"></div>
+
+					<div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed" style="float:right; right:20px;">
+						<button class="logout_color_button" type="button">LOGOUT</button>
 						<div class="morph-content">
 							<div>
 								<div class="content-style-form content-style-form-2" >
@@ -200,7 +202,7 @@ if(!$_SESSION['login']){
 
 <div class="footer_fixed"> 
 			<div class="morph-button morph-button-sidebar morph-button-fixed">
-			<button type="button" class="green_color_button"><?= $building_name?></button>
+			<button type="button" class="red_color_button"><?= $building_name?></button>
 			<div class="morph-content">
 				<div>
 					<div class="content-style-sidebar">

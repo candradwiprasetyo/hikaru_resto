@@ -1,4 +1,4 @@
-<div class="table_total_item" style="margin-bottom:10px; margin-top:10px; text-align:center;">
+<div class="table_total_item">
 
 <?php
 $q_t = mysql_query("select table_name from tables where table_id = '".$row['table_id']."'");
@@ -76,7 +76,7 @@ if($i > 1){ echo ")"; }
     
     </td>
     <td width="25%">
-    <a href="#" onclick="javascript: cancel_order(<?= $row['table_id']?>)"><div class="btn_payment" style="background:#f56954">CANCEL</div></a>
+    <a href="#" onclick="javascript: cancel_order(<?= $row['table_id']?>)"><div class="btn_cancel">CANCEL</div></a>
       
     
     </td>
