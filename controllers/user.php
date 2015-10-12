@@ -24,6 +24,8 @@ switch ($page) {
 		get_header();
 
 		$close_button = "user.php?page=list";
+		$query_type = select_type();
+		$query_branch = select_branch();
 
 		$id = (isset($_GET['id'])) ? $_GET['id'] : null;
 		if($id){
@@ -40,11 +42,13 @@ switch ($page) {
 			//$get_code = get_user_code();
 
 			$row->user_code = false;
+			$row->user_type_id = false;
 			$row->user_name = false;
 			$row->user_phone = false;
 			$row->user_password = false;
 			$row->user_login = false;
 			$row->user_confirm_password = false;
+			$row->branch_id = false;
 
 			$action = "user.php?page=save";
 		}
@@ -60,6 +64,7 @@ switch ($page) {
 		extract($_POST);
 
 		$i_type = get_isset($i_type);
+		$i_branch_id = get_isset($i_branch_id);
 		$i_login = get_isset($i_login);
 		$i_password = get_isset($i_password);
 		$i_confirm_password = get_isset($i_confirm_password);
@@ -69,7 +74,7 @@ switch ($page) {
 		
 		$path = "../img/user/";
 		$i_img_tmp = $_FILES['i_img']['tmp_name'];
-		$i_img = ($_FILES['i_img']['name']) ? $_FILES['i_img']['name'] : "";
+		$i_img = ($_FILES['i_img']['name']) ? time()."_".$_FILES['i_img']['name'] : "";
 	
 		$cek_i_login = cek_name_login($i_login);
 
@@ -94,7 +99,8 @@ switch ($page) {
 					'$i_code', 
 					'$i_phone', 
 					'$i_img',
-					'1'
+					'1',
+					'$i_branch_id'
 			";
 			
 			//echo $data;
@@ -115,6 +121,7 @@ switch ($page) {
 
 		$id = get_isset($_GET['id']);
 		$i_type = get_isset($i_type);
+		$i_branch_id = get_isset($i_branch_id);
 		$i_login = get_isset($i_login);
 		$i_password = get_isset($i_password);
 		$i_name = get_isset($i_name);
@@ -145,7 +152,8 @@ switch ($page) {
 					user_name = '$i_name',
 					user_code = '$i_code',
 					user_phone = '$i_phone'
-					user_img = '$i_img'
+					user_img = '$i_img',
+					branch_id = '$i_branch_id'
 
 			";
 					};
@@ -158,6 +166,7 @@ switch ($page) {
 					user_name = '$i_name',
 					user_code = '$i_code'
 					user_phone = '$i_phone',
+					branch_id = '$i_branch_id'
 					";
 			}
 

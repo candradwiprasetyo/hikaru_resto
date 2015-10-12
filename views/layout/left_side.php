@@ -42,6 +42,10 @@
                                 <li><a href="menu.php?page=list"><i class="fa fa-glass"></i>Menu</a></li>
                                 <li><a href="partner.php?page=list"><i class="fa fa-smile-o"></i>Partner</a></li>
                                 <li><a href="member.php?page=list"><i class="fa fa-user"></i>Member</a></li>
+                                <li><a href="supplier.php?page=list"><i class="fa fa-user"></i>Supplier</a></li>
+                                <li><a href="unit.php?page=list"><i class="fa fa-user"></i>Unit</a></li>
+                                <li><a href="bank.php?page=list"><i class="fa fa-user"></i>Bank Account</a></li>
+                                
                              
                             </ul>
                   </li>
@@ -90,6 +94,14 @@
                             <a href="purchase.php">
                                  <i class="fa fa-list-alt"></i>
                                 <span>Pembelian</span>
+                            </a>
+                            
+                  </li>
+                  
+                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 12){ echo "class='active'"; } ?>>
+                            <a href="stock.php">
+                                 <i class="fa fa-list-alt"></i>
+                                <span>Stok</span>
                             </a>
                             
                   </li>

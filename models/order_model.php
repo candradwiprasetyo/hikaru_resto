@@ -35,15 +35,26 @@ function save_table_location($id, $data_x, $data_y){
 
 
 
-function get_item($id){
+function get_item_ordered($id){
 	$query = mysql_query("select count(menu_id) as jumlah from transactions_tmp a
 							join transaction_tmp_details b on b.transaction_id = a.transaction_id
-							where table_id = '$id'");
+							where table_id = '$id' and transaction_detail_status = '1'");
 	$row = mysql_fetch_array($query);
 	
 	$result = ($row['jumlah']) ? $row['jumlah'] : 0 ; 
 	return $result;
 }
+
+function get_item_not_ordered($id){
+	$query = mysql_query("select count(menu_id) as jumlah from transactions_tmp a
+							join transaction_tmp_details b on b.transaction_id = a.transaction_id
+							where table_id = '$id' and transaction_detail_status = '0'");
+	$row = mysql_fetch_array($query);
+	
+	$result = ($row['jumlah']) ? $row['jumlah'] : 0 ; 
+	return $result;
+}
+
 
 function save_room($data){
 		$query = mysql_query("insert into buildings values($data)");
@@ -70,8 +81,16 @@ function update_merger_status($table_id, $status){
 	mysql_query("update tables set tms_id = '$status' where table_id = '$table_id'");
 }
 
-function get_first_building_id(){
-	$query = mysql_query("select min(building_id) as result from buildings");
+function get_first_building_id($branch_id){
+	$query = mysql_query("select min(building_id) as result from buildings where branch_id = '$branch_id'");
+	$row = mysql_fetch_array($query);
+	
+	$result = ($row['result']) ? $row['result'] : 0 ; 
+	return $result;
+}
+
+function get_first_branch_id(){
+	$query = mysql_query("select min(branch_id) as result from branches");
 	$row = mysql_fetch_array($query);
 	
 	$result = ($row['result']) ? $row['result'] : 0 ; 
@@ -80,6 +99,14 @@ function get_first_building_id(){
 
 function get_building_name($building_id){
 	$query = mysql_query("select building_name as result from buildings where building_id = '$building_id'");
+	$row = mysql_fetch_array($query);
+	
+	$result = ($row['result']);
+	return $result;
+}
+
+function get_branch_name($branch_id){
+	$query = mysql_query("select branch_name as result from branches where branch_id = '$branch_id'");
 	$row = mysql_fetch_array($query);
 	
 	$result = ($row['result']);
@@ -144,7 +171,25 @@ function cancel_order($table_id){
 			
 		}
 		mysql_query("delete from transactions_tmp where table_id = '$table_id'");
+		mysql_query("update tables set table_status_id = '1' where table_id = '$table_id'");
 }
+
+function cancel_reserved($table_id){
+		
+		mysql_query("delete from reserved where table_id = '".$row['table_id']."'");
+		mysql_query("update tables set table_status_id = '1' where table_id = '$table_id'");
+}
+
+function update_table_status($table_id){
+		
+		mysql_query("update tables set table_status_id = '1' where table_id = '$table_id'");
+}
+
+function update_order_status($id){
+		mysql_query("update transaction_tmp_details set transaction_detail_status = '1' where transaction_detail_id = '$id'");
+}
+
+
 
 function get_jumlah_meja($building_id){
 	$query = mysql_query("select count(a.table_id) as result  

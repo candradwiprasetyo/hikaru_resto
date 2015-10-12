@@ -26,6 +26,20 @@
                                             <label>Nama Ruang</label>
                                             <input required type="text" name="i_name" class="form-control" placeholder="Masukkan nama ruang..." value="<?= $row->building_name ?>"/>
                                         </div>
+
+                                         <div class="form-group">
+                                          <label>Branch</label>
+                                            <select id="basic" name="i_branch_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                           <?php
+                                           while($r_branch = mysql_fetch_array($query_branch)){
+                                            ?>
+                                             <option value="<?= $r_branch['branch_id'] ?>" <?php if($row->branch_id == $r_branch['branch_id']){ ?> selected="selected"<?php } ?>><?= $r_branch['branch_name']?></option>
+                                             <?php
+                                             }
+                                             ?>
+                                           </select>                                      
+                                      </div>
+
                                       
                                     
             							 <div class="form-group">

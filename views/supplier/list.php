@@ -56,7 +56,7 @@
                                         <thead>
                                             <tr>
                                             	<th width="5%">No</th>
-                                            	<th width="5%">Nama Supplier</th>
+                                            	<th>Nama Supplier</th>
                                                 <th>Nomor Telepon</th>
                                                 <th>Alamat</th>
                                                 <th>Config</th>
@@ -90,7 +90,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="10"><a href="<?= $add_button ?>" class="btn btn-info " >Add</a></td>
+                                                <td colspan="5"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

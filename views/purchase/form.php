@@ -49,17 +49,14 @@
                                         </div><!-- /.input group -->
             </div>
             
+                                        
                                         <div class="form-group">
                                             <label>Nama Barang</label>
-                                            <input required type="text" name="i_name" class="form-control" placeholder="Masukkan nama barang..." value="<?= $row->purchase_name ?>"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Satuan</label>
-                                            <select id="basic" name="i_satuan" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                            <select id="basic" name="i_item_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
                                            <?php
-                                           while($r_unit = mysql_fetch_array($query_unit)){
+                                           while($r_item = mysql_fetch_array($query_item)){
 										   ?>
-                                             <option value="<?= $r_unit['unit_id'] ?>" <?php if($row->unit_id == $r_unit['unit_id']){ ?> selected="selected"<?php } ?>><?= $r_unit['unit_name']?></option>
+                                             <option value="<?= $r_item['item_id'] ?>" <?php if($row->item_id == $r_item['item_id']){ ?> selected="selected"<?php } ?>><?= $r_item['item_name']?></option>
                                              <?php
 										   }
 											 ?>
@@ -91,7 +88,19 @@
 											 ?>
                                            </select>                                    
                                   		</div>
-            
+            								
+                                             <div class="form-group">
+                                            <label>Cabang</label>
+                                            <select id="basic" name="i_branch_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                           <?php
+                                           while($r_branch = mysql_fetch_array($query_branch)){
+										   ?>
+                                             <option value="<?= $r_branch['branch_id'] ?>" <?php if($row->branch_id == $r_branch['branch_id']){ ?> selected="selected"<?php } ?>><?= $r_branch['branch_name']?></option>
+                                             <?php
+										   }
+											 ?>
+                                           </select>                                            
+                                        </div>
                                         
                                         
                                         </div>
@@ -101,8 +110,8 @@
                                 </div><!-- /.box-body -->
                                 
                                   <div class="box-footer">
-                                <input class="btn btn-success" type="submit" value="Save"/>
-                                <a href="<?= $close_button?>" class="btn btn-success" >Close</a>
+                                <input class="btn btn-danger" type="submit" value="Save"/>
+                                <a href="<?= $close_button?>" class="btn btn-danger" >Close</a>
                              
                              </div>
                             

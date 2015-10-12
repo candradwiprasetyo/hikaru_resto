@@ -63,7 +63,8 @@
                                                 <th>Harga</th> 
                                                 <th>Total</th>
                                                 <th>Supplier</th>
-                                                <th>Config</th>
+                                                <th>Cabang</th>
+                                               <!-- <th>Config</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -74,19 +75,19 @@
                                             <tr>
                                             <td><?= $no?></td>
                                                <td><?= format_date($row['purchase_date']); ?></td>
-                                                <td><?= $row['purchase_name']?></td>
+                                                <td><?= $row['item_name']?></td>
                                                 <td><?= $row['unit_name']?></td>
                                                 <td><?= $row['purchase_qty']?></td>
                                                 <td><?= $row['purchase_price']?></td>
                                                 <td><?= $row['purchase_total']?></td>
                                                 <td><?= $row['supplier_name']?></td>
-                                                
-                                              <td style="text-align:center;">
+                                                <td><?= $row['branch_name']?></td>
+                                              <!--<td style="text-align:center;">
 
                                                     <a href="purchase.php?page=form&id=<?= $row['purchase_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
                                                     <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['purchase_id']; ?>,'purchase.php?page=delete&id=')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
 
-                                                </td> 
+                                                </td> -->
                                             </tr>
                                             <?php
 											$no++;
@@ -98,7 +99,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="9"><a href="<?= $add_button ?>" class="btn btn-info " >Add</a></td>
+                                                <td colspan="9"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

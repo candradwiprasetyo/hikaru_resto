@@ -68,11 +68,26 @@ if(!$_SESSION['login']){
         <script src="../js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="../js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
          <script type="text/javascript">
+		  function update_discount(){
+			 var total = parseFloat(document.getElementById("i_total").value);
+			 var discount = parseFloat(document.getElementById("i_discount").value);
+			 
+			 if(discount > total){
+				 alert("Discount tidak boleh melebihi total harga");
+				 document.getElementById("i_discount").value = 0;
+				 document.getElementById("i_grand_total").value = total;
+		     }else{
+			 	var grand_total = total - discount;
+				document.getElementById("i_grand_total").value = grand_total;
+				document.getElementById("i_payment").value = grand_total;
+			 }
+		  }
+		  
 		  function update_change()
 			{
 				
 				var bayar = parseFloat(document.getElementById("i_payment").value);
-				var total = parseFloat(document.getElementById("i_total").value);
+				var total = parseFloat(document.getElementById("i_grand_total").value);
 				
 				
 				if(bayar < total ){
@@ -86,6 +101,16 @@ if(!$_SESSION['login']){
 				
 				document.getElementById("i_change").value = kembali;
 				
+			}
+			
+			
+			function payment_method(id){
+				var bank_frame = document.getElementById("bank_frame");
+				if(id == 1){
+					bank_frame.style.display = 'none';
+				}else{
+					bank_frame.style.display = 'table-cell';
+				}
 			}
 
 		   </script>
@@ -157,10 +182,25 @@ if(!$_SESSION['login']){
                                           
                                        
                                          <tfoot>
+                                            
                                             <tr>
-                                                <td colspan="2" style="font-size:36px;">TOTAL </td>
-                                                <td colspan="3" style="text-align:right; font-size:36px;" ><?= number_format($total_price)?> 
-                                                 <input required type="hidden" name="i_total" id="i_total" class="form-control" value="<?= ($total_price)?> " style="text-align:right; font-size:30px; height:50px;" readonly/>
+                                                <td colspan="2" style="font-size:20px;">Total </td>
+                                                <td colspan="3" style="text-align:right; font-size:20px;" ><?= number_format($total_price)?> 
+                                                 <input required type="hidden" name="i_total" id="i_total" class="form-control" value="<?= ($total_price)?>" style="text-align:right; font-size:30px; height:50px;" readonly/>
+                                                </td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="font-size:20px;">Discount </td>
+                                                <td colspan="3" style="text-align:right; font-size:20px;" >
+                                                 <input required type="text" name="i_discount" id="i_discount" class="form-control" value="0" style="text-align:right; font-size:20px;" onChange="update_discount()"/>
+                                                </td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="font-size:20px;">Grand Total </td>
+                                                <td colspan="3" style="text-align:right; font-size:20px;" >
+                                                 <input required type="text" name="i_grand_total" id="i_grand_total" class="form-control" value="<?= ($total_price)?>" style="text-align:right; font-size:20px;" readonly/>
                                                 </td>
                                                
                                             </tr>
@@ -175,6 +215,52 @@ if(!$_SESSION['login']){
                                             <input required type="number" name="i_payment" id="i_payment" class="form-control" value="<?= ($total_price) ?>" style="text-align:right; font-size:30px; height:50px;" onChange="update_change()" />
                                         </div>
                                                    </td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="font-size:36px;"> 
+                                                
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:20px;">
+  <tr>
+    <td align="center">
+                                                <label>
+                                                    <input type="radio" name="i_payment_method" id="i_payment_method" value="1" checked onclick="payment_method(1)">
+                                                   Cash
+                                                </label>
+                                            
+                                            </td>
+    <td align="center">
+                                                <label>
+                                                    <input type="radio" name="i_payment_method" id="i_payment_method" value="2" onclick="payment_method(2)">
+                                                   Debit
+                                                </label>
+                                            </td>
+    <td align="center"><label>
+                                                    <input type="radio" name="i_payment_method" id="i_payment_method" value="3" onclick="payment_method(3)">
+                                                   Credit
+                                                </label></td>
+  </tr>
+</table>
+
+                                                
+                                                 </td>
+                                               
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style=" display:none;"  id="bank_frame">
+                                                <select id="basic" name="i_bank_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                           <?php
+										   $q_bank = mysql_query("select * from banks order by bank_id");
+                                           while($r_bank = mysql_fetch_array($q_bank)){
+                                            ?>
+                                             <option value="<?= $r_bank['bank_id'] ?>"><?= $r_bank['bank_name']?></option>
+                                             <?php
+                                             }
+                                             ?>
+                                           </select>     
+                                                 </td>
+                                               
                                                
                                             </tr>
                                              <tr>

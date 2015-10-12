@@ -59,11 +59,29 @@
                                         </div>
                                         <div class="form-group">
                                           <label>Type</label>
-                                           <select name="i_type" size="1" class="form-control"/>
-                                             <option value="2">Owner</option>
-                                           <option value="3">Cashier</option>       
-                                           </select>                                    
+                                            <select id="basic" name="i_type" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                           <?php
+                                           while($r_type = mysql_fetch_array($query_type)){
+                                            ?>
+                                             <option value="<?= $r_type['user_type_id'] ?>" <?php if($row->user_type_id == $r_type['user_type_id']){ ?> selected="selected"<?php } ?>><?= $r_type['user_type_name']?></option>
+                                             <?php
+                                             }
+                                             ?>
+                                           </select>                                      
                                   		</div>
+
+                                      <div class="form-group">
+                                          <label>Branch</label>
+                                            <select id="basic" name="i_branch_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                           <?php
+                                           while($r_branch = mysql_fetch_array($query_branch)){
+                                            ?>
+                                             <option value="<?= $r_branch['branch_id'] ?>" <?php if($row->branch_id == $r_branch['branch_id']){ ?> selected="selected"<?php } ?>><?= $r_branch['branch_name']?></option>
+                                             <?php
+                                             }
+                                             ?>
+                                           </select>                                      
+                                      </div>
 
                                           <div class="form-group">
                                             <label>User login</label>

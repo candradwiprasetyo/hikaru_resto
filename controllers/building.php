@@ -23,6 +23,8 @@ switch ($page) {
 		get_header();
 
 		$close_button = "building.php?page=list";
+
+		$query_branch = select_branch();
 		
 		$id = (isset($_GET['id'])) ? $_GET['id'] : null;
 		if($id){
@@ -37,6 +39,7 @@ switch ($page) {
 	
 			$row->building_name = false;
 			$row->building_img = false;
+			$row->branch_id = false;
 			
 			$action = "building.php?page=save";
 		}
@@ -50,18 +53,20 @@ switch ($page) {
 		extract($_POST);
 
 		$i_name = get_isset($i_name);
+		$i_branch_id = get_isset($i_branch_id);
 		
 		$path = "../img/building/";
 		$i_img_tmp = $_FILES['i_img']['tmp_name'];
 		$i_img = ($_FILES['i_img']['name']) ? $_FILES['i_img']['name'] : "";
 		$i_img = str_replace(" ","",$i_img);
 		
-		$date = ($_FILES['i_img']['name']) ? date("Ymdhms")."_" : "";
+		$date = ($_FILES['i_img']['name']) ? time()."_" : "";
 		
 		$data = "'',
 					
 					'$i_name',
-					'".$date.$i_img."'
+					'".$date.$i_img."',
+					'$i_branch_id'
 					
 			";
 			
@@ -83,33 +88,36 @@ switch ($page) {
 
 		$id = get_isset($_GET['id']);
 		$i_name = get_isset($i_name);
+		$i_branch_id = get_isset($i_branch_id);
 		
 		$path = "../img/building/";
 		$i_img_tmp = $_FILES['i_img']['tmp_name'];
 		$i_img = ($_FILES['i_img']['name']) ? $_FILES['i_img']['name'] : "";
 		$i_img = str_replace(" ","",$i_img);
 		
-		$date = ($_FILES['i_img']['name']) ? date("Ymdhms")."_" : "";
+		$date = ($_FILES['i_img']['name']) ? time()."_" : "";
 		
 				if($i_img){
 				
 			
 				if(move_uploaded_file($i_img_tmp, $path.$date.$i_img)){
 					$get_img_old = get_img_old($id);
-					if($get_img_old){
-						unlink("../img/building/" .$get_img_old);
+					if(file_exists($path.$get_img_old)){
+						unlink($path.$get_img_old);
 					}
 					
 					$data = "building_name = '$i_name',
 							
-							building_img = '$date$i_img'
+							building_img = '$date$i_img',
+							branch_id = '$i_branch_id'
 
 					";
 				}
 			
 			
 			}else{
-				$data = "building_name = '$i_name'
+				$data = "building_name = '$i_name',
+						branch_id = '$i_branch_id'
 					";
 			}
 			
@@ -123,11 +131,13 @@ switch ($page) {
 
 	case 'delete':
 
-		$id = get_isset($_GET['id']);	
+		$id = get_isset($_GET['id']);
+
+		$path = "../img/building/";	
 		
 		$get_img_old = get_img_old($id);
-					if($get_img_old){
-						unlink("../img/building/" . $get_img_old);
+					if(file_exists($path.$get_img_old)){
+						unlink($path.$get_img_old);
 					}
 
 

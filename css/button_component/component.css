@@ -88,7 +88,7 @@
 	-webkit-transition: opacity 0.1s 0.5s;
 	transition: opacity 0.1s 0.5s;
 	position:fixed;
-	width: 200px;
+	width: 280px;
 	height: 60px;
 }
 
@@ -390,12 +390,12 @@
 
 .morph-button-sidebar > button {
 	line-height: 60px;
-	font-size: 1.6em;
+	font-size: 1em;
 	padding: 0;
 }
 
 .morph-button-sidebar .morph-content {
-	background: #27AE60;
+	background: #DD4B39;
 	z-index:9999;
 }
 
@@ -406,7 +406,7 @@
 	height: 100%;
 	overflow: hidden;
 	-webkit-backface-visibility: hidden;
-	margin-top:80px;
+	margin-top: 80px;
 	
 }
 

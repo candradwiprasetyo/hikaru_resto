@@ -7,17 +7,31 @@ if(!$_SESSION['login']){
 <html lang="en">
 <head>
 <title>.: Warung App :.</title>
-<link rel="stylesheet" type="text/css" href="../css/style_table.css" />
-<!-- tooltip -->
- <link rel="stylesheet" type="text/css" href="../css/tooltip/tooltip-classic.css" />
- <!-- button component-->
+<!-- bootstrap 3.0.2 -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        
+         <!-- DATA TABLES -->
+        <link href="../css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+        <!-- Theme style -->
+        <link href="../css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <!-- iCheck for checkboxes and radio inputs -->
+        <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />
+
+		<link rel="stylesheet" type="text/css" href="../css/style_table.css" />
+		<!-- tooltip -->
+ 		<link rel="stylesheet" type="text/css" href="../css/tooltip/tooltip-classic.css" />
+ 		<!-- button component-->
  		<link rel="stylesheet" type="text/css" href="../css/button_component/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="../css/button_component/demo.css" />
 		<link rel="stylesheet" type="text/css" href="../css/button_component/component.css" />
 		<link rel="stylesheet" type="text/css" href="../css/button_component/content.css" />
-
-		<!-- progress button -->
-        <link rel="stylesheet" type="text/css" href="../css/progress_button/component.css" />
+        
+        <!-- vertical scroll 
+         <link rel="stylesheet" href="../css/vertical_scroll/main.css">-->
+         
+         <!-- vertical scroll new -->
+         <link rel="stylesheet" href="../css/vertical_scroll_new/style.css">
+		<link rel="stylesheet" href="../css/vertical_scroll_new/jquery.mCustomScrollbar.css">
         <!-- Bootstrap -->
         <script src="../js/bootstrap.min.js" type="text/javascript"></script>
          
@@ -97,7 +111,11 @@ if(!$_SESSION['login']){
 	$q_building1++;
 	}
 	?>
-	
+	.meja1 {
+    background: url(../img/table_hikaru.png) no-repeat !important;
+    display: table;
+    width: 100%;
+	}
 </style>
  
 <script type="text/javascript" src="../js/table/jquery.js"></script>
@@ -247,7 +265,7 @@ function handleDragStop_<?= $r4['table_id']?>( event, ui) {
 		$get_item = get_item($row['table_id']);
 		
 	?>
-	<div id="makeMeDraggable_<?= $row['table_id']?>" class="meja">
+	<div id="makeMeDraggable_<?= $row['table_id']?>" class="meja1">
 	
 				<span class="">
 				<div class="tooltip-item"><?= $row['table_name'] ?>

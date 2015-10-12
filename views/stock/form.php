@@ -1,3 +1,4 @@
+
 <!-- Content Header (Page header) -->
         
 
@@ -23,29 +24,28 @@
                                         <div class="col-md-12">
                                         
                                         <div class="form-group">
-                                            <label>Nomor Meja</label>
-                                            <input required type="text" name="i_name" class="form-control" placeholder="Masukkan nomor meja..." value="<?= $row->table_name ?>"/>
-                                        </div>
-                                      
+                                       
+            
                                         <div class="form-group">
-                                          <label>Ruang</label>
-                                           <select id="basic" name="i_building_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                            <label>Nama</label>
+                                            <input required type="text" name="i_name" class="form-control" placeholder="Masukkan nama barang..." value="<?= $row->item_name ?>"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Satuan</label>
+                                            <select id="basic" name="i_unit_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
                                            <?php
-                                           while($r_building = mysql_fetch_array($query_building)){
+                                           while($r_unit = mysql_fetch_array($query_unit)){
 										   ?>
-                                             <option value="<?= $r_building['building_id'] ?>" <?php if($row->building_id == $r_building['building_id']){ ?> selected="selected"<?php } ?>><?= $r_building['building_name']?> (<?= $r_building['branch_name']?>)</option>
+                                             <option value="<?= $r_unit['unit_id'] ?>" <?php if($row->unit_id == $r_unit['unit_id']){ ?> selected="selected"<?php } ?>><?= $r_unit['unit_name']?></option>
                                              <?php
 										   }
 											 ?>
-                                           </select>                                    
-                                  		</div>
-            							
-                                        <div class="form-group">
-                                            <label>Jumlah Kursi</label>
-                                            <input required type="text" name="i_chair_number" class="form-control" placeholder="Masukkan jumlah kursi..." value="<?= $row->chair_number ?>"/>
+                                           </select>                                            
                                         </div>
+                                      
+                                       
                                         
-                                        
+                                        </div>
                                         </div>
                                        
                                         <div style="clear:both;"></div>
@@ -53,8 +53,8 @@
                                 </div><!-- /.box-body -->
                                 
                                   <div class="box-footer">
-                                <input class="btn btn-success" type="submit" value="Save"/>
-                                <a href="<?= $close_button?>" class="btn btn-success" >Close</a>
+                                <input class="btn btn-danger" type="submit" value="Save"/>
+                                <a href="<?= $close_button?>" class="btn btn-danger" >Close</a>
                              
                              </div>
                             

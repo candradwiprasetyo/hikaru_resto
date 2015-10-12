@@ -21,16 +21,13 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-        <style>
-		html, body{
-			background-color:#354052 !important;
-		}
-		</style>
+       
     </head>
     <body >
 
+        <div class="login_logo"></div>
         <div class="form-box" id="login-box">
-            <div class="header"><div class="bg-logo"><span style="font-size: 1.3em !important;"><strong>HIKARU</strong></span><br>Resto</div></div>
+            <div class="header"><div class="bg-logo"><span style="font-size: 3em !important;"><strong>Login</strong></span></div></div>
             <form action="controllers/login.php?page=login" method="post">
                 <div class="body bg-white">
                     <?php
@@ -51,14 +48,13 @@
                     </div>
                     <div class="form-group">
                         <input style="border:1px solid #eee;" required type="password" name="i_password" class="form-control" placeholder="Password"/>
+                    </div>   
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-danger btn-block" style="margin-top:10px;">LOGIN</button>  
                     </div>          
                   
                 </div>
-                <div class="footer" >                                                               
-                    <button type="submit" class="btn btn-danger btn-block" style="margin-top:10px;">LOGIN</button>  
-                    
-                 
-                </div>
+                
             </form>
 
 <div></div>

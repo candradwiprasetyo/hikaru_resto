@@ -25,7 +25,7 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100%;
    /*background: #E9F0F5;*/
-   background: url('../img/new/background.gif') repeat;
+  
 
 }
 a {
@@ -1231,12 +1231,12 @@ body > .header .logo .icon {
   font-size: 28px;
   font-weight: bold;
   margin: 0 0 10px 0;
-  white-space: nowrap;
   padding: 0;
 }
 .small-box p {
-  margin-top: 40px;
+	position:absolute;
   font-size: 15px;
+  bottom:0px;
 }
 .small-box p > small {
   display: block;
@@ -2378,8 +2378,10 @@ Component: timeline
 */
 .form-box {
   width: 360px;
-  margin: 90px auto 0 auto;
- box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px auto 0 auto;
+ box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.1);
+ border-radius: 5px;
+
 }
 .form-box .header {
   -webkit-border-top-left-radius: 4px;
@@ -2390,27 +2392,28 @@ Component: timeline
   -moz-border-radius-topright: 4px;
   -moz-border-radius-bottomright: 0;
   -moz-border-radius-bottomleft: 0;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  box-shadow: inset 0px -3px 0px rgba(0, 0, 0, 0.2);
   padding: 20px 10px;
   text-align: center;
   
   font-weight: 300;
-  color: #fff;
-  background:#F56954;
+  color: #454140;
+  background:#fff;
   
 }
 .form-box .body{
-	background:#fff;
-	padding: 10px 20px;
-  
+  background:#fff;
+  padding: 10px 20px;
+  padding-bottom: 30px;
   color: #444;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .form-box .footer {
-   border-top: 1px solid #f4f4f4;
+  
   -webkit-border-top-left-radius: 0;
   -webkit-border-top-right-radius: 0;
   -webkit-border-bottom-right-radius: 3px;
@@ -2423,12 +2426,8 @@ Component: timeline
   border-top-right-radius: 0;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-  background:#F9FAFC;
-  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-  -moz-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-  border-top: 1px solid #e8e8e8;
-  padding: 20px;
+  background:#fff;
+  padding: 10px;
 }
 .form-box .body > .form-group,
 .form-box .footer > .form-group {
@@ -2462,6 +2461,7 @@ Component: timeline
     width: 90%;
   }
 }
+
 /* 
     Page: 404 and 500 error pages
 ------------------------------------
@@ -3057,4 +3057,13 @@ Component: timeline
 
 .home_back4{
   background: url('../img/new/home_back4.png') no-repeat top left;
+ }
+
+ .login_logo{
+  width: 200px;
+  height: 150px;
+  background: url('../img/new/login.png') no-repeat;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
  }

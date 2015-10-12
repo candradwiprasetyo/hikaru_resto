@@ -1,3 +1,4 @@
+
 <div class="table_total_item">
 
 <?php
@@ -35,6 +36,7 @@ if($i > 1){ echo ")"; }
     <td align="right">Qty</td>
     <td align="right">Harga</td>
     <td align="right">Jumlah</td>
+    <td align="right">Config</td>
   </tr>
   </thead>
   <?php
@@ -53,6 +55,10 @@ if($i > 1){ echo ")"; }
     <td align="right" valign="top"><?= $row_item['transaction_detail_qty'] ?></td>
     <td align="right" valign="top"><?= $row_item['transaction_detail_grand_price'] ?></td>
     <td align="right" valign="top"><?= $row_item['transaction_detail_total'] ?></td>
+    <td align="right" valign="top">
+    <input type="checkbox" name="i_status_id_<?= $row_item['transaction_detail_id']?>" value="1" onclick='return order_status(<?= $row_item['transaction_detail_id'] ?>)' <?php if($row_item['transaction_detail_status']==1){ ?> checked="checked" disabled="disabled"<?php }?>/>
+   
+   </td>
   </tr>
   
  <?php
@@ -61,7 +67,7 @@ if($i > 1){ echo ")"; }
   }
  ?>
 </table>
-<table width="100%" border="0" cellspacing="0" cellpadding="6" class="table_total_item">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_total_item">
   <tr>
     <td>TOTAL</td>
     <td align="right"><?= $total_price ?></td>

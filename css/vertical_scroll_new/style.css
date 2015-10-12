@@ -567,7 +567,7 @@ hr + .content:nth-child(odd) h2{
 
 .content table tr{ border-bottom: 1px dashed #666; }
 */
-.content table td{ padding: 6px 6px 6px 0px; }
+.content table td{ padding: 3px 3px 3px 0px; }
 
 .sortable{ min-width: 800px; }
 

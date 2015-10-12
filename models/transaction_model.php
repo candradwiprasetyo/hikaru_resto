@@ -83,4 +83,9 @@ function get_data_history($table_id, $menu_id){
 	return $query;
 }
 
+function delete_reserved($table_id){
+	mysql_query("delete from reserved where table_id = $table_id
+							  ");
+}
+
 ?>

@@ -48,8 +48,8 @@
                                             <input required type="text" name="i_telp" id="i_telp" class="form-control" placeholder="Masukkan nomor telepon..." value="<?= $row->supplier_phone ?>"/>
                                         </div>
                                         <div class="form-group">
-                                          <label>Alama</label>
-                                          <textarea name="i_alamat" id="i_alamat" cols="45" rows="5"><?= $row->supplier_addres ?></textarea>
+                                          <label>Alamat</label>
+                                          <textarea name="i_alamat" id="i_alamat" cols="45" rows="5" class="form-control"><?= $row->supplier_addres ?></textarea>
                                         </div>
                                         </div>
                                         
@@ -59,8 +59,8 @@
                                 </div><!-- /.box-body -->
                                 
                                   <div class="box-footer">
-                                <input class="btn btn-success" type="submit" value="Save"/>
-                                <a href="<?= $close_button?>" class="btn btn-success" >Close</a>
+                                <input class="btn btn-danger" type="submit" value="Save"/>
+                                <a href="<?= $close_button?>" class="btn btn-danger" >Close</a>
                              
                              </div>
                             

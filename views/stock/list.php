@@ -55,32 +55,51 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th width="5%">No</th>
-                                                <th>Branch</th>
-                                                <th>Name</th>
-                                                  <th>Type</th>
-                                                   <th>Phone</th> 
+                                            	<th width="5%">No</th>
+                                            	
+                                                <th>Nama</th>
+                                                <th>Satuan</th>
+                                                <?php
+                                               	while($r_branch = mysql_fetch_array($q_branch)){
+												?>
+                                                <th><?= $r_branch['branch_name']?></th>
+                                              	<?php
+												}
+												?>
+                                                <th>Config</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                            $no = 1;
-                                            while($row = mysql_fetch_array($query)){
+										   while($row = mysql_fetch_array($query)){
                                             ?>
                                             <tr>
                                             <td><?= $no?></td>
-                                               <td><?= $row['branch_name']?></td>
-                                                <td><?= $row['user_name']?></td>
-                                              
-                                                <td><?= $row['user_type_name']?></td>
-                                                 <td><?= $row['user_phone']?></td>
                                                
-                                               <!-- <td style="text-align:center;">
+                                                <td><?= $row['item_name']?></td>
+                                                <td><?= $row['unit_name']?></td>
+                                               
+                                                <?php
+												$count_branch = 0;
+												$q_branch2 = mysql_query("select * from branches $where_branch order by branch_id"); 
+                                               	while($r_branch2 = mysql_fetch_array($q_branch2)){
+													
+													
+													
+												?>
+                                                <td><?= get_stock($row['item_id'], $r_branch2['branch_id'])?></td>
+                                              	<?php
+												$count_branch++;
+												}
+												?>
+                                              	
+                                              <td style="text-align:center;">
 
-                                                    <a href="user.php?page=form&id=<?= $row['user_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['user_id']; ?>,'user.php?page=delete&id=')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+                                                    <a href="stock.php?page=form&id=<?= $row['item_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
+                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['item_id']; ?>,'stock.php?page=delete&id=')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
 
-                                                </td> -->
+                                                </td> 
                                             </tr>
                                             <?php
 											$no++;
@@ -92,7 +111,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="5"><a href="<?= $add_button ?>" class="btn btn-info " >Add</a></td>
+                                                <td colspan="<?php $col = $count_branch + 4; echo $col; ?>"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

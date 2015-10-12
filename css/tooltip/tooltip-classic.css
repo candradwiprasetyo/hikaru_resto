@@ -270,14 +270,43 @@ html, body{margin:0;  height:100%; }
 }
 
 
-.count_item{
+.count_item_ordered{
+	background:#393;
+	color:#fff;
+	
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	margin-top: -10px;
+	margin-left: 40px;
+	font-size: 15px;
+	border-radius:50%;
+	position:absolute;
+}
+
+.count_item_not_ordered{
 	background:#d82827;
 	color:#fff;
 	border-radius:50%;
 	width: 30px;
 	height: 30px;
 	line-height: 30px;
-	margin-top: -15px;
-	margin-left: 60px;
+	margin-top: -10px;
+	margin-left: 70px;
 	font-size: 15px;
+	position:absolute;
+}
+
+.table_reserved{
+	background:#FF0;
+	color:#626262;
+	line-height: 20px;
+	font-size: 12px;
+	border:1px solid #fff;
+	margin-top:-85px;
+	position:absolute;
+	margin-left:20px;
+	
+	padding-left:3px;
+	padding-right:3px;
 }

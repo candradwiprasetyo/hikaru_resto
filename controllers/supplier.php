@@ -4,7 +4,7 @@ include '../lib/function.php';
 include '../models/supplier_model.php';
 $page = null;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "list";
-$title = ucfirst("Pembelian");
+$title = ucfirst("Supplier");
 
 $_SESSION['menu_active'] = 1;
 

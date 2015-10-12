@@ -57,6 +57,7 @@
                                             <tr>
                                             <th width="5%">No</th>
                                                 <th>Nama Ruang</th>
+                                                <th>Cabang</th>
                                                 <th>Image</th>
                                                    <th>Config</th> 
                                             </tr>
@@ -69,6 +70,7 @@
                                             <tr>
                                             <td><?= $no?></td>
                                                <td><?= $row['building_name']?></td>
+                                               <td><?= $row['branch_name']?></td>
                                                 <td><img src="<?php
 											   if($row['building_img']){
 											   		$image = "../img/building/".$row['building_img'];
@@ -93,7 +95,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="4"><a href="<?= $add_button ?>" class="btn btn-info " >Add</a></td>
+                                                <td colspan="5"><a href="<?= $add_button ?>" class="btn btn-info " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

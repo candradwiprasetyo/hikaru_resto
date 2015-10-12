@@ -1,15 +1,20 @@
 <?php
 
 function select(){
-	$query = mysql_query("select a.* 
+	$query = mysql_query("select a.*, b.branch_name
 							from buildings a
-							
+							join branches b on b.branch_id = a.branch_id
 							order by building_id");
 	return $query;
 }
 
 function select_building(){
 	$query = mysql_query("select * from buildings order by building_id ");
+	return $query;
+}
+
+function select_branch(){
+	$query = mysql_query("select * from branches order by branch_id ");
 	return $query;
 }
 

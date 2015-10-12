@@ -12,7 +12,14 @@ switch ($page) {
 	case 'list':
 		get_header($title);
 		
-		$query = select();
+		
+		if($_SESSION['user_type_id']==1 || $_SESSION['user_type_id']==2){
+			$where_branch = "";
+		}else{
+			$where_branch = " where a.branch_id = '".$_SESSION['branch_id']."' ";
+		}
+		
+		$query = select($where_branch);
 		$add_button = "purchase.php?page=form";
 
 		include '../views/purchase/list.php';
@@ -23,8 +30,10 @@ switch ($page) {
 		get_header();
 
 		$close_button = "purchase.php?page=list";
+		
 		$query_supplier = select_supplier();
-		$query_unit = select_unit();
+		$query_item = select_item();
+		$query_branch = select_branch();
 
 		$id = (isset($_GET['id'])) ? $_GET['id'] : null;
 		if($id){
@@ -38,13 +47,13 @@ switch ($page) {
 			//inisialisasi
 			$row = new stdClass();
 	
-			$row->purchase_name = false;
 			$row->purchase_date = format_date(date("Y-m-d"));
-			$row->unit_id = false;
+			$row->item_id = false;
 			$row->purchase_price = false;
 			$row->purchase_qty = false;
 			$row->purchase_total = false;
 			$row->supplier_id = false;
+			$row->branch_id = false;
 			
 			$action = "purchase.php?page=save";
 		}
@@ -57,28 +66,30 @@ switch ($page) {
 	
 		extract($_POST);
 
-		$i_name = get_isset($i_name);
+		
 		$i_date = get_isset($i_date);
 		$i_date = format_back_date($i_date);
-		$i_satuan = get_isset($i_satuan);
+		$i_item_id = get_isset($i_item_id);
 		$i_harga = get_isset($i_harga);
 		$i_qty = get_isset($i_qty);
 		$i_total = get_isset($i_total);
 		$i_supplier = get_isset($i_supplier);
+		$i_branch_id = get_isset($i_branch_id);
 		
 		$data = "'',
 					'$i_date', 
-					'$i_name',
-					'$i_satuan', 
+					'$i_item_id', 
 					'$i_qty',
 					'$i_harga',
 					'$i_total',
-					'$i_supplier'
+					'$i_supplier',
+					'$i_branch_id'
 			";
 			
 			//echo $data;
 
 			create($data);
+			add_stock($i_item_id, $i_branch_id, $i_qty);
 		
 			header("Location: purchase.php?page=list&did=1");
 		
@@ -90,22 +101,23 @@ switch ($page) {
 		extract($_POST);
 
 		$id = get_isset($_GET['id']);
-		$i_name = get_isset($i_name);
+		
 		$i_date = get_isset($i_date);
 		$i_date = format_back_date($i_date);
-		$i_satuan = get_isset($i_satuan);
+		$i_item_id = get_isset($i_stock_id);
 		$i_harga = get_isset($i_harga);
 		$i_qty = get_isset($i_qty);
 		$i_total = get_isset($i_total);
 		$i_supplier = get_isset($i_supplier);
+		$i_branch_id = get_isset($i_branch_id);
 		
-					$data = " purchase_date = '$i_date', 
-					purchase_name = '$i_name',
-					unit_id = '$i_satuan', 
+					$data = " purchase_date = '$i_date',
+					stock_id = '$i_stock_id', 
 					purchase_qty = '$i_qty',
 					purchase_price = '$i_harga',
 					purchase_total = '$i_total',
-					supplier_id = '$i_supplier'
+					supplier_id = '$i_supplier',
+					branch_id = '$i_branch_id'
 
 					";
 			

@@ -11,8 +11,22 @@ $_SESSION['menu_active'] = 2;
 switch ($page) {
 	case 'list':
 		
-		$first_building_id = get_first_building_id();
+		$where_branch = "";
+		if($_SESSION['user_type_id']==3 || $_SESSION['user_type_id']==4 || $_SESSION['user_type_id']==5){
+			$where_branch = " where branch_id = '".$_SESSION['branch_id']."' ";
+			$branch_id = $_SESSION['branch_id'];
+		}else{
+
+			$first_branch_id = get_first_branch_id();
+			$branch_id = (isset($_GET['branch_id'])) ? $_GET['branch_id'] : $first_branch_id; 
+		}
+
+		$first_building_id = get_first_building_id($branch_id);
 		$building_id = (isset($_GET['building_id'])) ? $_GET['building_id'] : $first_building_id; 
+		
+
+		$branch_name = get_branch_name($branch_id);
+
 		$building_name = get_building_name($building_id);
 		$building_img = get_building_img($building_id);
 		
@@ -66,6 +80,12 @@ switch ($page) {
 		
 		$i_payment = $_POST['i_payment'];
 		$i_change = $_POST['i_change'];
+		$i_discount = $_POST['i_discount'];
+		$i_grand_total = $_POST['i_grand_total'];
+		$i_payment_method = $_POST['i_payment_method'];
+		if($i_payment_method == 2 || $i_payment_method == 3){
+			$i_bank_id  = $_POST['i_bank_id'];
+		}
 	
 		$table_id = $_GET['table_id'];
 		$building_id = $_GET['building_id'];
@@ -73,10 +93,11 @@ switch ($page) {
 		$data_total = get_data_total($table_id);
 		$total_discount = get_total_discount($table_id);
 		
-		echo $total_discount;
+		//echo $total_discount;
 		
+		update_table_status($table_id);
 		
-		if($i_payment < $data_total){
+		if($i_payment < $i_grand_total){
 			header("location: payment.php?table_id=$table_id&building_id=$building_id&err=1");
 		}else{
 		
@@ -103,8 +124,13 @@ switch ($page) {
 					'".$row['member_id']."',
 					'".$row['transaction_date']."', 
 					'".$data_total."',
+					'".$i_discount."',
+					'".$i_grand_total."',
 					'".$i_payment."',
-					'".$i_change."'
+					'".$i_change."',
+					'".$i_payment_method."',
+					'".$i_bank_id."'
+					
 			";
 			create_config("transactions", $data);
 			$transaction_id = mysql_insert_id();
@@ -150,6 +176,23 @@ switch ($page) {
 		
 		
 		cancel_order($table_id);
+		header("location: order.php?building_id=$building_id");
+	break;
+	
+	case 'order_status':
+		$id = $_GET['id'];
+		$building_id = $_GET['building_id'];
+		
+		update_order_status($id);
+		header("location: order.php?building_id=$building_id");
+	break;
+	
+	case 'cancel_reserved':
+		$table_id = $_GET['table_id'];
+		$building_id = $_GET['building_id'];
+		
+		
+		cancel_reserved($table_id);
 		header("location: order.php?building_id=$building_id");
 	break;
 	

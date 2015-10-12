@@ -15,9 +15,9 @@ if(!$_SESSION['login']){
         <link href="../css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="../css/AdminLTE.css" rel="stylesheet" type="text/css" />
-        <!-- iCheck for checkboxes and radio inputs -->
+        <!-- iCheck for checkboxes and radio inputs 
         <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />
-
+-->
 		<link rel="stylesheet" type="text/css" href="../css/style_table.css" />
 		<!-- tooltip -->
  		<link rel="stylesheet" type="text/css" href="../css/tooltip/tooltip-classic.css" />
@@ -46,6 +46,19 @@ if(!$_SESSION['login']){
 				window.location.href = 'order.php?page=cancel_order&table_id='+id+'&building_id='+<?= $building_id ?>;
 			}
 	   }
+	   
+	   function cancel_reserved(id){
+		 	var question = confirm("Anda yakin ingin cancel reservasi ?");
+			if(question==true){
+				window.location.href = 'order.php?page=cancel_reserved&table_id='+id+'&building_id='+<?= $building_id ?>;
+			}
+	   }
+	   
+	   function order_status(id){
+
+			window.location.href = 'order.php?page=order_status&id='+id+'&building_id='+<?= $building_id ?>;
+				
+		}
        </script>
     
 		<script src="../js/button_component/modernizr.custom.js"></script>
@@ -158,7 +171,8 @@ if(!$_SESSION['login']){
 	$query =  mysql_query("select * from tables where building_id = '".$r_building4['building_id']."' and tms_id <> '2' order by table_id");
 	while($row = mysql_fetch_array($query)){
 		
-		$get_item = get_item($row['table_id']);
+		$get_item_ordered = get_item_ordered($row['table_id']);
+		$get_item_not_ordered = get_item_not_ordered($row['table_id']);
 		
 	?>
 	<span class="tooltip tooltip-effect-1">
@@ -167,10 +181,20 @@ if(!$_SESSION['login']){
 				
 				<div class="tooltip-item"><?= $row['table_name'] ?>
 				<?php
-                if($get_item > 0 ){
+                if($row['table_status_id'] == 2){
 				?>
               
-				<div class="count_item"><?= $get_item ?></div>
+				<div class="count_item_ordered"><?= $get_item_ordered ?></div>
+                <div class="count_item_not_ordered"><?= $get_item_not_ordered ?></div>
+                <?php
+				}
+				?>
+                
+                <?php
+                if($row['table_status_id'] == 3 ){
+				?>
+              
+				<div class="table_reserved">Reserved</div>
                 <?php
 				}
 				?>
@@ -178,10 +202,12 @@ if(!$_SESSION['login']){
 				<span class="tooltip-content clearfix">
 					
 						<?php 
-						if($get_item > 0 ){
-							include('table_item.php');
-						}else{
-							include('table_empty.php');	
+						if($row['table_status_id'] == 1 ){
+							include('table_empty.php');
+						}else if($row['table_status_id'] == 2 ){
+							include('table_item.php');	
+						}else if($row['table_status_id'] == 3 ){
+							include('table_reserved.php');	
 						}
 						?>
 					
@@ -202,18 +228,44 @@ if(!$_SESSION['login']){
 
 <div class="footer_fixed"> 
 			<div class="morph-button morph-button-sidebar morph-button-fixed">
+			<button type="button" class="red_color_button"><?= $branch_name?></button>
+			<div class="morph-content">
+				<div>
+					<div class="content-style-sidebar">
+						<span class="icon icon-close">Close the overlay</span>
+						<h2>Cabang</h2>
+						<ul>
+                       <?php
+						$q_branch = mysql_query("select * from branches $where_branch order by branch_id");
+						while($r_branch = mysql_fetch_array($q_branch)){
+							?>
+							<li><a href="order.php?branch_id=<?= $r_branch['branch_id']?>"><?= $r_branch['branch_name']?></a></li>
+                            <?php
+						}
+							?>
+                       
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div><!-- morph-button -->
+
+		<div class="morph-button morph-button-sidebar morph-button-fixed" style="
+    bottom: 10px;
+    left: 310px;">
 			<button type="button" class="red_color_button"><?= $building_name?></button>
 			<div class="morph-content">
 				<div>
 					<div class="content-style-sidebar">
 						<span class="icon icon-close">Close the overlay</span>
-						<h2>Room</h2>
+						<h2>Ruangan</h2>
 						<ul>
                        <?php
-						$q_building5 = mysql_query("select * from buildings order by building_id");
+						$q_building5 = mysql_query("select * from buildings where branch_id = '".$branch_id."' order by building_id");
 						while($r_building5 = mysql_fetch_array($q_building5)){
 							?>
-							<li><a href="order.php?building_id=<?= $r_building5['building_id']?>"><?= $r_building5['building_name']?></a></li>
+							<li><a href="order.php?branch_id=<?= $branch_id?>&building_id=<?= $r_building5['building_id']?>"><?= $r_building5['building_name']?></a></li>
                             <?php
 						}
 							?>
@@ -233,18 +285,19 @@ if(!$_SESSION['login']){
       
      <script src="../js/jquery.js"></script>
         <script src="../js/function.js" type="text/javascript"></script>
-        <!-- Bootstrap -->
-        <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- Bootstrap 
+        <script src="../js/bootstrap.min.js" type="text/javascript"></script>-->
         <!-- DATA TABES SCRIPT -->
         <script src="../js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="../js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
        	<!-- date-range-picker -->
         <script src="../js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <!-- InputMask -->
+        
+        <!-- InputMask 
         <script src="../js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
         <script src="../js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
         <script src="../js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-       
+       -->
         <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
        
     
@@ -321,7 +374,7 @@ if(!$_SESSION['login']){
     
     <script>
 		(function($){
-			
+			/*
 			//iCheck for checkbox and radio inputs
                 $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
                     checkboxClass: 'icheckbox_minimal',
@@ -337,7 +390,7 @@ if(!$_SESSION['login']){
                     checkboxClass: 'icheckbox_flat-red',
                     radioClass: 'iradio_flat-red'
                 });
-				
+				*/
 			
 		
 			
