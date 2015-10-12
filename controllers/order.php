@@ -83,6 +83,7 @@ switch ($page) {
 		$i_discount = $_POST['i_discount'];
 		$i_grand_total = $_POST['i_grand_total'];
 		$i_payment_method = $_POST['i_payment_method'];
+		$i_bank_id = "";
 		if($i_payment_method == 2 || $i_payment_method == 3){
 			$i_bank_id  = $_POST['i_bank_id'];
 		}
@@ -135,10 +136,14 @@ switch ($page) {
 					'".$i_bank_id."'
 					
 			";
+			// simpan transaksi
 			create_config("transactions", $data);
 			$transaction_id = mysql_insert_id();
 			
+			$get_table_name = get_table_name($table_id);
 			
+			// simpan jurnal
+			create_journal($transaction_id, "", 1, $i_grand_total, "Meja ".$get_table_name, $i_bank_id, $branch_id);
 			
 			$query_detail =  mysql_query("select * 
 								from transaction_tmp_details a
@@ -165,12 +170,14 @@ switch ($page) {
 								where a.menu_id = '".$row_detail['menu_id']."'
 								");
 					while($row_item = mysql_fetch_array($query_item)){
+						// update stok bahan
 						$new_stock = $row_detail['transaction_detail_qty'] * $row_item['item_qty'];
 							update_stock($branch_id, $row_item['item_id'], $new_stock);
 					}
 					
 			}
 			
+			// hapus tmp
 			delete_tmp($table_id);
 			
 		}

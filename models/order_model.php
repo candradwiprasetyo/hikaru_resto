@@ -125,6 +125,24 @@ function create_config($table, $data){
 	mysql_query("insert into $table values(".$data.")");
 }
 
+function create_journal($data_id, $data_url, $journal_type_id, $journal_debit, $journal_desc, $bank_id, $branch_id){
+	mysql_query("insert into journals values(
+				'',
+				'$journal_type_id',
+				'$data_id',
+				'$data_url',
+				'$journal_debit',
+				'0',
+				'0',
+				'0',
+				'".date("Y-m-d")."',
+				'$journal_desc',
+				'$bank_id',
+				'".$_SESSION['user_id']."',
+				'$branch_id'
+	)");
+}
+
 function delete_tmp($table_id){
 		$query =  mysql_query("select * 
 								from transactions_tmp a
@@ -220,6 +238,14 @@ function get_branch_id($building_id){
 	$row = mysql_fetch_array($query);
 	
 	$result = ($row['branch_id']);
+	return $result;
+}
+
+function get_table_name($table_id){
+	$query = mysql_query("select table_name as result from tables where table_id = '$table_id'");
+	$row = mysql_fetch_array($query);
+	
+	$result = ($row['result']);
 	return $result;
 }
 

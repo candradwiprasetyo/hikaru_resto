@@ -64,7 +64,7 @@
                                                 
                                                 <th>Supplier</th>
                                                 <th>Cabang</th>
-                                               <!-- <th>Config</th>-->
+                                               <th>Config</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,12 +82,12 @@
                                                
                                                 <td><?= $row['supplier_name']?></td>
                                                 <td><?= $row['branch_name']?></td>
-                                              <!--<td style="text-align:center;">
+                                              <td style="text-align:center;">
 
-                                                    <a href="purchase.php?page=form&id=<?= $row['purchase_id']?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
-                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row['purchase_id']; ?>,'purchase.php?page=delete&id=')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+                                                    <a href="purchase.php?page=form&id=<?= $row['purchase_id']?>" class="btn btn-default" >View</a>
+                                                    <!--<a href="javascript:void(0)" onclick="confirm_delete(<?= $row['purchase_id']; ?>,'purchase.php?page=delete&id=')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>-->
 
-                                                </td> -->
+                                                </td>
                                             </tr>
                                             <?php
 											$no++;
@@ -99,7 +99,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="8"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
+                                                <td colspan="9"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

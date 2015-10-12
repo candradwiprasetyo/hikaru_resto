@@ -6,7 +6,7 @@ $page = null;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "list";
 $title = ucfirst("user");
 
-$_SESSION['menu_active'] = 7;
+$_SESSION['menu_active'] = 11;
 
 switch ($page) {
 	case 'list':

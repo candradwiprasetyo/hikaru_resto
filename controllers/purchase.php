@@ -6,7 +6,7 @@ $page = null;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "list";
 $title = ucfirst("Pembelian");
 
-$_SESSION['menu_active'] = 1;
+$_SESSION['menu_active'] = 7;
 
 switch ($page) {
 	case 'list':
@@ -76,6 +76,8 @@ switch ($page) {
 		$i_supplier = get_isset($i_supplier);
 		$i_branch_id = get_isset($i_branch_id);
 		
+		$get_item_name = get_item_name($i_item_id);
+		
 		$data = "'',
 					'$i_date', 
 					'$i_item_id', 
@@ -89,6 +91,11 @@ switch ($page) {
 			//echo $data;
 
 			create($data);
+			$data_id = mysql_insert_id();
+			
+			// simpan jurnal
+			create_journal($data_id, "purchase.php?page=form&id=", 2, $i_harga, $get_item_name, '', $i_branch_id);
+			
 			add_stock($i_item_id, $i_branch_id, $i_qty);
 		
 			header("Location: purchase.php?page=list&did=1");

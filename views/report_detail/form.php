@@ -60,7 +60,7 @@
                              
                     
                     <div class="box-footer">
-                                <input class="btn btn-primary" type="submit" value="Preview"/>
+                                <input class="btn btn-danger" type="submit" value="Preview"/>
                                           
                              	 <?php 
  

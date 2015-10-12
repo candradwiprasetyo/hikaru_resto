@@ -9,7 +9,7 @@
                               <div class="box-header" style="cursor: move;">
 <h3 class="box-title"><strong>Detail Per Menu</strong></h3>
 </div>
-                                    <table id="example_simple" class="table table-bordered table-striped">
+                                    <table id="" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                             <th width="5%">No</th>

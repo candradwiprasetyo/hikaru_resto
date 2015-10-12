@@ -58,7 +58,7 @@ function add_menu(id)
                                           <label>Type</label>
                                            <select name="i_discount_type" size="1" class="form-control"/>
                                              <option value="1"  <?php if($row->member_discount_type == 1){ echo "selected='selected'"; } ?>>Diskon Langsung</option>
-                                           <option value="2" <?php if($row->member_discount_type == 2){ echo "selected='selected'"; } ?>>Diskon 50:50</option>       
+                                           <option value="2" <?php if($row->member_discount_type == 2){ echo "selected='selected'"; } ?>>Diskon POIN</option>       
                                            </select>                                    
                                   		</div>
                                                             
@@ -81,8 +81,8 @@ function add_menu(id)
                                 </div><!-- /.box-body -->
                                 
                                   <div class="box-footer">
-                                <input class="btn btn-success" type="submit" value="Save"/>
-                                <a href="<?= $close_button?>" class="btn btn-success" >Close</a>
+                                <input class="btn btn-danger" type="submit" value="Save"/>
+                                <a href="<?= $close_button?>" class="btn btn-danger" >Close</a>
                              
                              </div>
                             

@@ -75,7 +75,7 @@
                                                <td><?= $row['member_phone']?></td>
                                                <td>
 											    <?php
-												$disount_type_name = array('','Diskon Langsung',"Diskon 50:50");
+												$disount_type_name = array('','Diskon Langsung',"Diskon Poin");
 												
                                                 ?>
 											   <?= $disount_type_name[$row['member_discount_type']]?></td>
@@ -98,7 +98,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="7"><a href="<?= $add_button ?>" class="btn btn-info " >Add</a></td>
+                                                <td colspan="7"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

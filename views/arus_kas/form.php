@@ -47,7 +47,40 @@
                                     </div><!-- /.form group -->
                                        
                                      
-                                        
+                                         <div class="form-group">
+                                         <?php
+                                         if($_SESSION['user_type_id'] == 1 || $_SESSION['user_type_id'] == 2){
+										 ?>
+                                            <label>Cabang</label>
+                                            <select id="basic" name="i_branch_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                            <option value="0">Semua</option>
+                                           <?php
+                                           while($r_branch = mysql_fetch_array($query_branch)){
+										   ?>
+                                           
+                                             <option value="<?= $r_branch['branch_id'] ?>" <?php if($branch_id == $r_branch['branch_id']){ ?> selected="selected"<?php } ?>><?= $r_branch['branch_name']?></option>
+                                             <?php
+										   }
+											 ?>
+                                           </select>
+                                           <?php
+										 }else{
+										   ?>  
+                                            <label>Cabang</label>
+                                            <select id="basic" name="i_branch_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                           <?php
+                                           while($r_branch = mysql_fetch_array($query_branch)){
+										   ?>
+                                          
+                                             <option value="<?= $r_branch['branch_id'] ?>" <?php if($branch_id == $r_branch['branch_id']){ ?> selected="selected"<?php } ?>><?= $r_branch['branch_name']?></option>
+                                             <?php
+										   }
+											 ?>
+                                           </select>
+                                           <?php
+										 }
+										   ?>                                          
+                                        </div>
                                         
 
                                           </div>
@@ -61,7 +94,13 @@
                     
                     <div class="box-footer">
                                 <input class="btn btn-danger" type="submit" value="Preview"/>
-                             
+                                          
+                             	 <?php 
+ 
+/*if(isset($_GET['preview'])){ ?><a href="report_detail.php?page=download&date=<?= $_GET['date']?>&owner=<?= $_GET['owner']?>" class="btn btn-primary" >Download Excel</a>
+								 <a href="report_detail.php?page=download_pdf&date=<?= $_GET['date']?>&owner=<?= $_GET['owner']?>" class="btn btn-primary" >Download PDF</a>
+                              
+								 <?php }*/  ?>
                                 </div>
                             
                             </div><!-- /.box -->

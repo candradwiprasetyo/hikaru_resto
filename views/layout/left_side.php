@@ -43,9 +43,10 @@
                                 <li><a href="partner.php?page=list"><i class="fa fa-smile-o"></i>Partner</a></li>
                                 <li><a href="member.php?page=list"><i class="fa fa-user"></i>Member</a></li>
                                 <li><a href="supplier.php?page=list"><i class="fa fa-user"></i>Supplier</a></li>
+                                <!--
                                 <li><a href="unit.php?page=list"><i class="fa fa-user"></i>Unit</a></li>
                                 <li><a href="bank.php?page=list"><i class="fa fa-user"></i>Bank Account</a></li>
-                                
+                                -->
                              
                             </ul>
                   </li>
@@ -66,7 +67,7 @@
                             
                   </li>
                   
-                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 8){ echo "class='active'"; } ?>>
+                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 4){ echo "class='active'"; } ?>>
                             <a href="transaction_new.php">
                                  <i class="fa fa-pencil-square-o"></i>
                                 <span>Transaksi Baru</span>
@@ -82,7 +83,7 @@
                             
                   </li>
                   
-                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 4){ echo "class='active'"; } ?>>
+                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 6){ echo "class='active'"; } ?>>
                             <a href="table.php">
                                  <i class="fa fa-asterisk"></i>
                                 <span>Setting Table</span>
@@ -90,7 +91,7 @@
                             
                   </li>
 
-                   <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 5){ echo "class='active'"; } ?>>
+                   <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 7){ echo "class='active'"; } ?>>
                             <a href="purchase.php">
                                  <i class="fa fa-list-alt"></i>
                                 <span>Pembelian</span>
@@ -98,15 +99,30 @@
                             
                   </li>
                   
-                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 12){ echo "class='active'"; } ?>>
+                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 8){ echo "class='active'"; } ?>>
                             <a href="stock.php">
                                  <i class="fa fa-list-alt"></i>
                                 <span>Stok</span>
                             </a>
                             
                   </li>
+                  
+                  <li class="treeview <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 9){ echo "active"; }?>">
+                            <a href="#">
+                                <i class="fa fa-list-alt"></i>
+                                <span>Accounting</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                              
+                                <li><a href="arus_kas.php"><i class="fa fa-book"></i>Arus Kas</a></li>
+                                <li><a href="jurnal_umum.php"><i class="fa fa-book"></i>Pemasukan dan Pengeluaran Lainnya</a></li>
+                                
+                             
+                            </ul>
+                  </li>
 
-                  <li class="treeview <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 6){ echo "active"; }?>">
+                  <li class="treeview <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 10){ echo "active"; }?>">
                             <a href="#">
                                 <i class="fa fa-list-alt"></i>
                                 <span>Laporan</span>
@@ -135,7 +151,7 @@
 					?>
                  
                   
-                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 7){ echo "class='active'"; } ?>>
+                  <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 11){ echo "class='active'"; } ?>>
                             <a href="user.php">
                                 <i class="fa fa-user"></i>
                                 <span>User</span>

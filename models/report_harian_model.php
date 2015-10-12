@@ -48,7 +48,7 @@ function get_total_penjualan($date1, $date2){
 							 ");
 	$result = mysql_fetch_array($query);
 	$result = ($result['jumlah']) ? $result['jumlah'] : "0"; 
-	$result = 25 / 100 * $result; 
+	//$result = 25 / 100 * $result; 
 	return $result;
 }
 
@@ -60,7 +60,7 @@ function get_total_pajak($date1, $date2){
 							 ");
 	$result = mysql_fetch_array($query);
 	$result = ($result['jumlah']) ? $result['jumlah'] : "0"; 
-	$result = 25 / 100 * $result;
+	//$result = 25 / 100 * $result;
 	$result = 10 / 100 * $result; 
 	return $result;
 }
@@ -74,7 +74,7 @@ function get_total_penjualan_harian($date){
 							 ");
 	$result = mysql_fetch_array($query);
 	$result = ($result['jumlah']) ? $result['jumlah'] : "0";
-	$result = 25 / 100 * $result; 
+	//$result = 25 / 100 * $result; 
 	return $result;
 }
 
@@ -86,7 +86,7 @@ function get_total_pajak_harian($date){
 							 ");
 	$result = mysql_fetch_array($query);
 	$result = ($result['jumlah']) ? $result['jumlah'] : "0";
-	$result = 25 / 100 * $result; 
+	//$result = 25 / 100 * $result; 
 	$result = 10 / 100 * $result; 
 	return $result;
 }

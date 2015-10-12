@@ -110,7 +110,13 @@
                                 </div><!-- /.box-body -->
                                 
                                   <div class="box-footer">
+                                  <?php
+                                  if(!$id){
+								  ?>
                                 <input class="btn btn-danger" type="submit" value="Save"/>
+                                <?php
+								  }
+								?>
                                 <a href="<?= $close_button?>" class="btn btn-danger" >Close</a>
                              
                              </div>

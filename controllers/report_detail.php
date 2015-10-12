@@ -6,7 +6,7 @@ $page = null;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "list";
 $title = ucfirst("Report Detail");
 
-$_SESSION['menu_active'] = 5;
+$_SESSION['menu_active'] = 10;
 
 switch ($page) {
 	
@@ -68,7 +68,7 @@ switch ($page) {
 			
             include '../views/report_detail/form_result.php'; 
 			include '../views/report_detail/list_item.php';
-			include '../views/report_detail/list_partner.php';
+			//include '../views/report_detail/list_partner.php';
 			include '../views/report_detail/list_transaction.php';
 		}
 		

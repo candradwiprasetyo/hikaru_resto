@@ -16,7 +16,7 @@
                                                 <th>Nama Menu</th>
                                                 <th>Owner</th>
                                                 <th>Qty</th>
-                                                <th>Dasar</th>
+                                                
                                                 <th>Omset</th>
                                                 
                                             </tr>
@@ -35,7 +35,7 @@
 												<td><?= $row_item['menu_name']; ?></td>
                                               	<td><?= $row_item['partner_name']; ?></td>
                                                 <td><?= tool_format_number($jumlah)?></td>
-                                                <td><?= tool_format_number($row_item['jumlah_dasar'])?></td>
+                                               
                                              	<td><?= tool_format_number($row_item['jumlah_omset'])?></td>
                                                  </tr>
                                         
@@ -51,7 +51,7 @@
 											<tr>
                                             
                                                  <td colspan="4" align="right"  style="font-size:22px; font-weight:bold;">TOTAL</td>
-                                                <td><?= tool_format_number_report($grand_total_dasar)?></td>
+                                               
                                               <td><?= tool_format_number_report($grand_total_omset)?></td>
                                               </tr>
                                           </tfoot>

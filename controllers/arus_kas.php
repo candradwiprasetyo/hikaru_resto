@@ -1,35 +1,45 @@
 <?php
 include '../lib/config.php';
 include '../lib/function.php';
-include '../models/report_harian_model.php';
+include '../models/arus_kas_model.php';
 $page = null;
 $page = (isset($_GET['page'])) ? $_GET['page'] : "list";
-$title = ucfirst("Report Harian");
+$title = ucfirst("Arus Kas");
 
-$_SESSION['menu_active'] = 10;
+$_SESSION['menu_active'] = 9;
 
 switch ($page) {
 	
 	case 'list':
 		get_header();
+		
+		if($_SESSION['user_type_id']==1 || $_SESSION['user_type_id']==2){
+			$where_branch2 = "";
+		}else{
+			$where_branch2 = " where a.branch_id = '".$_SESSION['branch_id']."' ";
+		}
+		
+		$query_branch = select_branch($where_branch2);
 
 		$id = (isset($_GET['id'])) ? $_GET['id'] : null;
 		
 		$date_default = "";
 		$date_url = "";
+		$branch_id = "";
 
 		$button_download = "";
 		
 		if(isset($_GET['preview'])){
 			$i_date = get_isset($_GET['date']);
+			$branch_id = get_isset($_GET['branch_id']);
 			$date_default = $i_date;
 			$date_url = "&date=".str_replace(" ","", $i_date);
 			
 		}
 		
-		$action = "report_harian.php?page=form_result&preview=1";
+		$action = "arus_kas.php?page=form_result&preview=1";
 		
-		include '../views/report_harian/form.php';
+		include '../views/arus_kas/form.php';
 		
 		if(isset($_GET['preview'])){
 			
@@ -44,29 +54,11 @@ switch ($page) {
 			$date = explode("-", $i_date);
 			$date1 = format_back_date($date[0]);
 			$date2 = format_back_date($date[1]);
-			
-			
-			
-			$query_item = select_detail($date1, $date2);
-		
-			//fungsi backup
 
-			$datetime1 = new DateTime($date1);
-			$datetime2 = new DateTime($date2);
-			$difference = $datetime1->diff($datetime2);
-			//echo $difference->days;
-			
-			/*$sel = abs(strtotime($date2)-strtotime($date1));
-			$selisih= $sel /(60*60*24);*/
-			
-			$jumlah_hari = $difference->days + 1;
-			$jumlah_penjualan = get_jumlah_penjualan($date1, $date2);
-			$total_penjualan = number_format(get_total_penjualan($date1, $date2), 0);
-			$total_pajak = number_format(get_total_pajak($date1, $date2), 0);
-			
-			
-            include '../views/report_harian/form_result.php'; 
-			include '../views/report_harian/list_item.php';
+			$query_item = select_detail($date1, $date2, $branch_id);
+
+			include '../views/arus_kas/list_item.php';
+		
 		}
 		
 		
@@ -85,38 +77,17 @@ switch ($page) {
 			
 			extract($_POST);
 			$i_date = (isset($_POST['i_date'])) ? $_POST['i_date'] : null;
+			$i_branch_id = (isset($_POST['i_branch_id'])) ? $_POST['i_branch_id'] : null;
 			$date_default = $i_date;
 			$date_url = "&date=".str_replace(" ","", $i_date);
 		//}
 		
-		header("Location: report_harian.php?page=list&preview=1&date=$date_default");
+		header("Location: arus_kas.php?page=list&preview=1&date=$date_default&branch_id=$i_branch_id");
 	break;
 	
 
 	
-	case 'form_detail':
-		$title = ucfirst("Report Event Detail");
-		get_header();
-		
-		$close_button = "report_harian.php?page=form";
-
-			$id = (isset($_GET['id'])) ? $_GET['id'] : null;
-			
-			$row = read_id($id);
-			$row->transaction_date = format_date($row->transaction_date);
-			$row->transaction_date2 = format_date($row->transaction_date2);
-			$all_date = $row->transaction_date." - ".$row->transaction_date2;
-
-			$query_trainer_view = read_trainer_view($id);
-			$query_agent_view = read_agent_view($id);
-		
-			include '../views/report_harian/form_save.php';
-			include '../views/report_harian/list_trainer_view.php';
-			include '../views/report_harian/list_agent_view.php';
-			include '../views/report_harian/form_comand3.php';
-			
-		get_footer();
-	break;
+	
 	
 	case 'download':
 	
@@ -162,11 +133,11 @@ switch ($page) {
 			$total_harga_urukan = get_total_harga_urukan($date1, $date2, $i_owner_id);
 			$total_hpp = get_total_hpp($date1, $date2, $i_owner_id);
 						
-			$title = 'report_harian';
+			$title = 'arus_kas';
 			$supplier_title = str_replace(" ","_", $supplier);
 			$format = create_report($title."_".$supplier_title."_".$i_date);
 			
-			include '../views/report/report_harian.php';
+			include '../views/report/arus_kas.php';
 			
 
 	break;
@@ -216,7 +187,7 @@ switch ($page) {
 			$total_harga_urukan = get_total_harga_urukan($date1, $date2, $i_owner_id);
 			$total_hpp = get_total_hpp($date1, $date2, $i_owner_id);
 			
-			include '../views/report/report_harian_pdf.php';
+			include '../views/report/arus_kas_pdf.php';
 	
 	break;
 	
@@ -234,7 +205,7 @@ switch ($page) {
 		
 		delete_transaction($id);
 		
-		header("Location: report_harian.php?page=list&preview=1&date=$date_default");
+		header("Location: arus_kas.php?page=list&preview=1&date=$date_default");
 	break;
 	
 }
