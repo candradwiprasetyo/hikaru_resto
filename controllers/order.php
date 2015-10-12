@@ -90,6 +90,8 @@ switch ($page) {
 		$table_id = $_GET['table_id'];
 		$building_id = $_GET['building_id'];
 		
+		$branch_id = get_branch_id($building_id);
+		
 		$data_total = get_data_total($table_id);
 		$total_discount = get_total_discount($table_id);
 		
@@ -121,6 +123,7 @@ switch ($page) {
 			
 			$data = "'',
 					'$table_id',
+					'$branch_id',
 					'".$row['member_id']."',
 					'".$row['transaction_date']."', 
 					'".$data_total."',
@@ -156,6 +159,16 @@ switch ($page) {
 									'".$row_detail['transaction_detail_total']."'
 									";
 					create_config("transaction_details", $data_detail);
+					
+					$query_item =  mysql_query("select *
+								from menu_recipes a
+								where a.menu_id = '".$row_detail['menu_id']."'
+								");
+					while($row_item = mysql_fetch_array($query_item)){
+						$new_stock = $row_detail['transaction_detail_qty'] * $row_item['item_qty'];
+							update_stock($branch_id, $row_item['item_id'], $new_stock);
+					}
+					
 			}
 			
 			delete_tmp($table_id);
@@ -191,7 +204,7 @@ switch ($page) {
 		$table_id = $_GET['table_id'];
 		$building_id = $_GET['building_id'];
 		
-		
+		//echo $table_id;
 		cancel_reserved($table_id);
 		header("location: order.php?building_id=$building_id");
 	break;

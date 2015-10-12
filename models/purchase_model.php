@@ -18,7 +18,10 @@ function select_supplier(){
 }
 
 function select_item(){
-	$query = mysql_query("select * from items order by item_id");
+	$query = mysql_query("select a.*, b.unit_name 
+							from items a 
+							join units b on b.unit_id = a.unit_id
+							order by item_id");
 	return $query;
 }
 

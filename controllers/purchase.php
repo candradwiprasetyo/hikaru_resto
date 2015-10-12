@@ -72,7 +72,7 @@ switch ($page) {
 		$i_item_id = get_isset($i_item_id);
 		$i_harga = get_isset($i_harga);
 		$i_qty = get_isset($i_qty);
-		$i_total = get_isset($i_total);
+		//$i_total = get_isset($i_total);
 		$i_supplier = get_isset($i_supplier);
 		$i_branch_id = get_isset($i_branch_id);
 		
@@ -81,7 +81,7 @@ switch ($page) {
 					'$i_item_id', 
 					'$i_qty',
 					'$i_harga',
-					'$i_total',
+					'0',
 					'$i_supplier',
 					'$i_branch_id'
 			";
@@ -107,7 +107,7 @@ switch ($page) {
 		$i_item_id = get_isset($i_stock_id);
 		$i_harga = get_isset($i_harga);
 		$i_qty = get_isset($i_qty);
-		$i_total = get_isset($i_total);
+		//$i_total = get_isset($i_total);
 		$i_supplier = get_isset($i_supplier);
 		$i_branch_id = get_isset($i_branch_id);
 		
@@ -115,7 +115,7 @@ switch ($page) {
 					stock_id = '$i_stock_id', 
 					purchase_qty = '$i_qty',
 					purchase_price = '$i_harga',
-					purchase_total = '$i_total',
+					purchase_total = '0',
 					supplier_id = '$i_supplier',
 					branch_id = '$i_branch_id'
 

@@ -1,6 +1,21 @@
-
 <!-- Content Header (Page header) -->
         
+                 <?php
+                if(isset($_GET['did']) && $_GET['did'] == 1){
+                ?>
+                <section class="content_new">
+                   
+                <div class="alert alert-info alert-dismissable">
+                <i class="fa fa-check"></i>
+                <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                <b>Simpan gagal !</b>
+               Password dan confirm password tidak sama
+                </div>
+           
+                </section>
+                <?php
+                }
+                ?>
 
                 <!-- Main content -->
                 <section class="content">
@@ -23,32 +38,26 @@
                                     
                                         <div class="col-md-12">
                                         
-                                        <div class="form-group">
                                        
-            
                                         <div class="form-group">
-                                            <label>Nama</label>
-                                            <input required type="text" name="i_name" class="form-control" placeholder="Masukkan nama barang..." value="<?= $row->item_name ?>"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Satuan</label>
-                                            <select id="basic" name="i_unit_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
+                                          <label>Item</label>
+                                           <select id="basic" name="i_item_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
                                            <?php
-                                           while($r_unit = mysql_fetch_array($query_unit)){
+                                           while($r_item = mysql_fetch_array($query_item)){
 										   ?>
-                                             <option value="<?= $r_unit['unit_id'] ?>" <?php if($row->unit_id == $r_unit['unit_id']){ ?> selected="selected"<?php } ?>><?= $r_unit['unit_name']?></option>
+                                             <option value="<?= $r_item['item_id'] ?>" <?php if($row->item_id == $r_item['item_id']){ ?> selected="selected"<?php } ?>><?= $r_item['item_name'] . " ( ".$r_item['unit_name']." )"?></option>
                                              <?php
 										   }
 											 ?>
-                                           </select>                                            
+                                           </select>                                    
+                                  		</div>
+
+										    <div class="form-group">
+                                            <label>Qty</label>
+                                            <input required type="number" name="i_item_qty" class="form-control" placeholder="Masukkan qty ..." value="<?= $row->item_qty ?>"/>
                                         </div>
-                                      <div class="form-group">
-                                            <label>Limit</label>
-                                            <input required type="text" name="i_item_limit" class="form-control" placeholder="Masukkan limit stok..." value="<?= $row->item_limit ?>"/>
-                                        </div>
-                                       
                                         
-                                        </div>
+                                        
                                         </div>
                                        
                                         <div style="clear:both;"></div>
@@ -65,4 +74,8 @@
                        </form>
                         </div><!--/.col (right) -->
                     </div>   <!-- /.row -->
+                    
+                   
+
+                    
                 </section><!-- /.content -->

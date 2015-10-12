@@ -49,6 +49,7 @@ switch ($page) {
 	
 			$row->item_name = false;
 			$row->unit_id = false;
+			$row->item_limit = false;
 			
 			
 			$action = "stock.php?page=save";
@@ -64,11 +65,13 @@ switch ($page) {
 
 		$i_name = get_isset($i_name);
 		$i_unit_id = get_isset($i_unit_id);
+		$i_item_limit = get_isset($i_item_limit);
 		
 		
 		$data = "'',
 					'$i_name',
-					'$i_unit_id'
+					'$i_unit_id',
+					'$i_item_limit'
 			";
 			
 			//echo $data;
@@ -88,12 +91,13 @@ switch ($page) {
 		
 		$i_name = get_isset($i_name);
 		$i_unit_id = get_isset($i_unit_id);
-		
+		$i_item_limit = get_isset($i_item_limit);
 	
 		
 					$data = "
 					item_name = '$i_name',
-					unit_id = '$i_unit_id'
+					unit_id = '$i_unit_id',
+					item_limit = '$i_item_limit'
 
 					";
 			

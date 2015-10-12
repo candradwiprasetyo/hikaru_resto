@@ -31,6 +31,7 @@ switch ($page) {
 			$row->name = false;
 			$row->phone = false;
 			$row->address = false;
+			$row->date = date("d/m/Y");
 			$row->hour = false;
 			
 		$action = "reserved.php?page=save";
@@ -57,6 +58,8 @@ switch ($page) {
 		$i_name = get_isset($i_name);
 		$i_phone = get_isset($i_phone);
 		$i_address = get_isset($i_address);
+		$i_date = get_isset($i_date);
+		$i_date = format_back_date($i_date);
 		$i_hour = get_isset($i_hour);
 			
 		$query_count = select($where);		
@@ -82,6 +85,7 @@ switch ($page) {
 								'$i_name',
 								'$i_phone',
 								'$i_address',
+								'$i_date',
 								'$i_hour'
 								";
 							save($data);

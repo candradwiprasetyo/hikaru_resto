@@ -433,9 +433,9 @@ body > .header .navbar .nav > li > a > .label {
   right: 2px;
   font-size: 10px;
   font-weight: normal;
-  width: 15px;
-  height: 15px;
-  line-height: 1.0em;
+  width: 20px;
+  height: 20px;
+  line-height: 15px;
   text-align: center;
   padding: 2px;
 }
@@ -805,6 +805,10 @@ body > .header .logo .icon {
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a {
   font-size: 12px;
   color: #444444;
+  padding-top:0px;
+  height:40px;
+  padding-left:20px;
+  line-height:40px;
 }
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .glyphicon,
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .fa,
@@ -812,7 +816,7 @@ body > .header .logo .icon {
   font-size: 20px;
   width: 50px;
   text-align: center;
-  padding: 15px 0px;
+  padding: 10px 0px;
   margin-right: 5px;
   /* Default background and font colors */
 
@@ -2957,6 +2961,7 @@ Component: timeline
 	 width:100%;
    padding-right: 250px;
    border: 1px solid #d82827;
+   z-index:9999;
    
 }
 @media screen and (max-width: 992px) {

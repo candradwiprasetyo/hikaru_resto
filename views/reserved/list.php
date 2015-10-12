@@ -40,6 +40,17 @@
                                        
                                         <div class="col-md-12">
                                         
+                                         <div class="form-group">
+             <label>Tanggal </label>
+             <div class="input-group">
+            
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" required class="form-control pull-right" id="date_picker1" name="i_date" value="<?= $row->date ?>"/>
+                                        </div><!-- /.input group -->
+            </div>
+                                        
                                         <div class="form-group">
                                             <label>Nama</label>
                                             <input required type="text" name="i_name" class="form-control" placeholder="Enter name ..." value="<?= $row->name ?>"/>

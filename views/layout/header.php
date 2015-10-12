@@ -119,6 +119,51 @@ if(!$_SESSION['login']){
 
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
+                    
+                    <!-- Notifications: style can be found in dropdown.less -->
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-warning"></i>
+                                <span class="label label-warning"><?= count_stock_limit(); ?></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">Stok limit : <?= count_stock_limit(); ?></li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        
+                                        <table id="" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                            	<th>Item</th>
+                                            	<th>Stok</th>
+                                                <th>Cabang</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <?php
+										$query_stock_limit = select_stock_limit();
+										   while($row_stock_limit = mysql_fetch_array($query_stock_limit)){
+                                            ?>
+                                            <tr>
+                                           
+                                               <td><?= ($row_stock_limit['item_name']); ?></td>
+                                                <td><?= $row_stock_limit['item_stock_qty']."(".$row_stock_limit['unit_name'].")"?></td>
+                                                <td><?= $row_stock_limit['branch_name']?></td>
+                                                
+                                                </tr>
+                                            <?php
+											
+                                            }
+                                            ?>
+                                         
+                                    </table>
+                                       
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>
 
                       
                         <!-- User Account: style can be found in dropdown.less -->
@@ -179,7 +224,7 @@ if(!$_SESSION['login']){
             ?>
 
             <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side <?php if($_SESSION['menu_active'] == 3){ ?>strech<?php } ?>">                
+            <aside class="right-side <?php /*if($_SESSION['menu_active'] == 3){ ?>strech<?php }*/ ?>">                
                 <!-- Content Header (Page header) -->
         
 				<script type="text/javascript">

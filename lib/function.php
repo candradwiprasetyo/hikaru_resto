@@ -227,4 +227,45 @@ function get_urutan($parent_id, $number){
 	return $row['result'] + 1;
 }
 
+function count_stock_limit(){
+	
+	$where_branch = "";
+		if($_SESSION['user_type_id']==1 || $_SESSION['user_type_id']==2){
+			$where_branch = "";
+		}else{
+			$where_branch = " and a.branch_id = '".$_SESSION['branch_id']."' ";
+		}
+	
+	$query = mysql_query("select count(item_stock_id) as result 
+							from item_stocks a
+							join items b on b.item_id = a.item_id
+							where item_stock_qty <= item_limit
+							$where_branch
+							");
+	$row = mysql_fetch_array($query);
+	
+	return $row['result'];
+}
+
+function select_stock_limit(){
+	$where_branch = "";
+		if($_SESSION['user_type_id']==1 || $_SESSION['user_type_id']==2){
+			$where_branch = "";
+		}else{
+			$where_branch = " and a.branch_id = '".$_SESSION['branch_id']."' ";
+		}
+	
+	$query = mysql_query("select a.*, b.item_name, c.unit_name, d.branch_name
+							from item_stocks a
+							join items b on b.item_id = a.item_id
+							join units c on c.unit_id = b.unit_id
+							join branches d on d.branch_id = a.branch_id
+							where item_stock_qty <= item_limit
+							$where_branch
+							");
+	return $query;
+}
+
+
+
 ?>

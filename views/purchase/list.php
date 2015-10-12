@@ -61,7 +61,7 @@
                                                 <th>Satuan</th>
                                                 <th width="5%">Jumlah</th>
                                                 <th>Harga</th> 
-                                                <th>Total</th>
+                                                
                                                 <th>Supplier</th>
                                                 <th>Cabang</th>
                                                <!-- <th>Config</th>-->
@@ -79,7 +79,7 @@
                                                 <td><?= $row['unit_name']?></td>
                                                 <td><?= $row['purchase_qty']?></td>
                                                 <td><?= $row['purchase_price']?></td>
-                                                <td><?= $row['purchase_total']?></td>
+                                               
                                                 <td><?= $row['supplier_name']?></td>
                                                 <td><?= $row['branch_name']?></td>
                                               <!--<td style="text-align:center;">
@@ -99,7 +99,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="9"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
+                                                <td colspan="8"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

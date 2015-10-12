@@ -59,6 +59,7 @@
                                             	
                                                 <th>Nama</th>
                                                 <th>Satuan</th>
+                                                <th>Limit</th>
                                                 <?php
                                                	while($r_branch = mysql_fetch_array($q_branch)){
 												?>
@@ -79,7 +80,7 @@
                                                
                                                 <td><?= $row['item_name']?></td>
                                                 <td><?= $row['unit_name']?></td>
-                                               
+                                               <td><?= $row['item_limit']?></td>
                                                 <?php
 												$count_branch = 0;
 												$q_branch2 = mysql_query("select * from branches $where_branch order by branch_id"); 
@@ -88,7 +89,7 @@
 													
 													
 												?>
-                                                <td><?= get_stock($row['item_id'], $r_branch2['branch_id'])?></td>
+                                                <td  <?php if(get_stock($row['item_id'], $r_branch2['branch_id']) <= $row['item_limit']){ ?> bgcolor="#D82827" style="color:#fff;"<?php  } ?>><?= get_stock($row['item_id'], $r_branch2['branch_id'])?></td>
                                               	<?php
 												$count_branch++;
 												}
@@ -111,7 +112,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="<?php $col = $count_branch + 4; echo $col; ?>"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
+                                                <td colspan="<?php $col = $count_branch + 5; echo $col; ?>"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

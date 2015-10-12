@@ -176,7 +176,7 @@ function cancel_order($table_id){
 
 function cancel_reserved($table_id){
 		
-		mysql_query("delete from reserved where table_id = '".$row['table_id']."'");
+		mysql_query("delete from reserved where table_id = '".$table_id."'");
 		mysql_query("update tables set table_status_id = '1' where table_id = '$table_id'");
 }
 
@@ -187,6 +187,10 @@ function update_table_status($table_id){
 
 function update_order_status($id){
 		mysql_query("update transaction_tmp_details set transaction_detail_status = '1' where transaction_detail_id = '$id'");
+}
+
+function update_stock($branch_id, $item_id, $new_stock){
+		mysql_query("update item_stocks set item_stock_qty = item_stock_qty - $new_stock where branch_id = '$branch_id' and item_id = '$item_id'");
 }
 
 
@@ -207,6 +211,15 @@ function get_discount_type($member_id){
 	$row = mysql_fetch_array($query);
 	
 	$result = ($row['member_discount_type']);
+	return $result;
+}
+
+
+function get_branch_id($building_id){
+	$query = mysql_query("select branch_id from buildings where building_id = '$building_id'");
+	$row = mysql_fetch_array($query);
+	
+	$result = ($row['branch_id']);
 	return $result;
 }
 

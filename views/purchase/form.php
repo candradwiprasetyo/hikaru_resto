@@ -56,7 +56,7 @@
                                            <?php
                                            while($r_item = mysql_fetch_array($query_item)){
 										   ?>
-                                             <option value="<?= $r_item['item_id'] ?>" <?php if($row->item_id == $r_item['item_id']){ ?> selected="selected"<?php } ?>><?= $r_item['item_name']?></option>
+                                             <option value="<?= $r_item['item_id'] ?>" <?php if($row->item_id == $r_item['item_id']){ ?> selected="selected"<?php } ?>><?= $r_item['item_name']." (".$r_item['unit_name'].")"?></option>
                                              <?php
 										   }
 											 ?>
@@ -70,12 +70,12 @@
                                             <label>QTY</label>
                                             <input required type="number" name="i_qty" id="i_qty" class="form-control" placeholder="Masukkan jumlah..." value="<?= $row->purchase_qty ?>" onChange="grand_total()" />
                                         </div>
-                                        
+                                        <!--
                                         <div class="form-group">
                                             <label>Total Harga</label>
                                             <input required type="text" readonly name="i_total" id="i_total" class="form-control"  value="<?= $row->purchase_total ?>"/>
                                         </div>
-                                      
+                                      -->
                                         <div class="form-group">
                                           <label>Supplier</label>
                                            <select id="basic" name="i_supplier" size="1" class="selectpicker show-tick form-control" data-live-search="true" />

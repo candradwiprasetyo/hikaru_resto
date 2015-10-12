@@ -46,9 +46,9 @@ $row_res = mysql_fetch_array($query_res);
     <td>:</td>
     <td><?= $row_res['phone'] ?></td>
     <td>&nbsp;</td>
-    <td>Jam</td>
+    <td>Tanggal / Jam</td>
     <td>:</td>
-    <td><?= $row_res['hour'] ?></td>
+    <td><?= format_date($row_res['date'])." (".$row_res['hour'].")" ?></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

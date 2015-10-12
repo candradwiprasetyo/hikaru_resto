@@ -57,7 +57,7 @@
                                   		</div>
 
 										    <div class="form-group">
-                                            <label>Harga Original</label>
+                                            <label>HPP</label>
                                             <input required type="number" name="i_original_price" class="form-control" placeholder="Masukkan harga original ..." value="<?= $row->menu_original_price ?>"/>
                                         </div>
                                         
@@ -107,8 +107,8 @@
                                 </div><!-- /.box-body -->
                                 
                                   <div class="box-footer">
-                                <input class="btn btn-success" type="submit" value="Save"/>
-                                <a href="<?= $close_button?>" class="btn btn-success" >Close</a>
+                                <input class="btn btn-danger" type="submit" value="Save"/>
+                                <a href="<?= $close_button?>" class="btn btn-danger" >Close</a>
                              
                              </div>
                             
@@ -116,4 +116,69 @@
                        </form>
                         </div><!--/.col (right) -->
                     </div>   <!-- /.row -->
+                    
+                    <?php
+                    if($id){
+					?>
+                     <div class="row">
+                        <div class="col-xs-12">
+                            
+                             <div class="title_page"> Recipe</div>
+                            
+                            <div class="box">
+                             
+                                <div class="box-body2 table-responsive">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                            <th width="5%">No</th>
+                                                <th>Nama Bahan</th>
+                                                <th>Qty</th>
+                                                  <th>Satuan</th>
+                                                   <th>Config</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                           $no = 1;
+                                            while($row_recipe = mysql_fetch_array($query_recipe)){
+                                            ?>
+                                            <tr>
+                                            <td><?= $no?></td>
+                                               <td><?= $row_recipe['item_name']?></td>
+                                                <td><?= $row_recipe['item_qty']?></td>
+                                                <td><?= ($row_recipe['unit_name'])?></td>
+                                               
+                                              <td style="text-align:center;">
+
+                                                    <a href="menu.php?page=form_item&id=<?= $row_recipe['menu_recipe_id']?>&menu_id=<?= $row->menu_id ?>" class="btn btn-default" ><i class="fa fa-pencil"></i></a>
+                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row_recipe['menu_recipe_id']; ?>,'menu.php?page=delete_item&menu_id=<?= $row->menu_id ?>&id=')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+
+                                                </td> 
+                                            </tr>
+                                            <?php
+											$no++;
+                                            }
+                                            ?>
+
+                                           
+                                          
+                                        </tbody>
+                                          <tfoot>
+                                            <tr>
+                                                <td colspan="5"><a href="<?= $add_button_item ?>" class="btn btn-danger " >Add Item</a></td>
+                                               
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                        </div>
+                    </div>
+                    <?php
+					}
+					?>
+
+                    
                 </section><!-- /.content -->
