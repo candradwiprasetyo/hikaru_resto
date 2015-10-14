@@ -29,7 +29,8 @@ table{
 .header{
 	text-align:center;
 	font-weight:bold;
-	font-size:10px;
+	font-size:11px;
+	
 }
 .header_img{
 
@@ -37,8 +38,9 @@ table{
 	height:79px;
 	margin-left:auto;
 	margin-right:auto;
-	margin-bottom:20px;
+	margin-bottom:10px;
 }
+
 .back_to_order{
 	width:10%;
 	margin-left:auto;
@@ -49,8 +51,7 @@ table{
 	text-align:center;
 	border-radius:10px;
 	margin-top:10px;
-	padding:5px;
-	height:30px;
+	padding:5px;height:30px;
 }
 .back_to_order:hover{
 	background:#069;
@@ -58,17 +59,23 @@ table{
 </style>
 <body  onload=print()>
 <!--<body>-->
-<div class="header"><span style="font-size:16px;">Order <?= $row['table_name'] ?></span></div>
+
+<div class="header">
+<span style="font-size:18px;">Hikaru Resto<br>
+
+
+</div>
 <br />
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td></td>
+    <td><?= "Meja : ". $row['table_name']?></td>
    
     <td align="right" ><?= $row['transaction_date'] ?></td>
   </tr>
 </table>
 <br />
-<table width="100%" border="0" cellspacing="0" cellpadding="2">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 <?php
   $no_item = 1;
   $total_price = 0;
@@ -77,14 +84,28 @@ table{
   ?>
   <tr>
     <td><?= $row_item['menu_name'] ?></td>
-    <td align="right"><?= $row_item['transaction_detail_qty'] ?></td>
+    <td align="right">&nbsp;</td>
   </tr>
-  
+  <tr>
+    <td><?= $row_item['transaction_detail_qty']." x ".number_format($row_item['transaction_detail_price'])?></td>
+    <td align="right"><?= number_format($row_item['transaction_detail_total'])?></td>
+  </tr>
   <?php
  $no_item++;
  $total_price = $total_price + $row_item['transaction_detail_total'];
   }
  ?>
 </table>
-<a href="<?= $back_button ?>" style="text-decoration:none"><div class="back_to_order"></div></a>
+<br />
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:14px;">
+  <tr>
+    <td style="font-size:18px"><strong>Total</strong></td>
+    <td style="font-size:18px" align="right"><strong><?= number_format($total_price)?></strong></td>
+  </tr>
+  
+</table>
+
+<br />
+
+<a href="order.php" style="text-decoration:none"><div class="back_to_order"></div></a>
 </body>

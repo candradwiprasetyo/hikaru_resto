@@ -163,7 +163,7 @@ switch ($page) {
 
 		$i_date = get_isset($_GET['date']);
 		$i_date = format_back_date($i_date);
-		$i_jam = date("h:m:s");
+		$i_jam = date("h:i:s");
 		$table_id = get_isset($_GET['table_id']);
 		$member_id = get_isset($_GET['member_id']);
 		$tanggal = $i_date." ".$i_jam;
@@ -221,7 +221,7 @@ switch ($page) {
 
 		$i_date = get_isset($_GET['date']);
 		$i_date = format_back_date($i_date);
-		$i_jam = date("h:m:s");
+		$i_jam = date("h:i:s");
 		$table_id = get_isset($_GET['table_id']);
 		$member_id = get_isset($_GET['member_id']);
 		$tanggal = $i_date." ".$i_jam;

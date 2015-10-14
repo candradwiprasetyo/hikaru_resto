@@ -58,6 +58,7 @@
                                             	<th width="5%">No</th>
                                             	<th>Nama Supplier</th>
                                                 <th>Nomor Telepon</th>
+                                                <th>Email</th>
                                                 <th>Alamat</th>
                                                 <th>Config</th>
                                             </tr>
@@ -71,6 +72,7 @@
                                             <td><?= $no?></td>
                                                <td><?= $row['supplier_name']?></td>
                                                 <td><?= $row['supplier_phone']?></td>
+                                                <td><?= $row['supplier_email']?></td>
                                                 <td><?= $row['supplier_addres']?></td>
                                                 
                                               <td style="text-align:center;">

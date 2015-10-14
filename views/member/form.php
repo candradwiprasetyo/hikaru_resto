@@ -53,6 +53,11 @@ function add_menu(id)
                                             <label>Telepon</label>
                                             <input required type="text" name="i_phone" class="form-control" placeholder="Masukkan telepon member..." value="<?= $row->member_phone ?>"/>
                                         </div>
+                                        
+                                         <div class="form-group">
+                                            <label>Email</label>
+                                            <input required type="email" name="i_email" class="form-control" placeholder="Masukkan email member..." value="<?= $row->member_email ?>"/>
+                                        </div>
                   						
                                          <div class="form-group">
                                           <label>Type</label>
@@ -66,11 +71,16 @@ function add_menu(id)
                                             <label>Diskon (%)</label>
                                             <input required type="text" name="i_discount" class="form-control" placeholder="Masukkan diskon..." value="<?= $row->member_discount ?>"/>
                                         </div>
-                                        
+                                        <?php
+                                        if($id){
+										?>
                                          <div class="form-group">
                                             <label>Settlement (Rp)</label>
                                             <input required type="text" name="i_settlement" class="form-control" placeholder="Masukkan diskon..." value="<?= $row->member_settlement ?>" readonly="readonly"/>
                                         </div>
+                                        <?php
+										}
+										?>
             
                                         
                                         
@@ -95,7 +105,7 @@ function add_menu(id)
                     if($id){
 				
 
-                  include 'list_menu.php';
+                 // include 'list_menu.php';
 					}
 ?>
                     

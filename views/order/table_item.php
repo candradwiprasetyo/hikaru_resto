@@ -36,20 +36,28 @@ if($i > 1){ echo ")"; }
     <td align="right">Qty</td>
     <td align="right">Harga</td>
     <td align="right">Jumlah</td>
-    <td align="right">Config</td>
+    <td align="right">Ordered</td>
+    <td align="right">Out of time</td>
   </tr>
   </thead>
   <?php
   $no_item = 1;
   $total_price = 0;
-  $query_item = mysql_query("select b.*, c.menu_name 
+  $query_item = mysql_query("select a.transaction_date, b.*, c.menu_name, c.out_time
 							  from transactions_tmp a
 							  join transaction_tmp_details b on b.transaction_id = a.transaction_id
 							  join menus c on c.menu_id = b.menu_id
 							  where table_id = '".$row['table_id']."'");
   while($row_item = mysql_fetch_array($query_item)){
+	  
+		
+			  	$now =  strtotime(date("Y-m-d H:i:s"))."<br>";
+			  	$minute = $row_item['out_time'];
+        		$out_time = strtotime('+'.$minute.' minutes', strtotime($row_item['transaction_date']));
+				
+		
   ?>
-  <tr>
+  <tr <?php if($row_item['transaction_detail_status'] == 0){ if($now >= $out_time){ ?>bgcolor="#FF0000" style="color:#fff;"<?php } } ?>>
     <td align="center" valign="top"><?= $no_item ?></td>
     <td valign="top"><?= $row_item['menu_name'] ?></td>
     <td align="right" valign="top"><?= $row_item['transaction_detail_qty'] ?></td>
@@ -58,6 +66,10 @@ if($i > 1){ echo ")"; }
     <td align="right" valign="top">
     <input type="checkbox" name="i_status_id_<?= $row_item['transaction_detail_id']?>" value="1" onclick='return order_status(<?= $row_item['transaction_detail_id'] ?>)' <?php if($row_item['transaction_detail_status']==1){ ?> checked="checked" disabled="disabled"<?php }?>/>
    
+   </td>
+    <td align="right" valign="top">
+    	
+        <input type="checkbox" name="i_oot" value="1" <?php if($row_item['transaction_detail_status'] == 0){ if($now >= $out_time){ ?> checked="checked" <?php } } ?>disabled="disabled"/>
    </td>
   </tr>
   

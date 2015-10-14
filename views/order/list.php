@@ -126,7 +126,7 @@ if(!$_SESSION['login']){
 
  <div class="header_fixed"> 
  
-              
+             
 
 					<div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
 						<button class="blue_color_button"  type="button"  onClick="javascript: window.location.href = 'home.php'; ">BACK TO MENU</button>
@@ -143,8 +143,6 @@ if(!$_SESSION['login']){
 									<span class="icon icon-close">Close the dialog</span>
 									<h2 style="font-size:42px; padding-top:50px;">Anda yakin ingin <br><strong>logout</strong> ?</h2>
 									<form action="<?= $action_logout?>" method="post" enctype="multipart/form-data" role="form">
-										
-									
 										<p>
 										  <input type="submit" name="button" id="button" value="YA" class="button_building">
 										</p>

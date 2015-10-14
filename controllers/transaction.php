@@ -47,7 +47,7 @@ switch ($page) {
 
 		$i_date = get_isset($i_date);
 		$i_date = format_back_date($i_date);
-		$i_jam = date("h:m:s");
+		$i_jam = date("h:i:s");
 		$i_table_id = get_isset($i_table_id);
 		$i_tot_id = get_isset($i_tot_id);
 		$tanggal = $i_date." ".$i_jam;

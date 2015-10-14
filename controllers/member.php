@@ -42,6 +42,7 @@ switch ($page) {
 	
 			$row->member_name = false;
 			$row->member_phone = false;
+			$row->member_email = false;
 			$row->member_discount_type = 1;
 			$row->member_discount = false;
 			$row->member_settlement = 0;
@@ -59,6 +60,7 @@ switch ($page) {
 
 		$i_name = get_isset($i_name);
 		$i_phone = get_isset($i_phone);
+		$i_email = get_isset($i_email);
 		$i_settlement = get_isset($i_settlement);
 		$i_discount = get_isset($i_discount);
 		$i_discount_type = get_isset($i_discount_type);
@@ -66,10 +68,10 @@ switch ($page) {
 		$data = "'',
 					'$i_name',
 					'$i_phone',
+					'$i_email',
 					'$i_settlement',
 					'$i_discount',
 					'$i_discount_type'
-					
 			";
 			
 			//echo $data;
@@ -110,12 +112,14 @@ switch ($page) {
 		$id = get_isset($_GET['id']);
 		$i_name = get_isset($i_name);
 		$i_phone = get_isset($i_phone);
+		$i_email = get_isset($i_email);
 		$i_settlement = get_isset($i_settlement);
 		$i_discount = get_isset($i_discount);
 		$i_discount_type = get_isset($i_discount_type);
 		
 					$data = " member_name = '$i_name',
 							member_phone = '$i_phone',
+							member_email = '$i_email',
 							member_settlement = '$i_settlement',
 							member_discount = '$i_discount',
 							member_discount_type = '$i_discount_type'

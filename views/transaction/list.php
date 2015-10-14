@@ -4,6 +4,9 @@
 
 <script type="text/javascript">
 
+function filter_cat(){
+	alert("test");
+}
  
 
 /*
@@ -156,7 +159,7 @@ function load_data_history(id)
                 }
                 ?>
        
-        
+       
       
                 
  <form action="<?= $action ?>" method="post" enctype="multipart/form-data" role="form">
@@ -264,6 +267,7 @@ function load_data_history(id)
                     <div class="col-md-4 col-md-offset-4">
                         <div class="row">
                             <div class="otheader_title"><?= $row_cat['menu_type_name']?></div>
+                           
                         </div>
                     </div>
                 </div>
@@ -280,13 +284,15 @@ function load_data_history(id)
                    ?>
                    
                   <div class="box-showcase jcorgFilterTextParent">
-
+					  
                     <a onClick="add_menu(<?= $row['menu_id']?>)">
                       <div class="title_menu">
                           <?= $row['menu_name'] ?>
                         </div>
+                        <!--<a class="md-trigger" data-modal="modal-1">Note</a>-->
                         <div class="box-showcaseInner_frame">
                         <div class="box-showcaseInner">
+                        
                         <?php
                         $gambar = ($row['menu_img']) ? $row['menu_img'] : "default.jpg";
             ?>
@@ -376,6 +382,7 @@ function load_data_history(id)
                
                  <div class="form-group">
                    <input type="text" name="searchText" id="filter" class="form-control cari_checkout" value="" placeholder="Cari menu..."/>
+                 
                  </div>
                  </div>
                   <!--<div class="col-xs-4">
@@ -394,6 +401,21 @@ function load_data_history(id)
                 
               </section>
               
+              <div class="md-modal md-effect-1" id="modal-1">
+			<div class="md-content">
+				<h3>Modal Dialog</h3>
+				<div>
+					<p>This is a modal window. You can do the following things with it:</p>
+					<ul>
+						<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+						<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+						<li><strong>Close:</strong> click on the button below to close the modal.</li>
+					</ul>
+					<a class="md-close">Close me!</a>
+				</div>
+			</div>
+		</div>
+              
               </form>
               
               
@@ -407,5 +429,6 @@ function load_data_history(id)
                     hideNegatives:true,
                     parentLookupClass:'jcorgFilterTextParent',
                     childBlockClass:'jcorgFilterTextChild'});
+			
        });          
        </script>

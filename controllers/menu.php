@@ -51,6 +51,7 @@ switch ($page) {
 			$row->menu_price = false;
 			$row->menu_img = false;
 			$row->partner_id = false;
+			$row->out_time = false;
 
 			$action = "menu.php?page=save";
 		}
@@ -106,10 +107,11 @@ switch ($page) {
 		$i_margin_price = get_isset($i_margin_price);
 		$i_price = get_isset($i_price);
 		$i_partner_id = get_isset($i_partner_id);
+		$i_out_time = get_isset($i_out_time);
 		
 		$path = "../img/menu/";
 		$i_img_tmp = $_FILES['i_img']['tmp_name'];
-		$i_img = ($_FILES['i_img']['name']) ? $_FILES['i_img']['name'] : "";
+		$i_img = ($_FILES['i_img']['name']) ? time()."_".$_FILES['i_img']['name'] : "";
 	
 
 			$data = "'',
@@ -119,7 +121,8 @@ switch ($page) {
 					'$i_margin_price',
 					'$i_price', 
 					'$i_img',
-					'$i_partner_id'
+					'$i_partner_id',
+					'$i_out_time'
 			";
 			
 			//echo $data;
@@ -170,11 +173,11 @@ switch ($page) {
 		$i_margin_price = get_isset($i_margin_price);
 		$i_price = get_isset($i_price);
 		$i_partner_id = get_isset($i_partner_id);
-		
+		$i_out_time = get_isset($i_out_time);
 		
 		$path = "../img/menu/";
 		$i_img_tmp = $_FILES['i_img']['tmp_name'];
-		$i_img = ($_FILES['i_img']['name']) ? $_FILES['i_img']['name'] : "";
+		$i_img = ($_FILES['i_img']['name']) ? time()."_".$_FILES['i_img']['name'] : "";
 		
 			if($i_img){
 				
@@ -193,7 +196,8 @@ switch ($page) {
 							menu_margin_price = '$i_margin_price',
 							menu_price = '$i_price',
 							menu_img = '$i_img',
-							partner_id = '$i_partner_id'
+							partner_id = '$i_partner_id',
+							out_time = '$i_out_time'
 
 					";
 				}
@@ -205,7 +209,8 @@ switch ($page) {
 							menu_original_price = '$i_original_price',
 							menu_margin_price = '$i_margin_price',
 							menu_price = '$i_price',
-							partner_id = '$i_partner_id'
+							partner_id = '$i_partner_id',
+							out_time = '$i_out_time'
 					";
 			}
 
@@ -244,6 +249,8 @@ switch ($page) {
 	case 'delete':
 
 		$id = get_isset($_GET['id']);	
+		
+		$path = "../img/menu/";
 		$get_img_old = get_img_old($id);
 					if($get_img_old){
 						if(file_exists($path.$get_img_old)){

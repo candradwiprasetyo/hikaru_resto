@@ -188,6 +188,15 @@
       height: 55px;
     }
   
+  	.button_note{
+		position:absolute;
+		z-index:9999;
+		color:#fff;
+		right:20px;
+		bottom:-20px;
+		background:#9CC;
+		padding:5px;
+	}
 
     /*.box-showcaseInner:hover .titlebox-showcase, .box-showcaseInner.touchFocus .titlebox-showcase {
        margin-bottom: 0;

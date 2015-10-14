@@ -58,9 +58,10 @@
                                             <th width="5%">No</th>
                                                 <th>Nama </th>
                                                  <th>Telepon </th>
-                                                  <th>Tipe Diskon</th>
+                                                 <th>Email</th>
+                                                  <th>Tipe Member</th>
                                                    <th>Diskon</th>
-                                                    <th>Settlement</th>
+                                                    <th>Poin</th>
                                                    <th>Config</th> 
                                             </tr>
                                         </thead>
@@ -73,6 +74,7 @@
                                             <td><?= $no?></td>
                                                <td><?= $row['member_name']?></td>
                                                <td><?= $row['member_phone']?></td>
+                                                <td><?= $row['member_email']?></td>
                                                <td>
 											    <?php
 												$disount_type_name = array('','Diskon Langsung',"Diskon Poin");
@@ -98,7 +100,7 @@
                                         </tbody>
                                           <tfoot>
                                             <tr>
-                                                <td colspan="7"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
+                                                <td colspan="8"><a href="<?= $add_button ?>" class="btn btn-danger " >Add</a></td>
                                                
                                             </tr>
                                         </tfoot>

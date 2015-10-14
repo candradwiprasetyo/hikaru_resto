@@ -37,6 +37,7 @@ switch ($page) {
 	
 			$row->supplier_name = false;
 			$row->supplier_phone = false;
+			$row->supplier_email = false;
 			$row->supplier_addres = false;
 			
 			$action = "supplier.php?page=save";
@@ -52,11 +53,13 @@ switch ($page) {
 
 		$i_name = get_isset($i_name);
 		$i_telp = get_isset($i_telp);
+		$i_email = get_isset($i_email);
 		$i_alamat = get_isset($i_alamat);
 		
 		$data = "'',
 					'$i_name',
 					'$i_telp', 
+					'$i_email', 
 					'$i_alamat'
 			";
 			
@@ -76,10 +79,12 @@ switch ($page) {
 		$id = get_isset($_GET['id']);
 		$i_name = get_isset($i_name);
 		$i_telp = get_isset($i_telp);
+		$i_email = get_isset($i_email);
 		$i_alamat = get_isset($i_alamat);
 		
 					$data = " supplier_name = '$i_name',
 					supplier_phone = '$i_telp',
+					supplier_email = '$i_email',
 					supplier_addres = '$i_alamat'
 					";
 			echo $data;

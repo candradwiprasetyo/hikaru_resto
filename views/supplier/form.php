@@ -47,6 +47,10 @@
                                             <label>No Telp</label>
                                             <input required type="text" name="i_telp" id="i_telp" class="form-control" placeholder="Masukkan nomor telepon..." value="<?= $row->supplier_phone ?>"/>
                                         </div>
+                                         <div class="form-group">
+                                            <label>Email</label>
+                                            <input required type="email" name="i_email" id="i_email" class="form-control" placeholder="Masukkan email..." value="<?= $row->supplier_email ?>"/>
+                                        </div>
                                         <div class="form-group">
                                           <label>Alamat</label>
                                           <textarea name="i_alamat" id="i_alamat" cols="45" rows="5" class="form-control"><?= $row->supplier_addres ?></textarea>

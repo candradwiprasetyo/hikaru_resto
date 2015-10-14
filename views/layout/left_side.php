@@ -78,7 +78,7 @@
                    <li <?php if(isset($_SESSION['menu_active']) && $_SESSION['menu_active'] == 5){ echo "class='active'"; } ?>>
                             <a href="reserved.php">
                                  <i class="fa fa-list-alt"></i>
-                                <span>Reserved</span>
+                                <span>Reservation</span>
                             </a>
                             
                   </li>

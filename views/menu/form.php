@@ -86,6 +86,11 @@
                                            </select>                                    
                                   		</div>
                                         
+                                        <div class="form-group">
+                                            <label>Waktu limit order (minute)</label>
+                                            <input required type="number" name="i_out_time" class="form-control" placeholder="Masukkan waktu limit order ..." value="<?= $row->out_time ?>"/>
+                                        </div>
+                                        
                                         </div>
                                         <div class="col-md-3">
                                          <div class="form-group">
