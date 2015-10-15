@@ -178,6 +178,17 @@ function get_total_discount($table_id){
 	return $row['total'];				 
 }
 
+function get_count_order_status($transaction_id){
+	 $query = mysql_query("select count(transaction_id) as result 
+	 							from transaction_tmp_details
+							  where transaction_detail_status = '0'
+							  and transaction_id = '".$transaction_id."'
+							  ");
+	$row = mysql_fetch_array($query);
+	
+	return $row['result'];				 
+}
+
 function cancel_order($table_id){
 		$query =  mysql_query("select * 
 								from transactions_tmp a
