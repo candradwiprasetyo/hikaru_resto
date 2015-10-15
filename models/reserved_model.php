@@ -1,6 +1,6 @@
 <?php
 
-function select($where){
+function select_table($where){
 	$query = mysql_query("select a.*, b.building_name, c.branch_name from tables a 
 							join buildings b on b.building_id = a.building_id
 							join branches c on c.branch_id = b.branch_id

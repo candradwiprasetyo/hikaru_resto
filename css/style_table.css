@@ -26,9 +26,8 @@
 }
 
 .border_meja{
-	width:1110px;
+	width:100%;
 	position:absolute;
-	margin-left:100px;
 	margin-top:150px;
 	/*border:4px #ecf0f5 dashed;*/
 	margin-bottom:150px;
@@ -37,9 +36,8 @@
 
 .border_meja_edit{
 	
-	width:1110px;
+	width:100%px;
 	position:absolute;
-	margin-left:100px;
 	margin-top:150px;
 	border:4px #27AE60 dashed;
 	margin-bottom:150px;

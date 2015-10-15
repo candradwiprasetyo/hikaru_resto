@@ -298,6 +298,23 @@ switch ($page) {
 		header("location: order.php?building_id=$building_id");
 	break;
 	
+	case 'add_duration':
+	
+		$reserved_id = $_GET['reserved_id'];
+		$i_duration = $_POST['i_duration'];
+		$building_id = (isset($_GET['building_id'])) ? $_GET['building_id'] : 0;
+		
+		$get_reservation_time = get_reservation_time($reserved_id);
+		//echo $get_reservation_time;
+		
+		$minute = $i_duration;
+        $add = strtotime('+'.$minute.' minutes', strtotime($get_reservation_time));
+		$add = date("Y-m-d H:i:s", $add);
+		
+		add_duration($reserved_id, $add);
+		header("location: order.php?building_id=$building_id");
+		
+	break;
 	
 }
 

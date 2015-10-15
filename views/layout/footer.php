@@ -12,8 +12,38 @@
 
     </body>
 </html>
-
-     
+ <!-- jQuery 2.0.2 -->
+       <script src="../js/jquery.js"></script>
+        <script src="../js/function.js" type="text/javascript"></script>
+        <!-- Bootstrap -->
+        <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- DATA TABES SCRIPT -->
+        <script src="../js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="../js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+       	<!-- date-range-picker -->
+        <script src="../js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <!-- InputMask -->
+        <script src="../js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+        <script src="../js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+        <script src="../js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+        <!-- pop Modal-->
+        <script src="../js/popup/popModal.js"></script>
+       
+        <!-- Datepicker -->
+        <script src="../js/plugins/datepicker/bootstrap-datepicker.js"></script>
+		<!-- select -->
+		<script type="text/javascript" src="../js/lookup/bootstrap-select.js"></script>
+        <!-- AdminLTE App -->
+        <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
+         <!-- bootstrap time picker -->
+        <script src="../js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <!-- validasi -->
+        <script src="../js/plugins/validate/jquery.validate.js" type="text/javascript"></script>
+        <!-- button -->
+        <script src="../js/button/modernizr.custom.js"></script>
+		<script src="../js/button/classie.js"></script>
+      <!-- bootstrap time picker -->
+      
 		
  <!-- page script -->
         <script type="text/javascript">

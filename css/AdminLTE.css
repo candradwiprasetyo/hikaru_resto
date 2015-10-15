@@ -1360,9 +1360,8 @@ body > .header .logo .icon {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   border-bottom: 1px solid #f4f4f4;
-  color: #444;
-  
-  background:#fff;
+  color:#fff;
+  background:#DD4B39;
 }
 .box .box-header:before,
 .box .box-header:after {
@@ -1383,6 +1382,7 @@ body > .header .logo .icon {
   font-weight: 400;
   float: left;
   cursor: default;
+  color:#fff;
 }
 .box .box-header a {
   color: #444;

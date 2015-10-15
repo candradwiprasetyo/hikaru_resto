@@ -249,9 +249,22 @@ function get_table_name($table_id){
 	return $result;
 }
 
+function get_reservation_time($id){
+	$query = mysql_query("select date as result from reserved where reserved_id = '$id'");
+	$row = mysql_fetch_array($query);
+	
+	$result = ($row['result']);
+	return $result;
+}
+
 
 function update_settlement($data, $member_id){
 	mysql_query("update members set member_settlement = member_settlement + '$data' where member_id = '$member_id'");
+}
+
+function add_duration($id, $data){
+	mysql_query("update reserved set date = '$data' where reserved_id = '$id'");
+	
 }
 
 ?>

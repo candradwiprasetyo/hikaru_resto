@@ -15,8 +15,6 @@ if(!$_SESSION['login']){
         <link href="../css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="../css/AdminLTE.css" rel="stylesheet" type="text/css" />
-         <!-- font Awesome -->
-        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- iCheck for checkboxes and radio inputs 
         <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />
 -->
@@ -40,19 +38,8 @@ if(!$_SESSION['login']){
          <!-- modal -->
         <link rel="stylesheet" type="text/css" href="../css/modal/component.css" />
      
-     <script src="../js/jquery.js"></script>
        
        <script type="text/javascript">
-	   
-	  function startRefresh() {
-			$.get('', function(data) {
-				$(document.body).html(data);    
-			});
-		}
-		$(function() {
-			setTimeout(startRefresh,30000);
-		});
-	   
        function cancel_order(id){
 		 	var question = confirm("Anda yakin ingin cancel order ?");
 			if(question==true){
@@ -137,11 +124,11 @@ if(!$_SESSION['login']){
 </head>
 <body margin-left="0" margin-top="0">
 
-	
-    
+
 
  <div class="header_fixed"> 
  
+             
 
 					<div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
 						<button class="blue_color_button"  type="button"  onClick="javascript: window.location.href = 'home.php'; ">BACK TO MENU</button>
@@ -178,78 +165,13 @@ if(!$_SESSION['login']){
 	$q_building4 = mysql_query("select * from buildings where building_id = '$building_id' order by building_id");
 	while($r_building4 = mysql_fetch_array($q_building4)){
 		?>
-        
 <div id="content_new">
 	
-   <?php
-	$query =  mysql_query("select * from tables where building_id = '".$r_building4['building_id']."' and tms_id <> '2' order by table_id");
-	while($row = mysql_fetch_array($query)){
-		
-		$get_item_ordered = get_item_ordered($row['table_id']);
-		$get_item_not_ordered = get_item_not_ordered($row['table_id']);
-		
-	?>
-	<span class="tooltip tooltip-effect-1">
-	<div id="makeMeDraggable_<?= $row['table_id']?>" <?php if($row['tms_id']==1){ ?>class="meja2" <?php  }else{ ?>class="meja1"<?php } ?>>
-	
-				
-				<div class="tooltip-item"><?= $row['table_name'] ?>
-				<?php
-                if($row['table_status_id'] == 2){
-				?>
-              
-				<div class="count_item_ordered"><?= $get_item_ordered ?></div>
-                <div class="count_item_not_ordered"><?= $get_item_not_ordered ?></div>
-                <?php
-				}
-				?>
-                
-                <?php
-                if($row['table_status_id'] == 3 ){
-				?>
-              	<?php
-				$query_res_list = mysql_query("select * from reserved where table_id = '".$row['table_id']."'");
-				$row_res_list = mysql_fetch_array($query_res_list);
-				
-				$now_res =  strtotime(date("Y-m-d H:i:s"))."<br>";
-        		$res_time = strtotime($row_res_list['date']);
-				
-				
-				
-				?>
-				<div class="table_reserved"><?php if($now_res >= $res_time){ ?><i class="fa fa-warning"></i><?php } ?> Reserved</div>
-                
-				<?php
-				}
-				?>
-                </div>
-				<span class="tooltip-content clearfix">
-					
-						<?php 
-						if($row['table_status_id'] == 1 ){
-							include('table_empty.php');
-						}else if($row['table_status_id'] == 2 ){
-							include('table_item.php');	
-						}else if($row['table_status_id'] == 3 ){
-							include('table_reserved.php');	
-						}
-						?>
-					
-				</span>
-			
-	 </div>
-	 </span> 
-	<?php
-	
-	}
-	?>
+    <div id="screen" style="height:100px; width:100px; margin-top:200px; position:absolute; z-index:9999; color:#000;">
+    	
+    </div>
 	
   
-</div>
-<div id="content_new_right">
-	<?php
-    include 'content_right.php';
-	?>
 </div>
 <?php
 	}
@@ -313,7 +235,7 @@ if(!$_SESSION['login']){
    </div>     
 <div class="md-overlay"></div>
       
-     
+     <script src="../js/jquery.js"></script>
         <script src="../js/function.js" type="text/javascript"></script>
         <!-- Bootstrap 
         <script src="../js/bootstrap.min.js" type="text/javascript"></script>-->
@@ -401,7 +323,7 @@ if(!$_SESSION['login']){
 				} );
 			})();
 		</script>
-   
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script>
 		(function($){
 			/*
@@ -493,7 +415,11 @@ if(!$_SESSION['login']){
 			});
 		})(jQuery);
 		
-		
+		$(document).ready(function(){
+			setInterval(function(){
+				$("#screen").load('banners.php')
+			}, 2000);
+		});
 	</script>
     
     <!-- modal -->
