@@ -61,8 +61,8 @@ table{
 <!--<body>-->
 
 <div class="header">
-<span style="font-size:18px;">Soto Kudus<br>
-Kedai Taman </span><br>
+<span style="font-size:18px;">Hikaru<br>
+Resto </span><br>
 Jl. Taman Gayungsari Timur No.7 Surabaya<br />
 (031) 8381 9381
 

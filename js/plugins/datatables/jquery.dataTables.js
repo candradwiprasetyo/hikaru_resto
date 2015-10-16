@@ -9290,7 +9290,7 @@
 			 *    } );
 			 */
 			//"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
-			"sInfo": "Data yang ditampilkan : _START_ sampai _END_ dari _TOTAL_ total data",
+			"sInfo": "Data : _START_ sampai _END_ dari _TOTAL_ total data",
 		
 			/**
 			 * Display information string for when the table is empty. Typically the 

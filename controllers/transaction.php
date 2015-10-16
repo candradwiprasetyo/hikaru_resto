@@ -66,7 +66,8 @@ switch ($page) {
 					'$i_table_id',
 					'0',
 					'$tanggal',
-					'$i_tot_id'
+					'$i_tot_id',
+					'".$_SESSION['user_id']."'
 						";
 			
 			create_config("transactions_tmp", $data);

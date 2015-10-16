@@ -3072,3 +3072,16 @@ Component: timeline
   margin-left: auto;
   margin-top: 50px;
  }
+ .top_food_tr{
+	 background:#81DAF6 !important;
+	 color:#fff;
+	 font-weight:bold;
+	}
+ .top_food{
+	 width:20px;
+	 height:20px;
+	 border-radius:50%;
+	 background:#428BCA;
+	 text-align:center;
+	 line-height:20px;
+	}

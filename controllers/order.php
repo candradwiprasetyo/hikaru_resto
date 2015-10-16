@@ -133,7 +133,8 @@ switch ($page) {
 					'".$i_payment."',
 					'".$i_change."',
 					'".$i_payment_method."',
-					'".$i_bank_id."'
+					'".$i_bank_id."',
+					'".$row['user_id']."'
 					
 			";
 			// simpan transaksi
