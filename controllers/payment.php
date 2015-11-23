@@ -14,8 +14,14 @@ switch ($page) {
 		$table_id = get_isset($_GET['table_id']);
 		$building_id = (isset($_GET['building_id'])) ? $_GET['building_id'] : 0;
 		$query = select($table_id);
+		$query2 = select($table_id);
 
 		$action = "order.php?page=save_payment&table_id=".$table_id."&building_id=".$building_id;
+
+		$table_name = get_table_name($table_id);
+		$building_name = get_table_name($building_id);
+		$transaction_code = get_transaction_code($table_id);
+
 
 		if($table_id == 0 ){
 			$button_back = "";

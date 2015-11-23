@@ -1325,6 +1325,19 @@ body > .header .logo .icon {
   border: 1px solid #FF3030;
   
 }
+
+.box_payment {
+  position: relative;
+  margin-bottom: 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 10px !important;
+  width: 100%;
+  background:#fff;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3); 
+  padding-bottom: 15px;
+
+}
 .box.box-primary {
   border-top-color: #3c8dbc;
   border-radius:3px;
@@ -2734,7 +2747,7 @@ Component: timeline
  */
 /* iCheck plugin Minimal skin, black
 ----------------------------------- */
-
+/*
 .icheckbox_minimal,
 .iradio_minimal {
   display: inline-block;
@@ -2780,7 +2793,7 @@ Component: timeline
 .iradio_minimal.checked.disabled {
   background-position: -180px 0;
 }
-/* Retina support */
+
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
   .icheckbox_minimal,
   .iradio_minimal {
@@ -3085,3 +3098,198 @@ Component: timeline
 	 text-align:center;
 	 line-height:20px;
 	}
+
+  .note_frame{
+    border:1px solid #D82827;
+    padding: 10px;
+  }
+
+  /*------------------------ note button-------------------*/
+
+#donate label {
+    
+    width:170px;
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:3px;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+       
+}
+
+#donate label span {
+    text-align:center;
+    padding:13px 0px;
+    display:block;
+    cursor: pointer;
+    color: #000;
+}
+
+#donate label input {
+   
+    top:-20px;
+}
+
+#donate  input:checked + span {
+    background-color:#404040;
+    color:#F7F7F7;
+}
+
+#donate .blue {
+    background-color:#00BFFF;
+    color:#333;
+}
+
+#payment_type label {
+    
+    width:130px;
+    margin:4px;
+    background-color:#EFEFEF;
+    border:1px solid #D0D0D0;
+    overflow:auto;
+       
+}
+
+#payment_type label span {
+    text-align:center;
+    padding:13px 0px;
+    display:block;
+    cursor: pointer;
+    color: #000;
+}
+
+
+
+/*---------------------------- payment ---------------------------*/
+
+.payment_title{
+  text-align: center;
+  text-transform: uppercase;
+  background: url('../img/payment_title.jpg') repeat-x;
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #666;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.payment_group{
+  border: 1px solid #666;
+  padding:10px;
+  margin-top: 15px;
+}
+
+.payment_button{
+  border: 1px solid #666;
+  height: 50px;
+  line-height: 50px;
+  width: 140px;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+
+  background: url('../img/payment_button.jpg') repeat-x;
+}
+
+.struk_title{
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.struk_frame{
+  font-size: 12px;
+}
+
+.button_save_payment{
+  border: 1px solid #666;
+  background: #fff;
+  border-radius: 0px !important;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 18px !important;
+  height: 50px;
+  color: #d82827;
+}
+
+.button_close_payment{
+  border: 1px solid #666;
+  background: #fff;
+  border-radius: 0px !important;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 18px !important;
+  height: 50px;
+  line-height: 38px;
+  margin-left: 10px;
+  color: #d82827;
+  width: 90%;
+}
+
+.payment_widget_frame{
+  border: 1px solid #666;
+
+}
+.payment_widget_header{
+  padding: 15px;
+  color: #fff;
+  font-weight: bold;
+  background: #d82827;
+}
+
+.payment_widget_content{
+  background: #fff;
+  padding: 15px;
+}
+
+.payment_widget_button{
+  width: 100%;
+  border: 1px solid #666;
+  height: 50px;
+  line-height: 32px;
+  font-weight: bold;
+  border-radius: 0px;
+  color: #000;
+}
+
+.calc_frame{
+  padding: 15px;
+}
+
+.calc_nominal{
+  background: #ddd;
+  border: none;
+}
+
+.calc_button{
+  width: 100%;
+  height: 41px;
+  line-height: 41px;
+  background: #d82827;
+  color: #fff;
+font-weight: bold;
+text-align: center;
+cursor: pointer;
+}
+
+.calc_button:hover{
+  background: #b01615;
+}
+
+.calc_button_right{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #d82827;
+  color: #fff;
+font-weight: bold;
+text-align: center;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.calc_button_right:hover{
+  background: #b01615;
+}

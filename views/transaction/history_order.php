@@ -1,5 +1,6 @@
 
                 <?php
+                /*
                 if(isset($_GET['did']) && $_GET['did'] == 1){
                 ?>
                 <section class="content_new">
@@ -114,3 +115,6 @@
                     </div>
 
                 </section><!-- /.content -->
+                <?php
+                */
+                ?>

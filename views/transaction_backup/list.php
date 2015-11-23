@@ -1,4 +1,6 @@
 ﻿<script type="text/javascript" src="../js/search2/jcfilter.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/modal/component.css" />
+<script src="../js/modal/modernizr.custom.js"></script>
 
 
 <script type="text/javascript">
@@ -49,11 +51,45 @@ function CurrencyFormat(number)
 
 
 
+function add_menu(id)
+{
+	
+	var jumlah = document.getElementById("i_jumlah_"+id).value;
+	
+	jumlah++;
+	
+	document.getElementById("i_jumlah_"+id).value = jumlah;
+	get_total_price();
+	// $("#table_treatment").load('treatment.php?page=form_add_treatment&planting_process_id='+id); 
+}
 
+function minus_menu(id)
+{
+	
+	var jumlah = document.getElementById("i_jumlah_"+id).value;
+	
+	jumlah--;
+	
+	if(jumlah > 0){
+		jumlah = jumlah;
+	}else{
+		jumlah = 0;
+	}
+	
+	document.getElementById("i_jumlah_"+id).value = jumlah;
+	get_total_price();
+	// $("#table_treatment").load('treatment.php?page=form_add_treatment&planting_process_id='+id); 
+}
 
-
-
-
+function edit_menu(id)
+{
+	
+	var jumlah = document.getElementById("i_jumlah_"+id).value;
+	
+	document.getElementById("i_jumlah_"+id).value = jumlah;
+	get_total_price();
+	// $("#table_treatment").load('treatment.php?page=form_add_treatment&planting_process_id='+id); 
+}
 
 function get_total_price(){
 	
@@ -124,18 +160,17 @@ function load_data_history(id)
                 }
                 ?>
        
-               
+      
+      
+                
  <form action="<?= $action ?>" method="post" enctype="multipart/form-data" role="form">
  
                 <!-- Main content -->
 
                 <section class="content" style="padding-top: 0">
-                  <?php
-                                $get_all_jumlah = get_all_jumlah($table_id);
-
-                                ?>
+                  
               <div class="row">
-              <div <?php if($get_all_jumlah == 0){ ?>class="col-md-12" <?php }else{ ?>class="col-md-8"<?php } ?> id="table_menu">
+              <div class="col-md-9">
               <div class="box box-cokelat">
               <div class="box-body">    
               
@@ -219,9 +254,10 @@ function load_data_history(id)
 			 ?>
 			</div>  
            
-     
+      
             
                <div class="row">
+               <a class="md-trigger" data-modal="modal-1">Fade in &amp; Scale</a>
                
                <?php
                 while($row_cat = mysql_fetch_array($query_cat)){
@@ -275,11 +311,7 @@ function load_data_history(id)
                              </a>
                             <div class="box-showcaseDesc_by">
                               <div class="col-xs-8" style="padding:0px;">
-                                <?php
-                                $get_jumlah = get_jumlah($row['menu_id'], $table_id);
-
-                                ?>
-                                    <input required type="text" name="i_jumlah_<?= $row['menu_id'] ?>" id="i_jumlah_<?= $row['menu_id'] ?>" class="form-control text_menu" value="<?= $get_jumlah ?>" onchange="edit_menu(<?= $row['menu_id'] ?>)"/>
+                                    <input required type="text" name="i_jumlah_<?= $row['menu_id'] ?>" id="i_jumlah_<?= $row['menu_id'] ?>" class="form-control text_menu" value="0" onchange="edit_menu(<?= $row['menu_id'] ?>)"/>
                                 <input type="hidden" name="i_harga_<?= $row['menu_id'] ?>" id="i_harga_<?= $row['menu_id'] ?>" class="form-control text_menu" value="<?= $row['menu_price'] ?>"/>
                             </div>
                                 <div class="col-xs-4" style="padding:0px;">
@@ -315,21 +347,8 @@ function load_data_history(id)
           </div>
           </div>
           </div>
-          </div>
-
-
-
+          </div>    
 				  </div>
-
-
-                    <div class="col-md-4" id="table_widget" <?php if($get_all_jumlah == 0){ ?>style="display:none" <?php } ?>>
-                    
-                            <?php
-                            include 'widget.php';
-                            ?>
-                       
-                    </div>
-                
                 
 			</section>
 			
@@ -350,9 +369,8 @@ function load_data_history(id)
                    
                  <div class="col-xs-8">
                    <div class="form-group">
-                    
-                  <input required type="hidden" readonly="readonly" name="i_total_harga" id="i_total_harga" class="form-control total_checkout" value="<?= $get_all_jumlah ?>"/>
-                   <input required type="text" readonly="readonly" name="i_total_harga_rupiah" id="i_total_harga_rupiah" class="form-control total_checkout" value="<?= $get_all_jumlah ?>"/>
+                  <input required type="hidden" readonly="readonly" name="i_total_harga" id="i_total_harga" class="form-control total_checkout" value="0"/>
+                   <input required type="text" readonly="readonly" name="i_total_harga_rupiah" id="i_total_harga_rupiah" class="form-control total_checkout" value="0"/>
                    </div>
                 </div>
                  <div class="col-xs-4">
@@ -380,15 +398,29 @@ function load_data_history(id)
                 -->
 
                   </div>
-
-                  
                
                 </div>
                 
                
                 
               </section>
-           
+              <!--
+       <div class="md-modal md-effect-1" id="modal-1">
+			<div class="md-content">
+				<h3>Modal Dialog</h3>
+				<div>
+					<p>This is a modal window. You can do the following things with it:</p>
+					<ul>
+						<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+						<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+						<li><strong>Close:</strong> click on the button below to close the modal.</li>
+					</ul>
+					<a class="md-close">Close me!</a>
+				</div>
+			</div>
+		</div>
+  -->
+              
               </form>
               
               
@@ -405,57 +437,5 @@ function load_data_history(id)
 			
        });          
        </script>
-   
-   <script type="text/javascript">
-function add_menu(id)
-{
-  
-  var jumlah = document.getElementById("i_jumlah_"+id).value;
-  
-  jumlah++;
-  
-  document.getElementById("i_jumlah_"+id).value = jumlah;
-  get_total_price();
-
-  $('#table_menu').addClass('col-md-8');
-
-  document.getElementById("table_widget").style.display = 'inline';
-
-  $("#table_widget").load('transaction.php?page=form_widget&menu_id='+id+'&jumlah='+jumlah+'&table_id='+<?= $table_id ?>);
-}
-
-function minus_menu(id)
-{
-  
-  var jumlah = document.getElementById("i_jumlah_"+id).value;
-  
-  jumlah--;
-  
-  if(jumlah > 0){
-    jumlah = jumlah;
-  }else{
-    jumlah = 0;
-  }
-
- $("#table_widget").load('transaction.php?page=form_widget&menu_id='+id+'&jumlah='+jumlah+'&table_id='+<?= $table_id ?>);
-  
-  document.getElementById("i_jumlah_"+id).value = jumlah;
-  get_total_price();
- 
-}
-
-function edit_menu(id)
-{
-  
-  var jumlah = document.getElementById("i_jumlah_"+id).value;
-  
-  document.getElementById("i_jumlah_"+id).value = jumlah;
-  get_total_price();
-
-   $('#table_menu').addClass('col-md-8');
-  document.getElementById("table_widget").style.display = 'inline';
-
-  $("#table_widget").load('transaction.php?page=form_widget&menu_id='+id+'&jumlah='+jumlah+'&table_id='+<?= $table_id ?>);
-}
-
-   </script>
+       <script src="../js/modal/classie.js"></script>
+		<script src="../js/modal/modalEffects.js"></script>

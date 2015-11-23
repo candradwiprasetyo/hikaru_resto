@@ -1,9 +1,10 @@
 <?php
 
 function select(){
-	$query = mysql_query("select a.* , b.building_name as nama_gedung
+	$query = mysql_query("select a.* , b.building_name as nama_gedung, c.branch_name
 							from tables a
 							join buildings b on b.building_id = a.building_id
+							join branches c on c.branch_id = b.branch_id
 							order by table_id");
 	return $query;
 }

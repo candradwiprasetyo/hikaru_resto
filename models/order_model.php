@@ -77,6 +77,10 @@ function delete_merger_table($table_parent_id, $table_id){
 		
 }
 
+function delete_config($table, $param){
+	mysql_query("delete from $table where $param");
+}
+
 function update_merger_status($table_id, $status){
 	mysql_query("update tables set tms_id = '$status' where table_id = '$table_id'");
 }
@@ -156,6 +160,10 @@ function delete_tmp($table_id){
 			
 		}
 		mysql_query("delete from transactions_tmp where table_id = '$table_id'");
+}
+
+function delete_widget_tmp($table_id){
+		mysql_query("delete from widget_tmp where table_id = '$table_id'");
 }
 
 function get_data_total($table_id){

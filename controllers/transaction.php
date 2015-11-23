@@ -38,6 +38,22 @@ switch ($page) {
 		include '../views/transaction/list.php';
 		get_footer($query_find);
 	break;
+
+	case 'note':
+		$title = ucfirst("Global Note");
+		get_header($title);
+
+		$table_id = get_isset($_GET['table_id']);	
+		$wt_id = get_isset($_GET['wt_id']);	
+
+		$get_note_desc = get_note_desc($wt_id);
+		
+		$action = "transaction.php?page=save_note&wt_id=$wt_id&table_id=$table_id";
+		$close_button = "transaction.php?page=list&table_id=$table_id";
+
+		include '../views/transaction/note.php';
+		get_footer();
+	break;
 	
 	
 
@@ -67,7 +83,8 @@ switch ($page) {
 					'0',
 					'$tanggal',
 					'$i_tot_id',
-					'".$_SESSION['user_id']."'
+					'".$_SESSION['user_id']."',
+					'".time()."'
 						";
 			
 			create_config("transactions_tmp", $data);
@@ -91,7 +108,8 @@ switch ($page) {
 						$data_history = get_data_history($i_table_id, $row['menu_id']);
 						$row_history = mysql_fetch_array($data_history);
 						
-						$new_qty = $row_history['transaction_detail_qty'] + $jumlah;
+						//$new_qty = $row_history['transaction_detail_qty'] + $jumlah;
+						$new_qty = $jumlah;
 						$new_total = $new_qty * $row['menu_price'];
 						
 						$data_detail = "transaction_detail_qty = '$new_qty', 
@@ -132,6 +150,43 @@ switch ($page) {
 	
 	break;
 
+	case 'save_note':
+	
+	
+		//extract($_POST);
+
+		$i_desc = get_isset($_POST['i_desc']);
+		$wt_id = get_isset($_GET['wt_id']);
+		$table_id = get_isset($_GET['table_id']);
+		
+		// delete widget_tmp_details
+		delete_config("widget_tmp_details", "wt_id = '$wt_id'");
+		
+		$query_note_category = mysql_query("select * from note_categories order by note_category_id");
+        while($row_note_category = mysql_fetch_array($query_note_category)){
+
+        	if(isset($_POST['i_note_'.$row_note_category['note_category_id']])){
+
+        		//echo $_POST['i_note_'.$row_note_category['note_category_id']]."<br>";
+        		$data_detail = "'',
+									'$wt_id',
+									'".$_POST['i_note_'.$row_note_category['note_category_id']]."'
+									";
+						create_config("widget_tmp_details", $data_detail);
+					
+				}
+        	}
+
+        // update desc
+        $data_desc = "wt_desc = '$i_desc'
+									";
+        update_config2("widget_tmp", $data_desc, "wt_id=$wt_id");
+					
+		header("Location: transaction.php?page=list&table_id=$table_id");
+		
+	
+	break;
+
 	case 'get_menu':
 		
 		$keyword = $_GET['keyword'];
@@ -167,6 +222,115 @@ switch ($page) {
 		}
 		//get_footer();
 	break;
+
+	case 'form_widget':
+
+		$menu_id = $_GET['menu_id'];
+		$jumlah = $_GET['jumlah'];
+		$table_id = $_GET['table_id'];
+
+		
+		$get_widget = get_widget($menu_id, $table_id);
+
+		if($jumlah == 0){
+
+			delete_config("widget_tmp", "menu_id = '$menu_id' and user_id = '".$_SESSION['user_id']."' and table_id = '$table_id'");
+
+		}else{
+
+			if($get_widget==0){
+
+				$data = "'',
+						'".$_SESSION['user_id']."',
+						'$menu_id',
+						'$jumlah',
+						'$table_id',
+						''
+							";
+				
+				create_config("widget_tmp", $data);
+
+			}else{
+
+				$data = "jumlah = '$jumlah'
+										";
+				update_config2("widget_tmp", $data, "menu_id = '$menu_id' and user_id = '".$_SESSION['user_id']."' and table_id = '$table_id'");
+						
+
+			}
+
+		}
+
+		include '../views/transaction/widget.php';
+		
+	break;
+
+	case 'delete_widget':
+
+		$id = get_isset($_GET['id']);	
+		$table_id = get_isset($_GET['table_id']);
+		
+		delete_config("widget_tmp", "wt_id = '$id'");
+		delete_config("widget_tmp_details", "wt_id = '$id'");
+
+		header("Location: transaction.php?table_id=$table_id&did=3");
+
+	break;
+
+	case 'delete_note':
+
+		$id = get_isset($_GET['id']);	
+		$table_id = get_isset($_GET['table_id']);
+		$wt_id = get_isset($_GET['wt_id']);
+		
+		delete_config("widget_tmp_details", "wtd_id = '$id'");
+
+		header("Location: transaction.php?page=note&table_id=$table_id&wt_id=$wt_id");
+
+	break;
+
+	case 'reset':
+
+		$table_id = get_isset($_GET['table_id']);
+
+		// hapus transaction_tmp_details
+		
+		$q_detail = mysql_query("select * from transactions_tmp where table_id = '$table_id' and user_id = '".$_SESSION['user_id']."'");
+		while($r_detail = mysql_fetch_array($q_detail)){
+			delete_config("transaction_tmp_details", "transaction_id = '".$r_detail['transaction_id']."'");
+		}
+		
+		delete_config("transactions_tmp", "table_id = '$table_id'");
+
+		// hapus widget_tmp_details
+		$q_widget_detail = mysql_query("select * from widget_tmp where table_id = '$table_id' and user_id = '".$_SESSION['user_id']."'");
+		while($r_widget_detail = mysql_fetch_array($q_widget_detail)){
+			delete_config("widget_tmp_details", "wt_id = '".$r_widget_detail['wt_id']."'");
+		}
+
+		delete_config("widget_tmp", "table_id = '$table_id'");
+
+
+		mysql_query("update tables set table_status_id = '1' where table_id = '$table_id'");
+		
+
+		header("Location: transaction.php?page=list&table_id=$table_id");
+		
+
+	break;
+
+	case 'close':
+
+		$table_id = get_isset($_GET['table_id']);
+
+		$building_id = get_building_id($table_id);
+		
+
+		header("Location: order.php?bulding_id=$building_id");
+		
+
+	break;
+	
 }
 
 ?>

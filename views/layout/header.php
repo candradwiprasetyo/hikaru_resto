@@ -23,8 +23,8 @@ if(!$_SESSION['login']){
         <link href="../css/popModal.css" type="text/css" rel="stylesheet" >
         <!-- Preview -->
         <link href="../css/preview.css" type="text/css" rel="stylesheet" >
-         <!-- iCheck for checkboxes and radio inputs -->
-        <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />
+         <!-- iCheck for checkboxes and radio inputs 
+        <link href="../css/iCheck/all.css" rel="stylesheet" type="text/css" />-->
          <!-- daterange picker -->
         <link href="../css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <!-- Bootstrap time Picker -->
@@ -62,7 +62,7 @@ if(!$_SESSION['login']){
             <script src="../js/footable/bootstrap-tab.js" type="text/javascript"></script>
          -->
 
-       
+        <script src="../js/jquery.js"></script>
         
        
     </head>
@@ -200,7 +200,7 @@ if(!$_SESSION['login']){
         
 				<script type="text/javascript">
 
-					$().ready(function() {
+					$(document).ready(function() {
 						
 						var container = $('div.alert.alert-danger-1');
 						

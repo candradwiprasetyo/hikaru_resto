@@ -13,7 +13,7 @@
     </body>
 </html>
  <!-- jQuery 2.0.2 -->
-       <script src="../js/jquery.js"></script>
+      
         <script src="../js/function.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <script src="../js/bootstrap.min.js" type="text/javascript"></script>
@@ -105,6 +105,7 @@
                 //Money Euro
                 $("[data-mask]").inputmask();
 				
+                /*
 				//iCheck for checkbox and radio inputs
                 $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
                     checkboxClass: 'icheckbox_minimal',
@@ -119,7 +120,7 @@
                 $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
                     checkboxClass: 'icheckbox_flat-red',
                     radioClass: 'iradio_flat-red'
-                });
+                });*/
 				
 				//Date range picker
                 $('#reservation').daterangepicker();

@@ -84,8 +84,10 @@ switch ($page) {
 		$i_grand_total = $_POST['i_grand_total'];
 		$i_payment_method = $_POST['i_payment_method'];
 		$i_bank_id = "";
+		$i_bank_account = "";
 		if($i_payment_method == 2 || $i_payment_method == 3){
 			$i_bank_id  = $_POST['i_bank_id'];
+			$i_bank_account  = $_POST['i_bank_account'];
 		}
 	
 		$table_id = $_GET['table_id'];
@@ -134,7 +136,9 @@ switch ($page) {
 					'".$i_change."',
 					'".$i_payment_method."',
 					'".$i_bank_id."',
-					'".$row['user_id']."'
+					'".$row['user_id']."',
+					'".$i_bank_account."',
+					'".$row['transaction_code']."'
 					
 			";
 			// simpan transaksi
@@ -180,6 +184,9 @@ switch ($page) {
 			
 			// hapus tmp
 			delete_tmp($table_id);
+
+			// hapus widget_tmp
+			delete_widget_tmp($table_id);
 			
 		}
 		
@@ -194,9 +201,29 @@ switch ($page) {
 	case 'cancel_order':
 		$table_id = $_GET['table_id'];
 		$building_id = $_GET['building_id'];
+
+		// hapus transaction_tmp_details
+		
+		$q_detail = mysql_query("select * from transactions_tmp where table_id = '$table_id' and user_id = '".$_SESSION['user_id']."'");
+		while($r_detail = mysql_fetch_array($q_detail)){
+			delete_config("transaction_tmp_details", "transaction_id = '".$r_detail['transaction_id']."'");
+		}
+		
+		delete_config("transactions_tmp", "table_id = '$table_id'");
+
+		// hapus widget_tmp_details
+		$q_widget_detail = mysql_query("select * from widget_tmp where table_id = '$table_id' and user_id = '".$_SESSION['user_id']."'");
+		while($r_widget_detail = mysql_fetch_array($q_widget_detail)){
+			delete_config("widget_tmp_details", "wt_id = '".$r_widget_detail['wt_id']."'");
+		}
+
+		delete_config("widget_tmp", "table_id = '$table_id'");
+
+
+		mysql_query("update tables set table_status_id = '1' where table_id = '$table_id'");
 		
 		
-		cancel_order($table_id);
+		//cancel_order($table_id);
 		header("location: order.php?building_id=$building_id");
 	break;
 	
