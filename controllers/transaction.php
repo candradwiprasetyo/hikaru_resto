@@ -28,10 +28,17 @@ switch ($page) {
 		}else{
 			$check_table = check_table($table_id);
 		}
-		$query_cat = select_cat();
-		$query = select();
-		$query2 = select();
-		$query_find = select();
+
+		if(isset($_GET['mt_id'])){
+			$param = $_GET['mt_id'];
+		}else{
+			$param = '';
+		}
+
+		$query_cat = select_cat($param);
+		$query = select($param);
+		$query2 = select($param);
+		$query_find = select($param);
 		$action = "transaction.php?page=save";
 		
 

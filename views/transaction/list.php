@@ -222,12 +222,55 @@ function load_data_history(id)
      
             
                <div class="row">
-               
+                <br>
+
+                <?php
+                if(isset($_GET['mt_id'])){
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                   <a href="transaction.php?page=list&table_id=<?= $_GET['table_id']; ?>" class="btn btn-block btn_cat_button"> All Categories</a>
+                 </div>
+                </div>
+                <?php
+                }else{
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                   <div class="btn btn-block btn_cat_button_active"><i class="fa fa-check"></i> All Categories</div>
+                  </div>
+                </div>
+                <?php
+                }
+                ?>
+                <?php
+                $q_cat_button = mysql_query("select * from menu_types order by menu_type_id");
+                while($r_cat_button = mysql_fetch_array($q_cat_button)){
+                if(isset($_GET['mt_id']) && $_GET['mt_id'] == $r_cat_button['menu_type_id']){
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                   <div class="btn btn-block btn_cat_button_active"><i class="fa fa-check"></i> <?= $r_cat_button['menu_type_name'] ?></div>
+                  </div>
+                </div>
+                <?php
+                }else{
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                    <a href="transaction.php?page=list&table_id=<?= $_GET['table_id']; ?>&mt_id=<?= $r_cat_button['menu_type_id']?>" class="btn btn-block btn_cat_button"> <?= $r_cat_button['menu_type_name'] ?></a>
+                  </div>
+                </div>
+                <?php
+                }
+                }
+                ?>
+               <div style="clear:both"></div>
                <?php
                 while($row_cat = mysql_fetch_array($query_cat)){
 			   ?>
                
-               <!-- batas kategori -->
+               <!-- batas kategori 
               
                 <div class="col-md-12">
                     <div class="col-md-4 col-md-offset-4">
@@ -236,7 +279,7 @@ function load_data_history(id)
                            
                         </div>
                     </div>
-                </div>
+                </div>-->
                 
                 
 				<p>
@@ -249,7 +292,7 @@ function load_data_history(id)
                     while($row = mysql_fetch_array($query)){
                    ?>
                    
-                  <div class="box-showcase jcorgFilterTextParent">
+                  <div class="box-showcase jcorgFilterTextParent" <?php if(isset($_GET['mt_id']) && $_GET['mt_id'] != $row_cat['menu_type_id']){ ?> style="display:none;"<?php } ?>>
 					  
                     <a onClick="add_menu(<?= $row['menu_id']?>)">
                     

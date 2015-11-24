@@ -3293,3 +3293,28 @@ cursor: pointer;
 .calc_button_right:hover{
   background: #b01615;
 }
+
+
+.btn_cat_button{
+  border:1px solid #D82827;
+  border-radius: 0px;
+  font-size: 13px !important;
+  font-weight: bold;
+  color: #D82827;
+}
+
+.btn_cat_button_active{
+  border:1px solid #D82827;
+  background: #D82827;
+  border-radius: 0px;
+  font-size: 13px !important;
+  font-weight: bold;
+  color: #fff;
+  cursor: default;
+
+}
+
+.btn_cat_button_active:hover{
+  color:#fff;
+  
+}

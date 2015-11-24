@@ -6,7 +6,7 @@ if(!$_SESSION['login']){
 <!doctype html>
 <html lang="en">
 <head>
-<title>.: Warung App :.</title>
+<title>.: Hikaru Resto :.</title>
 
 		<!-- bootstrap 3.0.2 -->
 		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />

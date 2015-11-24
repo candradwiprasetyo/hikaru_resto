@@ -1,12 +1,21 @@
 <?php
 
-function select(){
-	$query = mysql_query("select * from menus order by menu_id");
+function select($param){
+	$where = "";
+	/*if($param){
+		$where = "where menu_type_id = ".$param; 
+	}*/
+	$query = mysql_query("select * from menus $where order by menu_id");
 	return $query;
 }
 
-function select_cat(){
-	$query = mysql_query("select * from menu_types order by menu_type_id");
+function select_cat($param){
+	$where = "";
+	/*if($param){
+		$where = "where menu_type_id = ".$param; 
+	}*/
+
+	$query = mysql_query("select * from menu_types $where order by menu_type_id");
 	return $query;
 }
 
