@@ -74,6 +74,10 @@ if(!$_SESSION['login']){
         <!-- DATA TABES SCRIPT -->
         <script src="../js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="../js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+
+        <!-- select -->
+    <script type="text/javascript" src="../js/lookup/bootstrap-select.js"></script>
+        
         
     </head>
     <body class="skin-blue">
@@ -125,10 +129,8 @@ if(!$_SESSION['login']){
                                 
                                 <div class="box-body2 table-responsive">
 
-
-                                  <form action="<?= $action?>" method="post" enctype="multipart/form-data" role="form">
-                                
-                                <div class="col-md-8">
+                                   <form action="<?= $action?>" method="post" enctype="multipart/form-data" role="form">
+                               <div class="col-md-8">
                                   <div class="row">
                                     <div class="payment_group">
                                      <b> Tipe Pembayaran</b>
@@ -158,9 +160,58 @@ if(!$_SESSION['login']){
                                                     <span  onclick="get_change(3)" id="i_span_3" class="i_span">
                                                   Credit </span>
                                                 </label>
+
+                                                <label>
+                                                    <input style="position: absolute;
+    opacity: 0;" type="radio" name="i_payment_method" id="i_payment_method" value="4" onclick="payment_method(4)">
+                                                    <span  onclick="get_change(4)" id="i_span_4" class="i_span">
+                                                  Voucher </span>
+                                                </label>
                                         </div>
 
                                     </div>
+
+ <div class="payment_group" id="bank_frame" style="display:none; width:100%;"> 
+                                     <b> Bank</b>
+                                      <br>
+                                      <div class="row">
+                                      <div class="col-md-6" style="padding-left:0px; ">
+                                       <select id="basic" name="i_bank_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" style="min-height:100px;" />
+                                           <?php
+                       $q_bank = mysql_query("select * from banks order by bank_id");
+                                           while($r_bank = mysql_fetch_array($q_bank)){
+                                            ?>
+                                             <option value="<?= $r_bank['bank_id'] ?>"><?= $r_bank['bank_name']?></option>
+                                             <?php
+                                             }
+                                             ?>
+                                           </select>    
+                                         </div>
+                                         <div class="col-md-6" style="padding-left:0px; ">
+                                            <input type="text" name="i_bank_account" id="i_bank_account" class="form-control" value="" placeholder="No Kartu" style="text-align:right; font-size:20px;"/>
+                                        
+                                         </div>
+                                       </div>
+                                    </div>
+
+                                     <div class="payment_group" id="voucher_frame" style="display:none; width:100%;">
+                                     <b> Voucher</b>
+                                      <br>
+                                       <select  id="basic" name="i_voucher_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" style="min-height:100px;" onchange="update_voucher(this.value)" />
+                                           <option value="0">Pilih Voucher</option>
+                                           <?php
+                                            $q_voucher = mysql_query("select * from vouchers where voucher_active_status = '0' order by voucher_id");
+                                            while($r_voucher = mysql_fetch_array($q_voucher)){
+                                            ?>
+                                             <option value="<?= $r_voucher['voucher_id'] ?>"><?= $r_voucher['voucher_code']." ( Rp. ". $r_voucher['voucher_value']." )" ?></option>
+                                             <?php
+                                             }
+                                             ?>
+                                           </select>    
+                                         </div>
+
+
+                                   
 
                                      <?php
                                            
@@ -174,7 +225,7 @@ if(!$_SESSION['login']){
                                             }
                                             ?>
 
-                                    <div class="col-md-6" style="padding-left:0px;">
+                                    <div class="col-md-12" style="padding:0px;">
                                       <div class="payment_group">
                                         <div class="calc_title">
                                         <b>Nominal</b>
@@ -235,7 +286,7 @@ if(!$_SESSION['login']){
                                       </div>
                                     </div>
 
-                                    <div class="col-md-6" style="padding:0px;">
+                                    <div class="col-md-12" style="padding:0px;">
                                     <div class="payment_group">
                                       <table id="" class="" width="100%">
                                         <tbody>
@@ -247,17 +298,17 @@ if(!$_SESSION['login']){
                                          <tfoot>
                                             
                                             <tr>
-                                                <td colspan="2" width="50%">Total </td>
+                                                <td colspan="2" width="50%">Grand Total </td>
                                                 
                                                
                                             </tr>
                                             <tr>
                                               <td colspan="3" style="text-align:right; font-size:20px;" ><?= number_format($total_price2)?> 
-                                                 <input required type="hidden" name="i_total" id="i_total" class="form-control" value="<?= ($total_price)?>" style="text-align:right; font-size:30px; height:50px;" readonly/>
+                                                 <input required type="hidden" name="i_total" id="i_total" class="form-control" value="<?= ($total_price2)?>" style="text-align:right; font-size:30px; height:50px;" readonly/>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">Discount </td>
+                                                <td colspan="2">Penerimaan </td>
                                                 
                                                
                                             </tr>
@@ -267,7 +318,7 @@ if(!$_SESSION['login']){
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">Grand Total </td>
+                                                <td colspan="2">Sisa </td>
                                                
                                                
                                             </tr>
@@ -276,11 +327,7 @@ if(!$_SESSION['login']){
                                                  <input required type="text" name="i_grand_total" id="i_grand_total" class="form-control" value="<?= ($total_price2)?>" style="text-align:right; font-size:20px;" readonly/>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">Penerimaan </td>
-                                                
-                                               
-                                            </tr>
+                                           
                                             <tr>
                                               <td colspan="3" style="text-align:right; " >
                                                  </td>
@@ -307,37 +354,16 @@ if(!$_SESSION['login']){
                                                
                                                
                                             </tr>
-                                            <tr>
-                                                <td colspan="5" style=" display:none;"  id="bank_frame">
-                                                <select id="basic" name="i_bank_id" size="1" class="selectpicker show-tick form-control" data-live-search="true" />
-                                           <?php
-                       $q_bank = mysql_query("select * from banks order by bank_id");
-                                           while($r_bank = mysql_fetch_array($q_bank)){
-                                            ?>
-                                             <option value="<?= $r_bank['bank_id'] ?>"><?= $r_bank['bank_name']?></option>
-                                             <?php
-                                             }
-                                             ?>
-                                           </select>     
-                                                 </td>
-                                               
-                                               
-                                            </tr>
-
-                                            <tr>
-                                                <td colspan="5" style=" display:none;"  id="bank_account_frame">
-                                                 <input required type="text" name="i_bank_account" id="i_bank_account" class="form-control" value="" placeholder="No Kartu" style="text-align:right; font-size:20px;"/>
-                                                
-                                                 </td>
-                                               
-                                               
-                                            </tr>
+                                            
+                                           
                                             
                                         </tfoot>
                                     </table>
                                     </div>
 
-                                    
+                                       
+                                
+                               
                                       <table width="100%">
                                          <tr>
                                                 <td colspan="5"> 
@@ -543,7 +569,7 @@ if(!$_SESSION['login']){
        var total = parseFloat(document.getElementById("i_total").value);
        var discount = parseFloat(document.getElementById("i_discount").value);
        
-       if(discount > total){
+        if(discount > total){
          alert("Discount tidak boleh melebihi total harga");
          document.getElementById("i_discount").value = 0;
          document.getElementById("i_grand_total").value = total;
@@ -577,14 +603,17 @@ if(!$_SESSION['login']){
       
       function payment_method(id){
         var bank_frame = document.getElementById("bank_frame");
-        var bank_account_frame = document.getElementById("bank_account_frame");
+        var voucher_frame = document.getElementById("voucher_frame");
         if(id == 1){
           bank_frame.style.display = 'none';
-          bank_account_frame.style.display = 'none';
+          voucher_frame.style.display = 'none';
+        }else if(id==2 || id==3){
+          bank_frame.style.display = 'table';
+          voucher_frame.style.display = 'none';
         }else{
-          bank_frame.style.display = 'table-cell';
-          bank_account_frame.style.display = 'table-cell';
-        }
+          bank_frame.style.display = 'none';
+          voucher_frame.style.display = 'table';
+       }
       }
 
       function add_non_numeric(data){
@@ -617,6 +646,11 @@ if(!$_SESSION['login']){
         
          document.getElementById("i_payment").value = data;
         update_change();
+      }
+
+      function update_voucher(data){
+        alert(data);
+
       }
           
         </script>

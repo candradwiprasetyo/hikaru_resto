@@ -292,7 +292,22 @@ function load_data_history(id)
                     while($row = mysql_fetch_array($query)){
                    ?>
                    
-                  <div class="box-showcase jcorgFilterTextParent" <?php if(isset($_GET['mt_id']) && $_GET['mt_id'] != $row_cat['menu_type_id']){ ?> style="display:none;"<?php } ?>>
+                  <div class="box-showcase 
+                  <?php
+                  if(isset($_GET['mt_id'])){
+                    if($_GET['mt_id'] == $row_cat['menu_type_id']){
+                      ?>
+                        jcorgFilterTextParent
+                      <?php
+                    }
+                  }else{
+                  ?>
+                  jcorgFilterTextParent
+                  <?php
+                  }
+                  ?>
+                  " 
+                  <?php if(isset($_GET['mt_id']) && $_GET['mt_id'] != $row_cat['menu_type_id']){ ?> style="display:none;"<?php } ?>>
 					  
                     <a onClick="add_menu(<?= $row['menu_id']?>)">
                     
@@ -335,7 +350,19 @@ function load_data_history(id)
                             </div>
                             
                         </div>
-                         <div class="jcorgFilterTextChild"><?= $row['menu_name'] ?></div>
+                         <div class="<?php
+                  if(isset($_GET['mt_id'])){
+                    if($_GET['mt_id'] == $row_cat['menu_type_id']){
+                      ?>
+                        jcorgFilterTextChild
+                      <?php
+                    }
+                  }else{
+                  ?>
+                  jcorgFilterTextChild
+                  <?php
+                  }
+                  ?>"><?= $row['menu_name'] ?></div>
                       
                     </div>
                     

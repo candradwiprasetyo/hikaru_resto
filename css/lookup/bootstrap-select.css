@@ -97,6 +97,7 @@
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+          min-height: 100px !important;
 }
 .bootstrap-select.btn-group .dropdown-menu.inner {
   position: static;

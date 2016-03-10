@@ -74,37 +74,64 @@ table{
     <td align="right" ><?= $row['transaction_date'] ?></td>
   </tr>
 </table>
-<br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <?php
   $no_item = 1;
   $total_price = 0;
- 
-  while($row_item = mysql_fetch_array($query_item)){
+ 	
+ $query = mysql_query("select a.*, b.menu_name from widget_tmp a 
+                                                                    join menus b on b.menu_id = a.menu_id
+                                                                    where user_id = '".$_SESSION['user_id']."' 
+                                                                    and table_id = '$table_id'
+                                                                    order by a.wt_id");
+  while($row = mysql_fetch_array($query)){
   ?>
-  <tr>
-    <td><?= $row_item['menu_name'] ?></td>
-    <td align="right">&nbsp;</td>
+  <tr>&nbsp;
+    <td><?= $no_item. '. '.$row['menu_name'] ?></td>
+    <td align="right"><?=  $row['jumlah'] ?></td>
   </tr>
-  <tr>
-    <td><?= $row_item['transaction_detail_qty']." x ".number_format($row_item['transaction_detail_price'])?></td>
-    <td align="right"><?= number_format($row_item['transaction_detail_total'])?></td>
-  </tr>
+  
+<?php
+                                            $query_widget_detail = mysql_query("select a.*, b.note_name
+                                                                    from widget_tmp_details a
+                                                                    join notes b on b.note_id = a.note_id
+                                                                    where wt_id = '".$row['wt_id']."'
+                                                                    order by wt_id
+
+                                                                    ");
+                                            while($row_widget_detail = mysql_fetch_array($query_widget_detail)){
+
+                                            ?>
+                                            
+                                            <tr>
+                                           
+                                               <td>&nbsp;&nbsp;&nbsp;&nbsp;- <?= $row_widget_detail['note_name']?></td>
+                                                <td></td>
+                                              
+                                            </tr>
+
+                                            <?php
+                                            }
+                                            ?>
+
   <?php
  $no_item++;
- $total_price = $total_price + $row_item['transaction_detail_total'];
+ //$total_price = $total_price + $row_item['transaction_detail_total'];
   }
  ?>
 </table>
 <br />
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:14px;">
+<!--<table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:14px;">
   <tr>
     <td style="font-size:18px"><strong>Total</strong></td>
     <td style="font-size:18px" align="right"><strong><?= number_format($total_price)?></strong></td>
   </tr>
   
 </table>
-
+-->
+<br>
+<br>
+<hr>
 <br />
 
 <a href="order.php" style="text-decoration:none"><div class="back_to_order"></div></a>
