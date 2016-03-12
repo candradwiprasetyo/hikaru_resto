@@ -1,11 +1,27 @@
-﻿<script type="text/javascript">
+﻿<script type="text/javascript" src="../js/search2/jcfilter.min.js"></script>
 
+
+
+<script type="text/javascript">
+
+
+function filter_cat(){
+	alert("test");
+}
+ 
+
+/*
+function find_menu(keyword){
+	//alert(keyword);
+	window.find(keyword);
+}
+*/
 
 function CurrencyFormat(number)
 {
    var decimalplaces = 0;
    var decimalcharacter = "";
-   var thousandseparater = ".";
+   var thousandseparater = ",";
    number = parseFloat(number);
    var sign = number < 0 ? "-" : "";
    var formatted = new String(number.toFixed(decimalplaces));
@@ -35,103 +51,50 @@ function CurrencyFormat(number)
 
 
 
-function add_menu(id)
+
+
+
+
+
+
+function get_total_price(){
+	
+	var total_harga = 0;
+	<?php
+	while($row2 = mysql_fetch_array($query2)){
+	?>
+	var jumlah = document.getElementById("i_jumlah_"+<?= $row2['menu_id']?>).value; 
+	var harga = document.getElementById("i_harga_"+<?= $row2['menu_id']?>).value; 
+	
+	var total = jumlah * harga;
+	total_harga = total_harga + total;
+	<?php
+	}
+	?>
+	document.getElementById("i_total_harga").value = total_harga;
+	document.getElementById("i_total_harga_rupiah").value = CurrencyFormat(total_harga);
+}
+
+function confirm_delete_history(id){
+	var a = confirm("Anda yakin ingin menghapus order ini ?");
+	var table_id = document.getElementById("i_table_id").value;
+	
+	if(a==true){
+		window.location.href = 'transaction_new.php?page=delete_history&table_id=' + table_id + '&id=' + id;
+	}
+}
+
+function load_data_history(id)
 {
-
-	if(id!=0){
-		var member_id = document.getElementById("i_member_id").value;
-		var table_id = document.getElementById("i_table_id").value;
-		
-		window.location.href = 'transaction_new.php?page=add_menu&member_id='+member_id+'&menu_id='+id+'&table_id='+table_id;
-	}
-	/*$("#MyTable").append('<tr valign="top"><th scope="row"><label for="customFieldName">Custom Field</label></th><td><input type="text" class="code" name="customFieldName[]" value="" placeholder="Input Name" /> &nbsp; <input type="text" class="code" name="customFieldValue[]" value="" placeholder="Input Value" /> &nbsp; <a href="javascript:void(0);" class="remCF">Remove</a></td></tr>');
-*/
+	//alert(id);
+	//$("#table_history").load('transaction_new.php?page=list_history&table_id='+id); 
 }
-<?php
-while($row_item2 = mysql_fetch_array($query_item2)){
-?>
-function edit_qty_<?= $row_item2['tnt_id']?>(data){
 	
-	if(data > 0){
-				var grand_price = document.getElementById("i_grand_price_<?=  $row_item2['tnt_id']; ?>").value;
-				
-	 			$.ajax({
-					type: "GET",
-					url: "transaction_new.php?page=edit_qty",
-					data:{id:<?= $row_item2['tnt_id']?>, qty:data, grand_price : grand_price}
-				}).done(function( result ) {
-				   //alert("Simpan berhasil");
-				});
-				
-				document.getElementById("i_total_<?= $row_item2['tnt_id']?>").value =  parseFloat(data) * parseFloat(grand_price);
-				
-				total = get_total();
-				document.getElementById("i_total_transaction").value = CurrencyFormat(total);
-				document.getElementById("i_total_transaction_real").value = total;
-	}else{
-		alert("Qty tidak boleh kurang dari 0");
-		document.getElementById("i_total_<?= $row_item2['tnt_id']?>").value =  0;
-		total = get_total();
-		document.getElementById("i_total_transaction").value = CurrencyFormat(total);
-		document.getElementById("i_total_transaction_real").value = total;
-	}
-}
-
-	
-
-<?php
-
-}
-?>
-	
-	function get_total(){
-		var total = 0;
-		<?php
-		while($row_item3 = mysql_fetch_array($query_item3)){
-		?>
-
-		
-		
-		total = parseFloat(total) + parseFloat(document.getElementById("i_total_<?=  $row_item3['tnt_id']; ?>").value);
-		
-		
-		
-		<?php
-		}
-		?>
-		
-		return total;
-	}
-	
-	function go_to_payment(){
-		
-		var total = document.getElementById("i_total_transaction_real").value;
-		
-		//alert(total);
-		
-		
-		if(total > 0){
-			
-			var table_id = document.getElementById("i_table_id").value;
-			var member_id = document.getElementById("i_member_id").value;
-			var i_date = document.getElementById("date_picker1").value;
-			
-			window.location.href = 'transaction_new.php?page=save&member_id='+member_id+'&table_id='+table_id+'&date='+i_date;
-			
-		}else{
-			alert("Simpan gagal. Order menu masih kosong");
-		}
-		
-	}
-	/* 
- function addRow() {
-        var myRow = '<tr><td>C</td><td>3</td><td>C</td><td>3</td><td>C</td><td><a href="javascript:void(0);" class="delete_row">Remove</a></td></tr>';
-            $("#MyTable tbody tr:last").after(myRow);
- }*/
- 
 
 
 </script>
+
+
 	
                 <?php
                 if(isset($_GET['did']) && $_GET['did'] == 1){
@@ -163,61 +126,74 @@ function edit_qty_<?= $row_item2['tnt_id']?>(data){
                 }
                 ?>
        
+               
+ <form action="<?= $action ?>" method="post" enctype="multipart/form-data" role="form">
+ 
+                <!-- Main content -->
+
+                <section class="content" style="padding-top: 0">
+                  <?php
+                                $get_all_jumlah = get_all_jumlah($table_id);
+
+                                ?>
+              <div class="row">
+              <div <?php if($get_all_jumlah == 0){ ?>class="col-md-12" <?php }else{ ?>class="col-md-8"<?php } ?> id="table_menu">
+              <div class="box box-cokelat">
+              <div class="box-body">    
+              
+              <div class="container">
         
-      
-                
-
-<!-- Main content -->
-<section class="content">
-
+			<!-- Top Navigation -->
+		
+			
+			<section class="color-2">
             <div class="row">
             
             
             
-            <div class="col-xs-4">
+            <div class="col-md-4">
             <div class="form-group">
-             <label>Tanggal </label>
+             <label>Date </label>
              <div class="input-group">
             
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
                                             <input type="text" required class="form-control pull-right" id="date_picker1" name="i_date" value="<?= $date ?>"/>
+                                            
+                                           
                                         </div><!-- /.input group -->
             </div>
             </div>
-            
-             <div class="col-xs-4">
-             <div class="form-group">
-                                         <label>Member </label>
-                                        <select name="i_member_id" id="i_member_id"  class="selectpicker show-tick form-control" data-live-search="true" onChange="load_data(this.value)" >
-                                        <option value="0">Non Member</option>
-                                        <?php
-                                        $query_member = mysql_query("select a.*
-																	from members a																
-																	order by member_id
-																	");
-                                        while($row_member = mysql_fetch_array($query_member)){
+
+            <div class="col-md-4">
+            <div class="form-group">
+             <label>Order Type </label>
+             <select name="i_tot_id" id="i_tot_id"  class="selectpicker show-tick form-control" data-live-search="true">
+                     <?php
+                    $query_tot = mysql_query("select * from transaction_order_types 
+                                  ");
+                                        while($row_tot = mysql_fetch_array($query_tot)){
                                         ?>
-                                        <option value="<?= $row_member['member_id']?>"<?php if($row_member['member_id'] == $member_id){ ?> selected="selected" <?php }?>><?php
-										
-										echo $row_member['member_name']; ?></option>
+                                        <option value="<?= $row_tot['tot_id']?>">
+                                          <?= $row_tot['tot_name']; ?></option>
                                         <?php
                                         }
                                         ?>
-                                        </select>
-                                      	</div>
-            </div>  
+              </select>
+            </div>
+          </div>
             
-             <div class="col-xs-4">
+             <div class="col-md-4">
              <div class="form-group">
-                                         <label>Meja </label>
-                                        <select name="i_table_id" id="i_table_id"  class="selectpicker show-tick form-control" data-live-search="true" onChange="load_data(this.value)" >
+                                        <label>Table </label>
+                                        <select name="i_table_id" id="i_table_id"  class="selectpicker show-tick form-control" data-live-search="true"  >
                                         <?php
                                         $query_table = mysql_query("select a.*, b.building_name
 																	from tables a
 																	left join buildings b on b.building_id = a.building_id
-																	order by table_id
+                                  where tms_id <> '2'
+																	order by building_id, table_name
 																	");
                                         while($row_table = mysql_fetch_array($query_table)){
                                         ?>
@@ -233,114 +209,375 @@ function edit_qty_<?= $row_item2['tnt_id']?>(data){
                                         ?>
                                         </select>
                                       	</div>
-            </div>  
+            </div>
+           
+            
             </div>
             
-            <!-- list menu -->
+              <div id="table_history">
+
+			         </div>  
+           
+     
             
-             <div class="row">
-                        <div class="col-xs-12">
-                            
-                            
-                            
-                            <div class="box">
-                             
-                               
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                            	<th width="5%">No</th>
-                                                <th width="30%">Nama Menu</th>
-												<th width="15%">Price</th>
-                                                <th width="15%">Discount</th>
-                                                  <th width="10%">Qty</th>
-                                                  <th width="15%">Total Price</th>
-                                                   <th width="10%">Config</th> 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        
-                                         <?php
-										 //if($table_id!=""){
-											 $total = 0;
-                                           $no = 1;
-										   while($row_item = mysql_fetch_array($query_item)){
-                                            ?>
-                                            <tr>
-                                            	<td><?= $no?></td>
-                                               <td><?= $row_item['menu_name']?></td>
-                                               <td><?= $row_item['tnt_price']?></td>
-                                               <td><?= $row_item['tnt_discount']?></td>
-                                               <td>
-                                             <input name="i_qty_<?php echo $row_item['tnt_id']?>" type="text" id="i_qty_<?php echo $row_item['tnt_id']?>" value="<?php echo $row_item['tnt_qty']?>"  class="form-control" onchange="edit_qty_<?php echo $row_item['tnt_id']?>(this.value)" />
-                                               <input name="i_grand_price_<?php echo $row_item['tnt_id']?>" type="hidden" id="i_grand_price_<?php echo $row_item['tnt_id']?>"  value="<?php echo $row_item['tnt_grand_price']?>"  class="form-control"/>
-                                             </td>
-                                               <td><input name="i_total_<?php echo $row_item['tnt_id']?>" type="text" id="i_total_<?php echo $row_item['tnt_id']?>" value="<?php echo $row_item['tnt_total']?>" class="form-control"  readonly="readonly"/></td>
-                                               <td style="text-align:center;">
-                                                    <a href="javascript:void(0)" onclick="confirm_delete(<?= $row_item['tnt_id']; ?>,'transaction_new.php?page=delete_item&id=')" class="btn btn-default" ><i class="fa fa-trash-o"></i></a>
+               <div class="row">
+                <br>
 
-                                                </td> 
-                                            </tr>
-                                            <?php
-											$no++;
-											$total = $total + $row_item['tnt_total'];
-                                            }
-										// }
-											?>
-                                          
-
-                                          
-                                        </tbody>
-                                         <tfoot>
-                                          <tr>
-                                          <td></td>
-                                          <td>     <select name="i_menu_id" id="i_menu_id"  class="selectpicker show-tick form-control" data-live-search="true" onchange="add_menu(this.value)" >
-                                          <option value="0">Add menu</option>
-                                        <?php
-                                        $query_menu = mysql_query("select * from menus order by menu_id
-																	");
-                                        while($row_menu = mysql_fetch_array($query_menu)){
-                                        ?>
-                                        <option value="<?= $row_menu['menu_id']?>"><?php
-										
-										echo $row_menu['menu_name']; ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                        </select></td>
-                                          <td></td>
-                                            <td align="right" valign="middle" style="font-size:22px;"><strong>TOTAL (Rp)</strong></td>
-                                              
-                                           <td colspan="3" ><strong>
-                                          <input name="i_total_transaction" type="text" id="i_total_transaction" value="<?php echo number_format($total, 0, ",", ".") ?>" class="form-control"  readonly="readonly" style="font-size:30px; height:50px; text-align:right;" />
-                                            <input name="i_total_transaction_real" type="hidden" id="i_total_transaction_real" value="<?php echo $total ?>" class="form-control"  readonly="readonly" style="font-size:30px; height:50px; text-align:right;" />
-                                          
-                                           </strong>                                            </td>
-                                           </tr>
-                                           
-                                         </tfoot>
-                                         
-                                    </table>
-                             
-                   </div><!-- /.box -->
-                            
-                             <a href="javascript: go_to_payment()"  class="btn btn-success" >SAVE</a>
-
+                <?php
+                if(isset($_GET['mt_id'])){
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                   <a href="transaction_new.php?page=list&table_id=<?= $_GET['table_id']; ?>" class="btn btn-block btn_cat_button"> All Categories</a>
+                 </div>
+                </div>
+                <?php
+                }else{
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                   <div class="btn btn-block btn_cat_button_active"><i class="fa fa-check"></i> All Categories</div>
+                  </div>
+                </div>
+                <?php
+                }
+                ?>
+                <?php
+                $q_cat_button = mysql_query("select * from menu_types order by menu_type_id");
+                while($r_cat_button = mysql_fetch_array($q_cat_button)){
+                if(isset($_GET['mt_id']) && $_GET['mt_id'] == $r_cat_button['menu_type_id']){
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                   <div class="btn btn-block btn_cat_button_active"><i class="fa fa-check"></i> <?= $r_cat_button['menu_type_name'] ?></div>
+                  </div>
+                </div>
+                <?php
+                }else{
+                ?>
+                <div class="col-md-3" style="padding-left:0px;">
+                  <div class="form-group">
+                    <a href="transaction_new.php?page=list&table_id=<?= $_GET['table_id']; ?>&mt_id=<?= $r_cat_button['menu_type_id']?>" class="btn btn-block btn_cat_button"> <?= $r_cat_button['menu_type_name'] ?></a>
+                  </div>
+                </div>
+                <?php
+                }
+                }
+                ?>
+               <div style="clear:both"></div>
+               <?php
+                while($row_cat = mysql_fetch_array($query_cat)){
+			   ?>
+               
+               <!-- batas kategori 
+              
+                <div class="col-md-12">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="row">
+                            <div class="otheader_title"><?= $row_cat['menu_type_name']?></div>
+                           
+                        </div>
+                    </div>
+                </div>-->
+                
+                
+				<p>
+                 
+                  <!-- start menu -->
+                  
+                  <?php
+                    $no2 = 1;
+          $query = mysql_query("select * from menus where menu_type_id = '".$row_cat['menu_type_id']."' order by menu_id");
+                    while($row = mysql_fetch_array($query)){
+                   ?>
+                   
+                  <div class="box-showcase 
+                  <?php
+                  if(isset($_GET['mt_id'])){
+                    if($_GET['mt_id'] == $row_cat['menu_type_id']){
+                      ?>
+                        jcorgFilterTextParent
+                      <?php
+                    }
+                  }else{
+                  ?>
+                  jcorgFilterTextParent
+                  <?php
+                  }
+                  ?>
+                  " 
+                  <?php if(isset($_GET['mt_id']) && $_GET['mt_id'] != $row_cat['menu_type_id']){ ?> style="display:none;"<?php } ?>>
+					  
+                    <!--<a onClick="add_menu(<?= $row['menu_id']?>)">-->
+                   <a id="dialogModal_ex<?= $row['menu_id']?>" data-variable="<?= $row['menu_id']?>">
+                    
+                      <div class="title_menu">
+                          <?= $row['menu_name'] ?>
                         </div>
                         
+                        <div class="box-showcaseInner_frame">
+                        <div class="box-showcaseInner">
                         
-                    </div>
-            
-            <!-- list menu -->
-     
- 
-  
- 
-</section><!-- /.content -->
+                        <?php
+                        $gambar = ($row['menu_img']) ? $row['menu_img'] : "default.jpg";
+            ?>
+                            <img src="../img/menu/<?= $gambar ?>" class="img_class" />
+                           
+                        </div>
+                      </div>
+                        </a>
+                        <div class="box-showcaseDesc ">
+                            
 
+                             <div class="box-showcaseDesc_price">Rp. <?= $row['menu_price'] ?></div>
+                            
+                            <!--
+                            <div class="box-showcaseDesc_by">
+                              <div class="col-xs-8" style="padding:0px;">
+                                <?php
+                                $get_jumlah = get_jumlah($row['menu_id'], $table_id);
+
+                                ?>
+                                    <input required type="text" name="i_jumlah_<?= $row['menu_id'] ?>" id="i_jumlah_<?= $row['menu_id'] ?>" class="form-control text_menu" value="<?= $get_jumlah ?>" onchange="edit_menu(<?= $row['menu_id'] ?>)"/>
+                                <input type="hidden" name="i_harga_<?= $row['menu_id'] ?>" id="i_harga_<?= $row['menu_id'] ?>" class="form-control text_menu" value="<?= $row['menu_price'] ?>"/>
+                            	</div>
+                                <div class="col-xs-4" style="padding:0px;">
+                                  	<a onClick="minus_menu(<?= $row['menu_id']?>)">
+                                        <div class="box-showcaseDesc_button">
+                                          	<i class="fa fa-minus"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            -->
+                            
+                        </div>
+                         <div class="<?php
+                  if(isset($_GET['mt_id'])){
+                    if($_GET['mt_id'] == $row_cat['menu_type_id']){
+                      ?>
+                        jcorgFilterTextChild
+                      <?php
+                    }
+                  }else{
+                  ?>
+                  jcorgFilterTextChild
+                  <?php
+                  }
+                  ?>"><?= $row['menu_name'] ?></div>
+                      
+                    </div>
+                    
+                    <?php
+          $no2++;
+                    }
+                    ?>
+                                
+                    <div style="clear:both;"></div>       
+                          
+                  <!-- end menu -->
+                            
+				</p>
+                
+                  <!-- batas kategori -->
               
-              
+                  <?php
+				  }
+				  ?>
+          </div>
+          </div>
+          </div>
+          </div>
+
+
+
+				  </div>
+
+
+                    <div class="col-md-4" id="table_widget" <?php if($get_all_jumlah == 0){ ?>style="display:none" <?php } ?>>
+                    
+                            <?php
+                            include 'widget.php';
+                            ?>
+                       
+                    </div>
+                
+                
+			</section>
+			
+		</div><!-- /container -->
+  <div style="height:100px; width:100%;"></div>
+                
+                
+                
+               
+               
+                </section><!-- /.content -->
+
+                 <section class="content_checkout">
+                 <div class="row">
+                
+                 
+                   <div class="col-md-6">
+                   
+                 <div class="col-xs-8">
+                   <div class="form-group">
+                    
+                  <input required type="hidden" readonly="readonly" name="i_total_harga" id="i_total_harga" class="form-control total_checkout" value="<?= $get_all_jumlah ?>"/>
+                   <input required type="text" readonly="readonly" name="i_total_harga_rupiah" id="i_total_harga_rupiah" class="form-control total_checkout" value="<?= $get_all_jumlah ?>"/>
+                   </div>
+                </div>
+                 <div class="col-xs-4">
+                   <div class="form-group">
+                  <input class="btn btn-danger button_checkout" type="submit" value="SAVE"/>
+                </div>
+            </div>
+                </div>
+                
+                 <div class="col-md-6">
+                
+                 <div class="col-xs-12">
+               
+                 <div class="form-group">
+                   <input type="text" name="searchText" id="filter" class="form-control cari_checkout" value="" placeholder="Cari menu..."/>
+                 
+                 </div>
+                 </div>
+                  <!--<div class="col-xs-4">
+                   <div class="form-group">
+                   <a id="button_search_checkout" class="btn btn-primary button_checkout"><i class="fa  fa-search" style="font-size:1em; padding-top:10px;"></i></a>
+                   <input type="button" id="next" value="Next">
+                   </div>
+                </div>
+                -->
+
+                  </div>
+
+                  
+               
+                </div>
+                
+               
+                
+              </section>
            
+              </form>
+ 
+ 
+ 
+ <!-- start popmodal -->
+
+<div id="dialog_content<" class="dialog_content" style="display:none">
+<form action="transaction_new.php?page=create_note&table_id=<?= $table_id ?>" enctype="multipart/form-data" method="post"> 
+	<div class="dialogModal_header"></div>
+	<div class="dialogModal_content">
+    
+
+
+	</div>
+	<div class="dialogModal_footer">
+		<input type="submit" class="btn btn-primary" data-dialogmodal-but="next" value="Save"></input>
+		<button type="button" class="btn btn-default"data-dialogmodal-but="cancel">Cancel</button>
+	</div>
+</form>
+</div>
+
+<!-- end popmodal -->    
               
-              
-            
+<script type="text/javascript">
+       jQuery(document).ready(function(){
+          jQuery("#filter").jcOnPageFilter({animateHideNShow: true,
+                    focusOnLoad:true,
+                    highlightColor:'#E9F0F5',
+                    textColorForHighlights:'#E9F0F5',
+                    caseSensitive:false,
+                    hideNegatives:true,
+                    parentLookupClass:'jcorgFilterTextParent',
+                    childBlockClass:'jcorgFilterTextChild'});
+			
+       });          
+       </script>
+   
+   <script type="text/javascript">
+function add_menu(id)
+{
+  
+  var jumlah = document.getElementById("i_jumlah_"+id).value;
+  
+  jumlah++;
+  
+  document.getElementById("i_jumlah_"+id).value = jumlah;
+  get_total_price();
+
+  $('#table_menu').addClass('col-md-8');
+
+  document.getElementById("table_widget").style.display = 'inline';
+
+  $("#table_widget").load('transaction_new.php?page=form_widget&menu_id='+id+'&jumlah='+jumlah+'&table_id='+<?= $table_id ?>);
+}
+
+function minus_menu(id)
+{
+  
+  var jumlah = document.getElementById("i_jumlah_"+id).value;
+  
+  jumlah--;
+  
+  if(jumlah > 0){
+    jumlah = jumlah;
+  }else{
+    jumlah = 0;
+  }
+
+ $("#table_widget").load('transaction_new.php?page=form_widget&menu_id='+id+'&jumlah='+jumlah+'&table_id='+<?= $table_id ?>);
+  
+  document.getElementById("i_jumlah_"+id).value = jumlah;
+  get_total_price();
+ 
+}
+
+function edit_menu(id)
+{
+  
+  var jumlah = document.getElementById("i_jumlah_"+id).value;
+  
+  document.getElementById("i_jumlah_"+id).value = jumlah;
+  get_total_price();
+
+   $('#table_menu').addClass('col-md-8');
+  document.getElementById("table_widget").style.display = 'inline';
+
+  $("#table_widget").load('transaction_new.php?page=form_widget&menu_id='+id+'&jumlah='+jumlah+'&table_id='+<?= $table_id ?>);
+}
+
+   </script>
+   
+   
+   <script>
+$(function(){
+
+<?php
+$query_popmodal = mysql_query("select * from menus order by menu_id");
+while($row_popmodal = mysql_fetch_array($query_popmodal)){
+?>
+    $('#dialogModal_ex<?= $row_popmodal['menu_id'] ?>').click(function(){
+	
+		
+        $('.dialog_content').dialogModal({
+            topOffset: 0,
+            onOkBut: function() {},
+            onCancelBut: function() {},
+            onLoad: function() {
+				$(".dialogModal_content").load('transaction_new.php?page=popmodal&menu_id='+<?= $row_popmodal
+				['menu_id']?>);
+			},
+            onClose: function() {},
+          
+        });
+    });
+<?php
+}
+?>
+    
+});
+</script>

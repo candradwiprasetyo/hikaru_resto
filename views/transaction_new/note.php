@@ -1,4 +1,4 @@
-<!--<script type="text/javascript">
+<script type="text/javascript">
 		  function grand_total()
 			{
 				
@@ -36,7 +36,16 @@
                                
                                 <div class="box-body">
                                     
-                                    
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="popmodal_title"><?= $menu_name ?></div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <input type="text" class="form-control text_popmodal" value="<?= $jumlah ?>" name="i_qty" id="i_qty"  />
+                                      </div>
+                                      
+                                    </div>
+                                    <br>
 
                                     <?php
                                         $query_note_category = mysql_query("select * from note_categories order by note_category_id");
@@ -94,7 +103,7 @@
                                               if($active!=0){
                                               ?>
                                               <div style="text-align:right">
-                                              <a href="transaction.php?page=delete_note&table_id=<?= $table_id ?>&wt_id=<?= $wt_id?>&id=<?= $link ?>" class="btn btn-danger" ><i class="fa fa-trash-o"></i></a>
+                                              <a href="transaction_new.php?page=delete_note&table_id=<?= $table_id ?>&wt_id=<?= $wt_id?>&id=<?= $link ?>" class="btn btn-danger" ><i class="fa fa-trash-o"></i></a>
                                             </div>
                                             <?php
                                             }

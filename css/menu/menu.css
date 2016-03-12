@@ -8,7 +8,7 @@
        position: relative;
        width: 20%;
        padding-bottom: 20%;
-       margin-bottom: 90px;
+       margin-bottom: 50px;
        cursor: pointer;
 
 
@@ -70,7 +70,7 @@
        background: #fff;
        top: 100%;
        margin-top: -10px;
-       height: 90px;
+       height: 50px;
        
      text-align:center;
       border:1px solid #d82827;
@@ -87,9 +87,9 @@
     }
   
   .box-showcaseDesc_price{
-    bottom: 50px;
+    bottom: 10px;
     width:100%;
-        font-size: 12px;
+        font-size: 14px;
     position:absolute;
     background:#fff;
     padding:10px;

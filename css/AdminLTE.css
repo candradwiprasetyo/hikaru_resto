@@ -3100,7 +3100,7 @@ Component: timeline
 	}
 
   .note_frame{
-    border:1px solid #D82827;
+    border:1px solid #ccc;
     padding: 10px;
   }
 
@@ -3108,7 +3108,7 @@ Component: timeline
 
 #donate label {
     
-    width:170px;
+    width:150px;
     margin:4px;
     background-color:#EFEFEF;
     border-radius:3px;
@@ -3317,4 +3317,33 @@ cursor: pointer;
 .btn_cat_button_active:hover{
   color:#fff;
   
+}
+
+legend{
+	font-size:16px;
+	font-weight:bold;
+	padding-bottom:10px;
+	border-bottom:0px;
+	margin-bottom:0px;
+}
+
+
+/*----------------------popmodal----------------------------*/
+
+.popmodal_title{
+	font-size:32px;
+	font-weight:bold;
+	text-align:left;
+	position:relative;
+	margin-bottom:30px;
+}
+
+.text_popmodal{
+	text-align:center;
+	background:#333;
+	color:#fff;
+	font-weight:bold;
+	height:50px;
+	line-height:50px;
+	font-size:24px;
 }

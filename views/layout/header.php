@@ -19,8 +19,7 @@ if(!$_SESSION['login']){
         <link href="../css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="../css/AdminLTE.css" rel="stylesheet" type="text/css" />
-        <!-- Popup Modal -->
-        <link href="../css/popModal.css" type="text/css" rel="stylesheet" >
+     
         <!-- Preview -->
         <link href="../css/preview.css" type="text/css" rel="stylesheet" >
          <!-- iCheck for checkboxes and radio inputs 
@@ -40,7 +39,8 @@ if(!$_SESSION['login']){
        <link rel="stylesheet" type="text/css" href="../css/tooltip/tooltip-classic.css" />
        <!-- menu food -->
        <link href="../css/menu/menu.css" rel="stylesheet">
-       
+       <!-- popmodal -->
+       <link type="text/css" rel="stylesheet" href="../css/popmodal/popModal.css">
 	  
       
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

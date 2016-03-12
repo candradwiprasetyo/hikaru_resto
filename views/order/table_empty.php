@@ -33,7 +33,7 @@ Meja masih kosong
 
 <div class="row">
 <div class="form-group">
-<div class="col-xs-6" style="padding:3px;"><a href="transaction.php?table_id=<?= $row['table_id']?>" style="text-decoration:none;"><div class="btn_add_order">ADD ORDER</div></a>
+<div class="col-xs-6" style="padding:3px;"><a href="transaction_new.php?table_id=<?= $row['table_id']?>" style="text-decoration:none;"><div class="btn_add_order">ADD ORDER</div></a>
 </div>
 
 <div class="col-xs-6" style="padding:3px;">

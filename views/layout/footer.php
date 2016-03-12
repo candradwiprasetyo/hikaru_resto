@@ -26,8 +26,6 @@
         <script src="../js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
         <script src="../js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
         <script src="../js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-        <!-- pop Modal-->
-        <script src="../js/popup/popModal.js"></script>
        
         <!-- Datepicker -->
         <script src="../js/plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -42,6 +40,8 @@
         <!-- button -->
         <script src="../js/button/modernizr.custom.js"></script>
 		<script src="../js/button/classie.js"></script>
+        <!--popmodal-->
+        <script src="../js/popmodal/popModal.js"></script>
       <!-- bootstrap time picker -->
       
 		

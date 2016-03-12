@@ -1,39 +1,36 @@
 <?php
 
-function select(){
-	$query = mysql_query("select * from menus order by menu_id");
+function select($param){
+	$where = "";
+	/*if($param){
+		$where = "where menu_type_id = ".$param; 
+	}*/
+	$query = mysql_query("select * from menus $where order by menu_id");
 	return $query;
 }
 
-function select_cat(){
-	$query = mysql_query("select * from menu_types order by menu_type_id");
-	return $query;
-}
-
-function read_id($table_id){
-	$query = mysql_query("select * from transactions_tmp where table_id = '$table_id'");
-	$row = mysql_fetch_array($query);
-	return $row;
-}
-
-function select_item(){
-	 $query = mysql_query("select a.*, c.menu_name 
-							  from transaction_new_tmp a
-							  join menus c on c.menu_id = a.menu_id
-							  where user_id = '".$_SESSION['user_id']."'
-							  order by tnt_id 
-							  ");
+function select_widget($user_id, $table_id){
+	$query = mysql_query("select * from widget_tmp where user_id = '$user_id' and table_id = '$table_id'");
 	return $query;
 }
 
 
-function select_item_edit($table_id){
+function select_cat($param){
+	$where = "";
+	/*if($param){
+		$where = "where menu_type_id = ".$param; 
+	}*/
 
-	 $query = mysql_query("select a.*, c.menu_name 
-							  from transaction_tmp_details a
-							  join transactions_tmp b on b.transaction_id = a.transaction_id
-							  join menus c on c.menu_id = a.menu_id
-							  where b.table_id = '$table_id'
+	$query = mysql_query("select * from menu_types $where order by menu_type_id");
+	return $query;
+}
+
+function select_history($table_id){
+	 $query = mysql_query("select b.*, c.menu_name 
+							  from transactions_tmp a
+							  join transaction_tmp_details b on b.transaction_id = a.transaction_id
+							  join menus c on c.menu_id = b.menu_id
+							  where table_id = '".$table_id."'
 							  order by transaction_detail_id 
 							  ");
 	return $query;
@@ -47,18 +44,26 @@ function select_menu($keyword){
 
 function create_config($table, $data){
 	mysql_query("insert into $table values(".$data.")");
+	return mysql_insert_id();
 }
 
 function update_config($table, $data, $column, $id){
 	mysql_query("update $table set $data where $column = $id");
 }
 
-function delete_history($id){
-	mysql_query("delete from transaction_tmp_details  where transaction_detail_id = '$id'");
+function update_config2($table, $data, $param){
+	mysql_query("update $table set $data where $param");
 }
 
-function delete($table_id){
-	mysql_query("delete from transaction_new_tmp");
+function delete_config($table, $param){
+	mysql_query("delete from $table where $param");
+}
+
+
+
+
+function delete_history($id){
+	mysql_query("delete from transaction_tmp_details  where transaction_detail_id = '$id'");
 }
 
 function check_table($table_id){
@@ -84,41 +89,53 @@ function get_transaction_id_old($table_id){
 }
 
 
+function get_note_desc($wt_id){
+	$query = mysql_query("select wt_desc
+							  from widget_tmp
+							  where wt_id = '".$wt_id."'
+							  ");
+	$row = mysql_fetch_array($query);
+	
+	return $row['wt_desc'];
+	
+}
+
+function get_note_active($note_id, $wt_id){
+	$query = mysql_query("select count(wt_id) as result
+							  from widget_tmp_details
+							  where wt_id = '".$wt_id."' and note_id  = '$note_id'
+							  ");
+	$row = mysql_fetch_array($query);
+	
+
+	return ($row['result']) ? $row['result'] : 0;
+	
+}
+
+function get_link_active($note_id, $wt_id){
+	$query = mysql_query("select wtd_id as result
+							  from widget_tmp_details
+							  where wt_id = '".$wt_id."' and note_id  = '$note_id'
+							  ");
+	$row = mysql_fetch_array($query);
+	
+
+	return $row['result'];
+	
+}
+
+
 function check_history($table_id, $menu_id){
 	$query = mysql_query("select count(b.transaction_detail_id) as jumlah
 							  from transactions_tmp a
 							  join transaction_tmp_details b on b.transaction_id = a.transaction_id
-							  where table_id = '".$table_id."' and menu_id = '$menu_id'
+							  where table_id = '".$table_id."'
 							  ");
 	$row = mysql_fetch_array($query);
 	
 	$jumlah = $row['jumlah'];
 	return $jumlah;
 }
-
-function get_menu_price($menu_id){
-	$query = mysql_query("select * from menus where menu_id = '$menu_id'
-							  ");
-	$row = mysql_fetch_array($query);
-	
-	return $row;
-}
-
-
-
-function get_discount($member_id, $menu_id){
-	$query = mysql_query("select a.member_discount 
-							from members a
-							join member_items b on b.member_id = a.member_id
-							where a.member_id = '$member_id'
-							and b.menu_id = '$menu_id'
-							  ");
-	$row = mysql_fetch_array($query);
-	
-	$jumlah = $row['member_discount'];
-	return $jumlah;
-}
-
 
 function get_data_history($table_id, $menu_id){
 	$query = mysql_query("select b.*
@@ -129,85 +146,106 @@ function get_data_history($table_id, $menu_id){
 	return $query;
 }
 
-function check_menu($table_id, $menu_id){
-	$query = mysql_query("select count(table_id) as jumlah
-							  from transaction_new_tmp a
-							  where table_id = '".$table_id."' and menu_id = '$menu_id'
+function delete_reserved($table_id){
+	mysql_query("delete from reserved where table_id = $table_id
+							  ");
+}
+
+function get_widget($menu_id, $table_id){
+	$query = mysql_query("select count(menu_id) as jumlah 
+							from widget_tmp 
+							where menu_id = '".$menu_id."' 
+							and user_id = '".$_SESSION['user_id']."'
+							and table_id = '$table_id'
 							  ");
 	$row = mysql_fetch_array($query);
 	
-	$jumlah = $row['jumlah'];
+	$jumlah = ($row['jumlah']) ? $row['jumlah'] : 0;
 	return $jumlah;
 }
 
-function get_member_id($id){
-	$query = mysql_query("select member_id from transaction_new_tmp where tnt_id = '$id'
+function get_jumlah($menu_id, $table_id){
+	$query = mysql_query("select (jumlah) as jumlah 
+							from widget_tmp 
+							where menu_id = '".$menu_id."' 
+							and user_id = '".$_SESSION['user_id']."'
+							and table_id = '$table_id'
 							  ");
 	$row = mysql_fetch_array($query);
 	
-	$ressult = $row['member_id'];
-	return $ressult;
+	$jumlah = ($row['jumlah']) ? $row['jumlah'] : 0;
+	return $jumlah;
 }
 
-function get_table_id($id){
-	$query = mysql_query("select table_id from transaction_new_tmp where tnt_id = '$id'
+
+function get_all_jumlah($table_id){
+	$query = mysql_query("select sum(jumlah * b.menu_price) as total 
+							from widget_tmp a
+							join menus b on b.menu_id = a.menu_id
+							where 
+							user_id = '".$_SESSION['user_id']."'
+							and table_id = '$table_id'
 							  ");
 	$row = mysql_fetch_array($query);
 	
-	$ressult = $row['table_id'];
-	return $ressult;
-}
-
-
-function get_total($table_id){
-	$query = mysql_query("select sum(tnt_total) as jumlah from transaction_new_tmp where table_id = '$table_id'
-							  ");
-	$row = mysql_fetch_array($query);
-	
-	$result = $row['jumlah'];
-	return $result;
-}
-
-function delete_item($id){
-	
-	
-	mysql_query("delete from transaction_new_tmp where tnt_id = '$id'");
-	
-}
-
-function delete_item_edit($id){
-	
-	
-	mysql_query("delete from transaction_tmp_details where transaction_detail_id = '$id'");
-	
-}
-
-
-function get_data_menu($menu_id){
-	$query = mysql_query("select * from menus where menu_id = '$menu_id'
-							  ");
-	$row = mysql_fetch_array($query);
-	
-	
-	return $row;
+	$jumlah = ($row['total']) ? $row['total'] : 0;
+	return $jumlah;
 }
 
 function get_building_id($table_id){
-	$query = mysql_query("select building_id from tables where table_id = '$table_id'
+	$query = mysql_query("select building_id as result
+							from tables 
+							  where table_id = '".$table_id."'
 							  ");
 	$row = mysql_fetch_array($query);
 	
-	$result = $row['building_id'];
+	$result = $row['result'];
 	return $result;
 }
 
-function get_transaction_id($table_id){
-	$query = mysql_query("select transaction_id from transactions_tmp where table_id = '$table_id'
+function get_menu_name($menu_id){
+	$query = mysql_query("select menu_name as result
+							from menus
+							where menu_id = '".$menu_id."'
 							  ");
 	$row = mysql_fetch_array($query);
 	
-	$result = $row['transaction_id'];
-	return $result;
+	return $row['result'];
+	
+}
+
+function get_menu_price($menu_id){
+	$query = mysql_query("select menu_price as result
+							from menus
+							where menu_id = '".$menu_id."'
+							  ");
+	$row = mysql_fetch_array($query);
+	
+	return $row['result'];
+	
+}
+
+function get_menu_name_widget($wt_id){
+	$query = mysql_query("select menu_name as result
+							from widget_tmp a
+							join menus b on b.menu_id = a.menu_id
+							where wt_id = '".$wt_id."'
+							  ");
+	$row = mysql_fetch_array($query);
+	
+	return $row['result'];
+	
+}
+
+function get_jumlah_widget($wt_id){
+	$query = mysql_query("select jumlah as result
+							from widget_tmp a
+							where wt_id = '".$wt_id."'
+							  ");
+	$row = mysql_fetch_array($query);
+	
+	return $row['result'];
+	
 }
 
 

@@ -72,7 +72,7 @@ $row_res = mysql_fetch_array($query_res);
 
 <div class="row">
 <div class="form-group">
-<div class="col-xs-4" style="padding:3px; "><a href="transaction.php?table_id=<?= $row['table_id']?>" style="text-decoration:none;"><div class="btn_add_order" style="height:70px; padding-top:20px;">PROCESS RESERVED</div></a>
+<div class="col-xs-4" style="padding:3px; "><a href="transaction_new.php?table_id=<?= $row['table_id']?>" style="text-decoration:none;"><div class="btn_add_order" style="height:70px; padding-top:20px;">PROCESS RESERVED</div></a>
 </div>
 
 
